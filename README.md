@@ -1,2 +1,2 @@
 # stator
-Stator, your go to generator for the perfect stack.
+Stator, your go-to template for the perfect stack.
