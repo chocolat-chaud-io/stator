@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+  database:
+    image: mongo:4.2.3-bionic
+    container_name: stator-mongo
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=stator
+      - MONGO_INITDB_ROOT_USERNAME=stator
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    volumes:
+      # seeding scripts
+      - ./mongo-entrypoint:/docker-entrypoint-initdb.d
+      # named volumes
+      - mongodb:/data/db
+      - mongoconfig:/data/configdb
+
+volumes:
+  mongodb:
+  mongoconfig:
