@@ -21,5 +21,9 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "api": {
+      "tags": []
+    }
+  }
 }
