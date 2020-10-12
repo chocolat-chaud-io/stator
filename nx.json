@@ -20,10 +20,10 @@
         "accessToken": "nx_cloud_token",
         "cacheableOperations": [
           "build",
-          "test",
           "lint",
           "e2e"
         ],
+        "cacheDirectory": ".cache/nx",
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }

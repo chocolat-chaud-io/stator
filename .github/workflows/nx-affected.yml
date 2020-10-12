@@ -55,10 +55,22 @@ jobs:
         run: npm run affected:lint -- --base=origin/master
 
       - name: Run tests
-        run: npm run affected:test -- --base=origin/master
+        run: npm run affected:test -- --base=origin/master --code-coverage
 
       - name: Start api
         run: npm start api &
 
       - name: Run e2e tests
         run: npm run affected:e2e -- --base=origin/master
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ github.token }}
+          path-to-lcov: ./coverage/apps/api/lcov.info
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: ./coverage
