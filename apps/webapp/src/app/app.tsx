@@ -36,7 +36,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(todoThunks.getAll())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     setTodoEditTextMap(
