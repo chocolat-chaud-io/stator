@@ -33,6 +33,15 @@ async function main() {
     }
 
     await fs.promises.unlink("renameProject.js")
+    console.log("This is now YOUR project provided generously by:")
+    console.log(`
+███████ ████████  █████  ████████  ██████  ██████ 
+██         ██    ██   ██    ██    ██    ██ ██   ██ 
+███████    ██    ███████    ██    ██    ██ ██████  
+     ██    ██    ██   ██    ██    ██    ██ ██   ██ 
+███████    ██    ██   ██    ██     ██████  ██   ██ 
+                                                   
+    `)
   } catch (err) {
     console.error(err)
   }
