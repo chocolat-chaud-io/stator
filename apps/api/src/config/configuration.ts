@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config"
-import { Todo } from "../todos/todo.entity"
 import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface"
+import { Todo } from "@stator/models"
 
 export const configuration = () => ({
   port: parseInt(process.env.PORT, 10) || 3333,

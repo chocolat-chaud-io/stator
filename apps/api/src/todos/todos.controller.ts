@@ -1,6 +1,7 @@
 import { Controller } from "@nestjs/common"
 import { Crud, CrudController } from "@nestjsx/crud"
-import { Todo } from "./todo.entity"
+import { Todo } from "@stator/models"
+
 import { TodosService } from "./todos.service"
 
 @Crud({ model: { type: Todo } })

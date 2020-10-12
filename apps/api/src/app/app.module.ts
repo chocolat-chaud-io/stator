@@ -1,8 +1,9 @@
 import { Module } from "@nestjs/common"
-import { TodosModule } from "../todos/todos.module"
 import { ServeStaticModule } from "@nestjs/serve-static"
-import { configuration } from "../config/configuration";
-import { getRootModuleImports } from "../utils";
+
+import { configuration } from "../config/configuration"
+import { TodosModule } from "../todos/todos.module"
+import { getRootModuleImports } from "../utils"
 
 @Module({
   imports: [
@@ -16,6 +17,4 @@ import { getRootModuleImports } from "../utils";
   controllers: [],
   providers: [],
 })
-
-
 export class AppModule {}

@@ -1,8 +1,9 @@
 import { ConfigModule, ConfigService } from "@nestjs/config"
-import { getOrmConfigFn } from "./config/configuration"
 import { TypeOrmModule } from "@nestjs/typeorm"
 
-export const getRootModuleImports = (configuration) => [
+import { getOrmConfigFn } from "./config/configuration"
+
+export const getRootModuleImports = configuration => [
   ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
   TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
