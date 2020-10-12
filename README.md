@@ -61,11 +61,11 @@ Running the database:
 
 Running the api:
 
-`nx serve api`
+`npm start api`
 
 Running the webapp:
 
-`nx serve webapp`
+`npm start webapp`
 
 Running all the tests:
 
