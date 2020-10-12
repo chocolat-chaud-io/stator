@@ -1,13 +1,46 @@
-import { getGreeting } from "../support/app.po"
-
 describe("webapp", () => {
-  beforeEach(() => cy.visit("/"))
+  const newTodoText = "Brand new todo"
+  const todoTextSelector = "[data-testid='todo-text'] span"
 
-  it("should display welcome message", () => {
-    // Custom command example, see `../support/commands.ts` file
-    cy.login("my-email@something.com", "myPassword")
+  beforeEach(() => {
+    cy.visit("/")
 
-    // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains("Welcome to webapp!")
+    cy.server()
+    cy.route("**/todos").as("getTodos")
+
+    cy.wait("@getTodos").then(xhr => {
+      if (xhr.response.body.length > 0) {
+        cy.get(".delete-icon-button").click({ multiple: true })
+      }
+    })
+  })
+
+  const createTodo = () => {
+    cy.get("#create-text-field").type(`${newTodoText}{enter}`)
+  }
+
+  it("should create a todo", () => {
+    createTodo()
+    expect(cy.get(todoTextSelector).contains(newTodoText)).to.exist
+  })
+
+  it("should update a todo", () => {
+    const updatedTodoText = "Update todo text"
+
+    createTodo()
+
+    cy.get(".edit-icon-button").click()
+
+    cy.get("[data-testid='edit-text-field']").type(`${updatedTodoText}{enter}`)
+
+    expect(cy.get(todoTextSelector).contains(updatedTodoText)).to.exist
+  })
+
+  it("should delete a todo", () => {
+    createTodo()
+
+    cy.get(".delete-icon-button").click()
+
+    cy.get(todoTextSelector).should("not.exist")
   })
 })

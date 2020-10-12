@@ -2,6 +2,7 @@ import { CircularProgress, IconButton, Theme } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import React, { ComponentType, ReactNode } from "react"
 import { FC } from "react"
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,13 +21,14 @@ interface Props {
   loading: boolean
   Icon: ComponentType
   onClick: () => void
+  className?: string
 }
 
 export const LoadingIconButton: FC<Props> = props => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
+    <div className={clsx(classes.root, props.className)}>
       <IconButton edge="end" onClick={props.onClick} disabled={props.loading}>
         <props.Icon />
       </IconButton>

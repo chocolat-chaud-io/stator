@@ -109,13 +109,18 @@ export const App = () => {
       </Snackbar>
       <Card>
         <CardContent className={classes.addTodoContainer}>
-          <TextField
-            label="Todo"
-            value={todoCreateText}
-            onChange={onTodoCreateChange}
-            onKeyPress={onTodoCreateKeyPress()}
-          />
-          <LoadingIconButton Icon={Add} onClick={onTodoCreate} loading={todoState.status.post.loading} />
+          {!todoState.status.getAll.loading && (
+            <>
+              <TextField
+                id="create-text-field"
+                label="Todo"
+                value={todoCreateText}
+                onChange={onTodoCreateChange}
+                onKeyPress={onTodoCreateKeyPress()}
+              />
+              <LoadingIconButton Icon={Add} onClick={onTodoCreate} loading={todoState.status.post.loading} />
+            </>
+          )}
         </CardContent>
       </Card>
       <Card>
@@ -133,17 +138,20 @@ export const App = () => {
                       onChange={onTodoUpdateChange(todo)}
                       onKeyPress={onTodoUpdateKeyPress(todo)}
                       className={classes.updateTextField}
+                      data-testid="edit-text-field"
                       fullWidth
                     />
                   )}
-                  {!todoEditIdMap[todo.id] && <ListItemText primary={todo.text} />}
+                  {!todoEditIdMap[todo.id] && <ListItemText data-testid="todo-text" primary={todo.text} />}
                   <ListItemSecondaryAction className={classes.listItemSecondaryAction}>
                     <LoadingIconButton
+                      className="edit-icon-button"
                       loading={todoState.status.put.ids[todo.id]}
                       Icon={todoEditIdMap[todo.id] ? Done : Edit}
                       onClick={() => onTodoEditClick(todo)}
                     />
                     <LoadingIconButton
+                      className="delete-icon-button"
                       loading={todoState.status.delete.ids[todo.id]}
                       Icon={Delete}
                       onClick={() => dispatch(todoThunks.delete(todo))}
