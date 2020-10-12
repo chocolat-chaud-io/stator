@@ -33,11 +33,17 @@ Of course, you won't be creating a todo application for your project, but you ca
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [node.js](https://nodejs.org/en/download/) your version must >= 14
 
+### Usage
+
+#### Copy the template
+
 This repository is a repository template, which means you can use the `Use this template` button at the top to create your project based on this.
 
 ![use template button](readmeAssets/useTemplate.png)
 
 \*Note: If you have an existing repository, this will require more work. I would recommend using the `use template button` and migrating your current code to the newly created projects.
+
+#### Make it yours
 
 You will now want to make this project yours by replacing all `stator` occurrences with your own project name.
 Thankfully, we have a script just for that:
@@ -51,9 +57,13 @@ On completion, you will see the following message:
 
 ![project appropriation success](readmeAssets/projectAppropriationSuccess.png)
 
+#### Install the dependencies
+
 You can now install the dependencies:
 
 `npm i`
+
+#### Run the whole stack
 
 Running the database:
 
