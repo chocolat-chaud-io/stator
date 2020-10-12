@@ -1,4 +1,4 @@
-version: '3.6'
+version: "3.6"
 services:
   database:
     image: mongo:4.2.3-bionic

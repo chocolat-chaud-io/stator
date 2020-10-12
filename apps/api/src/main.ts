@@ -1,17 +1,17 @@
+import { ConfigService } from "@nestjs/config"
 import { NestFactory } from "@nestjs/core"
-import { AppModule } from "./app/app.module"
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify"
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger"
-import { ConfigService } from "@nestjs/config"
+
+import { AppModule } from "./app/app.module"
 
 async function bootstrap() {
   const globalPrefix = "api"
   const fastifyOptions = { logger: true }
 
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(fastifyOptions))
+  app.enableCors({ origin: true })
   app.setGlobalPrefix(globalPrefix)
-
-  const configService = app.get(ConfigService)
 
   const swaggerOptions = new DocumentBuilder()
     .setTitle("Todos")
@@ -23,6 +23,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerOptions)
   SwaggerModule.setup("documentation", app, document)
 
+  const configService = app.get(ConfigService)
   await app.listen(configService.get<number>("port"))
 }
 

@@ -24,6 +24,16 @@
   "projects": {
     "api": {
       "tags": []
+    },
+    "webapp": {
+      "tags": []
+    },
+    "webapp-e2e": {
+      "tags": [],
+      "implicitDependencies": ["webapp"]
+    },
+    "models": {
+      "tags": []
     }
   }
 }

@@ -1,11 +1,12 @@
 import { INestApplication } from "@nestjs/common"
 import { Test } from "@nestjs/testing"
-import { TodosModule } from "./todos.module"
-import { Todo } from "./todo.entity"
-import { Repository } from "typeorm"
+import { Todo } from "@stator/models"
 import * as supertest from "supertest"
-import { configurationTest } from "../config/configuration.test"
-import { getRootModuleImports } from "../utils";
+import { Repository } from "typeorm"
+
+import { configurationTest } from "../config/configuration-test"
+import { getRootModuleImports } from "../utils"
+import { TodosModule } from "./todos.module"
 
 describe("Todos", () => {
   let app: INestApplication
@@ -13,10 +14,7 @@ describe("Todos", () => {
 
   beforeAll(async () => {
     const module = await Test.createTestingModule({
-      imports: [
-        ...getRootModuleImports(configurationTest),
-        TodosModule,
-      ],
+      imports: [...getRootModuleImports(configurationTest), TodosModule],
     }).compile()
 
     app = module.createNestApplication()
@@ -35,7 +33,7 @@ describe("Todos", () => {
 
   describe("GET /todos", () => {
     it("should return an array of todos", async () => {
-      await repository.save([{ name: "test-name-0" }, { name: "test-name-1" }])
+      await repository.save([{ text: "test-name-0" }, { text: "test-name-1" }])
 
       const { body } = await supertest
         .agent(app.getHttpServer())
@@ -45,13 +43,13 @@ describe("Todos", () => {
         .expect(200)
 
       expect(body).toEqual([
-        { id: expect.any(Number), name: "test-name-0" },
-        { id: expect.any(Number), name: "test-name-1" },
+        { id: expect.any(Number), text: "test-name-0" },
+        { id: expect.any(Number), text: "test-name-1" },
       ])
     })
 
     it("should return a single todo", async () => {
-      const todo = await repository.save({ name: "test-name-0" })
+      const todo = await repository.save({ text: "test-name-0" })
 
       const { body } = await supertest
         .agent(app.getHttpServer())
@@ -60,11 +58,11 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual({ id: todo.id, name: "test-name-0" })
+      expect(body).toEqual({ id: todo.id, text: "test-name-0" })
     })
 
     it("should create one todo", async () => {
-      const todo = { name: "test-name-0" }
+      const todo = { text: "test-name-0" }
 
       const { body } = await supertest
         .agent(app.getHttpServer())
@@ -74,11 +72,11 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(201)
 
-      expect(body).toEqual({ id: expect.any(Number), name: "test-name-0" })
+      expect(body).toEqual({ id: expect.any(Number), text: "test-name-0" })
     })
 
     it("should create multiple todos", async () => {
-      const todos = [{ name: "test-name-0" }, { name: "test-name-1" }]
+      const todos = [{ text: "test-name-0" }, { text: "test-name-1" }]
 
       const { body } = await supertest
         .agent(app.getHttpServer())
@@ -89,27 +87,27 @@ describe("Todos", () => {
         .expect(201)
 
       expect(body).toEqual([
-        { id: expect.any(Number), name: "test-name-0" },
-        { id: expect.any(Number), name: "test-name-1" },
+        { id: expect.any(Number), text: "test-name-0" },
+        { id: expect.any(Number), text: "test-name-1" },
       ])
     })
 
     it("should update the name of a todo", async () => {
-      const todo = await repository.save({ name: "test-name-0" })
+      const todo = await repository.save({ text: "test-name-0" })
 
       const { body } = await supertest
         .agent(app.getHttpServer())
         .put(`/todos/${todo.id}`)
-        .send({ name: "updated-name" })
+        .send({ text: "updated-name" })
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual({ id: expect.any(Number), name: "updated-name" })
+      expect(body).toEqual({ id: expect.any(Number), text: "updated-name" })
     })
 
     it("should delete one todo", async () => {
-      const todo = await repository.save({ name: "test-name-0" })
+      const todo = await repository.save({ text: "test-name-0" })
 
       await supertest
         .agent(app.getHttpServer())

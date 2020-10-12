@@ -14,8 +14,10 @@
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": "./stator",
-    "paths": {}
+    "baseUrl": ".",
+    "paths": {
+      "@stator/models": ["libs/models/src/index.ts"]
+    }
   },
   "exclude": ["stator/node_modules", "tmp"]
 }

@@ -1,11 +1,11 @@
 version: "3.6"
 services:
   database:
+    image: postgres:latest
     container_name: stator-postgres
     ports:
       - 5433:5432
     restart: always
-    image: postgres:latest
     command:
       - postgres
       - -c
@@ -14,4 +14,10 @@ services:
       POSTGRES_DB: stator
       POSTGRES_HOST_AUTH_METHOD: "trust" # Not recommended, only for demo purposes
     volumes:
-      - ./database:/var/lib/postgresql
+      # seeding
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # named volume
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
