@@ -26,7 +26,13 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "postgres": "run-script-os",
+    "postgres:win32": "docker-compose -f ./apps/database/postgres/docker-compose.yml up",
+    "postgres:default": "sudo docker-compose -f ./apps/database/postgres/docker-compose.yml up",
+    "mongo": "run-script-os",
+    "mongo:win32": "docker-compose -f ./apps/database/mongo/docker-compose.yml up",
+    "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up"
   },
   "private": true,
   "dependencies": {
