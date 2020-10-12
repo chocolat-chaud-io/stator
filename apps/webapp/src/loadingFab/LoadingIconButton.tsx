@@ -1,6 +1,6 @@
 import { CircularProgress, IconButton, Theme } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import React, { ComponentType, ReactNode } from "react"
+import React, { ComponentType } from "react"
 import { FC } from "react"
 import clsx from "clsx";
 
