@@ -43,6 +43,7 @@
     "@nestjs/typeorm": "^7.1.4",
     "@nestjsx/crud": "^4.6.2",
     "@nestjsx/crud-typeorm": "^4.6.2",
+    "@nrwl/nx-cloud": "^10.1.6",
     "@reduxjs/toolkit": "^1.4.0",
     "axios": "^0.20.0",
     "class-transformer": "^0.3.1",
