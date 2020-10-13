@@ -1,8 +1,8 @@
 import { Slice, createSlice } from "@reduxjs/toolkit"
 import { Todo } from "@stator/models"
 
-import { sliceReducerFactory } from "../utils/sliceReducerFactory"
-import { SliceState, getInitialSliceState } from "../utils/SliceState"
+import { sliceReducerFactory } from "../utils/slice-reducer-factory"
+import { SliceState, getInitialSliceState } from "../utils/slice-state"
 import { todoThunks } from "./todos.thunk"
 
 export interface TodoState extends SliceState<Todo> {}
