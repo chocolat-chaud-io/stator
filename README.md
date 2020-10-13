@@ -87,7 +87,7 @@ For a full list of available commands, consult the `package.json`.
 ### Github Actions
 
 This templates integrates Github Actions as Continuous Integration. The existing workflows are under `.github/workflows`. 
-To have the CI work, you must:
+To have the CI working, you must:
 - Link your repository with [Coveralls](https://coveralls.io/repos/new).
 - (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
