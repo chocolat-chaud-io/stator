@@ -76,6 +76,8 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@innocells/branch-naming-check": "^1.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.4.4",
@@ -87,6 +89,9 @@
     "@nrwl/react": "^10.3.0",
     "@nrwl/web": "10.3.0",
     "@nrwl/workspace": "10.2.1",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.1.1",
     "@testing-library/react": "10.4.1",
     "@types/jest": "26.0.8",
     "@types/node": "~8.9.4",
@@ -97,7 +102,9 @@
     "@typescript-eslint/eslint-plugin": "2.19.2",
     "@typescript-eslint/parser": "2.19.2",
     "babel-jest": "26.2.2",
+    "commitizen": "^4.2.1",
     "cypress": "^4.1.0",
+    "cz-conventional-changelog": "^3.3.0",
     "dotenv": "6.2.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
@@ -110,6 +117,7 @@
     "husky": "^4.3.0",
     "jest": "26.2.2",
     "prettier": "^2.0.4",
+    "semantic-release": "^17.2.1",
     "supertest": "^5.0.0",
     "ts-jest": "26.1.4",
     "ts-node": "~7.0.0",
@@ -118,7 +126,13 @@
   },
   "husky": {
     "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
       "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+$'"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
