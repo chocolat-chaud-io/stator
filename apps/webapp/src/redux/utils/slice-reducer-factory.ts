@@ -1,8 +1,8 @@
 import { PayloadAction } from "@reduxjs/toolkit"
 
 import { RootEntity } from "@stator/models"
-import { SliceState } from "./SliceState"
-import { ThunkFactoryType } from "./thunkFactory"
+import { SliceState } from "./slice-state"
+import { ThunkFactoryType } from "./thunk-factory"
 
 export type PayloadEntityAction<T> = PayloadAction<T, string, { arg: T }>
 export type PayloadErrorAction<T> = PayloadAction<T, string, { arg: T }, Error>

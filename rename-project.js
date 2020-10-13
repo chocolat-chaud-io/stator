@@ -1,15 +1,14 @@
 const fs = require("fs")
 const path = require("path")
 
-async function* walk(dir, ignoredFolders) {
+async function* walk(dir, ignoredPaths) {
   for await (const d of await fs.promises.opendir(dir)) {
     const entry = path.join(dir, d.name)
-    if (d.isDirectory() && !ignoredFolders.includes(d.name)) yield* walk(entry, ignoredFolders)
+    if (d.isDirectory() && !ignoredPaths.includes(d.name)) yield* walk(entry, ignoredPaths)
     else if (d.isFile()) yield entry
   }
 }
 
-// Then, use it with a simple async for loop
 async function main() {
   try {
     const ignoredFolders = ["node_modules", "dist", ".git", ".idea"]
