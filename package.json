@@ -76,6 +76,7 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
+    "@innocells/branch-naming-check": "^1.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.4.4",
     "@nrwl/cypress": "10.3.0",
@@ -106,6 +107,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "husky": "^4.3.0",
     "jest": "26.2.2",
     "prettier": "^2.0.4",
     "supertest": "^5.0.0",
@@ -113,5 +115,10 @@
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
     "typescript": "~3.9.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+$'"
+    }
   }
 }

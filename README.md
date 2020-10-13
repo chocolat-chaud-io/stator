@@ -234,7 +234,9 @@ To facilitate and optimize the usage of the monorepo, we make use of [NX](https:
 
 [eslint](https://github.com/eslint/eslint) enforces excellent standards, and [prettier](https://github.com/prettier/prettier) helps you apply them.
 
-File and directory name are enforced by the custom made `enforce-file-folder-naming-convention.js`.
+File and directory names are enforced by the custom made `enforce-file-folder-naming-convention.js`.
+
+Branch names are enforced before you even commit to ensure everyone adopts the same standard: `{issue-number}-{branch-work-title-kebab-case}`.
 
 For end to end testing, we use the notorious [cypress](https://github.com/cypress-io/cypress).
 
