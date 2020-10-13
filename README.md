@@ -1,5 +1,5 @@
-![Github action status](https://img.shields.io/github/workflow/status/yann510/stator/stator%20CI/master?style=flat-square)
-![Coveralls github](https://img.shields.io/coveralls/github/yann510/stator?style=flat-square)
+![Github action status](https://github.com/yann510/stator/workflows/stator%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/yann510/stator/badge.svg?branch=master)](https://coveralls.io/github/yann510/stator?branch=master)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
