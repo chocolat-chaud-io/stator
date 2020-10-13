@@ -13,8 +13,8 @@ module.exports = {
   coverageDirectory: "../../coverage/apps/api",
   coverageThreshold: {
     global: {
-      branches: 80
-    }
+      branches: 80,
+    },
   },
-  coveragePathIgnorePatterns: ["./src/config/"]
+  coveragePathIgnorePatterns: ["./src/config/"],
 }

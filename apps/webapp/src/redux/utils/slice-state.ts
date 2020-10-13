@@ -21,7 +21,7 @@ export const getInitialSliceState = <T extends SliceState<TEntity>, TEntity>(): 
       post: { loading: false },
       put: { ids: {} },
       delete: { ids: {} },
-      error: null
+      error: null,
     },
   } as T
 }
