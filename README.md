@@ -8,7 +8,7 @@
 
 Stator, your go-to template for the perfect stack.
 
-## Why?
+# Why?
 
 Have you ever started a new project by yourself?
 If so, you probably know that it is tedious to set up all the necessary tools.
@@ -18,33 +18,33 @@ Indeed, this template is opinionated as to what's the best, but it does enforce 
 
 If you want more details about how this idea was implemented, I recommend reading the [series of blog articles](https://yann510.hashnode.dev/creating-the-modern-developer-stack-template-part-1-ckfl56axy02e85ds18pa26a6z) I wrote on the topic.
 
-### Demo Application
+# Demo Application
 
-![demo application](readmeAssets/todo-demo.gif)
+![demo application](readme-assets/todo-demo.gif)
 
-## Getting started
+# Getting started
 
-### Introduction
+## Introduction
 
 This template includes a demo todo application that serves as an example of sound patterns.
 Of course, you won't be creating a todo application for your project, but you can use this as an example of useful patterns and learn how to use the technologies presented in this project.
 
-### Prerequisites
+## Prerequisites
 
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [node.js](https://nodejs.org/en/download/) your version must >= 14
 
-### Usage
+## Usage
 
-#### Copy the template
+### Copy the template
 
 This repository is a repository template, which means you can use the `Use this template` button at the top to create your project based on this.
 
-![use template button](readmeAssets/useTemplate.png)
+![use template button](readme-assets/use-template.png)
 
 \*Note: If you have an existing repository, this will require more work. I would recommend using the `use template button` and migrating your current code to the newly created projects.
 
-#### Make it yours
+### Make it yours
 
 You will now want to make this project yours by replacing all `stator` occurrences with your own project name.
 Thankfully, we have a script just for that:
@@ -56,15 +56,15 @@ Thankfully, we have a script just for that:
 The file will delete itself once it has been completed.
 On completion, you will see the following message:
 
-![project appropriation success](readmeAssets/projectAppropriationSuccess.png)
+![project appropriation success](readme-assets/project-appropriation-success.png)
 
-#### Install the dependencies
+### Install the dependencies
 
 You can now install the dependencies:
 
 `npm i`
 
-#### Run the whole stack
+### Run the whole stack
 
 Running the database:
 
@@ -84,15 +84,15 @@ Running all the tests:
 
 For a full list of available commands, consult the `package.json`.
 
-#### Github Actions
+### Github Actions
 
 This templates integrates Github Actions as Continuous Integration. You can modify it under `.github/workflows/nx-affected.yml`. To have the CI work, you must link your repository with [Coveralls](https://coveralls.io/repos/new).
 
-## Technologies used
+# Technologies used
 
-### Database
+## Database
 
-#### Postgres
+### Postgres
 
 There are 2 databases available, postgres and mongo.
 To ensure your developers don't get into any trouble while installing those, they are already pre-configured with `docker-compose.yml` files.
@@ -100,18 +100,18 @@ To ensure your developers don't get into any trouble while installing those, the
 **By default, the project uses postgres.**
 If this is what you want, you're good to go; everything will work out of the box.
 
-#### Mongo [NOT RECOMMENDED]
+### Mongo [NOT RECOMMENDED]
 
 If you would like to use mongodb, even though it is absolutely not recommended because it currently doesn't work well with [typeorm](https://github.com/typeorm/typeorm), you can still do that by updating the connection info under `./apps/api/src/config/configuration.ts`.
 You simply need to replace `type: "postgres"` with `type: "mongo"`.
 
-#### Seeding data
+### Seeding data
 
 If you want your database to be pre-populated with that, it is very easy to do so.
 For postgres add your `sql` statements to `apps/database/postgres/init.sql` file.
 For mongo add your mongo statements to `apps/database/mongo/mongo-entrypoint/seed-data.js` file.
 
-### Backend
+## Backend
 
 We are using cutting edge technologies to ensure that you get the best development experience one could hope for.
 To communicate with the database, we make use of the great [typeorm](https://github.com/typeorm/typeorm).
@@ -160,9 +160,9 @@ We now have generated [swagger documentation](https://github.com/fastify/fastify
 
 Once you navigate to [localhost:3333](http://localhost:3333), you will see this:
 
-![redoc](readmeAssets/redoc.png)
+![redoc](readme-assets/redoc.png)
 
-### Frontend
+## Frontend
 
 For our webapp, we're using the very popular [react](https://github.com/facebook/react) alongside [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [react-router](https://github.com/ReactTraining/react-router).
 We highly recommend that you use [function components](https://reactjs.org/docs/components-and-props.html) as demonstrated in the example.
@@ -226,13 +226,15 @@ In our example, we are using [material-ui](https://github.com/mui-org/material-u
 
 We also use [axios](https://github.com/axios/axios) to simplify our requests handling as it works very well with TypeScript.
 
-### Global
+## Global
 
 We strongly believe that typing helps create a more robust program; thus, we use [TypeScript](https://github.com/microsoft/TypeScript).
 
 To facilitate and optimize the usage of the monorepo, we make use of [NX](https://github.com/nrwl/nx).
 
 [eslint](https://github.com/eslint/eslint) enforces excellent standards, and [prettier](https://github.com/prettier/prettier) helps you apply them.
+
+File and directory name are enforced by the custom made `enforce-file-folder-naming-convention.js`.
 
 For end to end testing, we use the notorious [cypress](https://github.com/cypress-io/cypress).
 

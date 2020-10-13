@@ -3,7 +3,7 @@
 
 name: stator CI
 
-on: 
+on:
   pull_request:
   push:
     branches:
@@ -57,6 +57,9 @@ jobs:
 
       - name: Lint files
         run: npm run affected:lint -- --base=origin/master
+
+      - name: Enforce naming conventions
+        run: npm run lint:file-folder-convention
 
       - name: Run tests
         run: npm run affected:test -- --base=origin/master --code-coverage
