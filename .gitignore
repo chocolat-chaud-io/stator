@@ -34,7 +34,6 @@ yarn-error.log
 testem.log
 /typings
 .cache
-.firebase
 
 # System Files
 .DS_Store
