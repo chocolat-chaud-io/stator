@@ -2,6 +2,7 @@
 ![Coveralls github](https://img.shields.io/coveralls/github/yann510/stator?style=flat-square)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Stator
 
@@ -82,6 +83,10 @@ Running all the tests:
 `npm run affected:test && npm run affected:e2e`
 
 For a full list of available commands, consult the `package.json`.
+
+#### Github Actions
+
+This templates integrates Github Actions as Continuous Integration. You can modify it under `.github/workflows/nx-affected.yml`. To have the CI work, you must link your repository with [Coveralls](https://coveralls.io/repos/new).
 
 ## Technologies used
 
