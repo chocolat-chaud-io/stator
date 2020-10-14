@@ -19,9 +19,9 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { LoadingIconButton } from "../loading-fab/loading-icon-button"
 import { RootState } from "../redux/root-reducer"
+import { AppDispatch } from "../redux/store"
 import { TodoState } from "../redux/todos/todos.slice"
 import { todoThunks } from "../redux/todos/todos.thunk"
-import { AppDispatch } from "../redux/store"
 import { useAppStyles } from "./app.styles"
 
 export const App = () => {
