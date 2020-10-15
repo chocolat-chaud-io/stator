@@ -249,7 +249,7 @@ We also have a pre-built CI toolkit for you that will build and run the tests.
 # Overview
 
 Stator is a full-stack pre-configured template for your projects.
-The technologies used are mentioned below-
+The technologies used are mentioned below:
 * Database
   * Postgres
   * Mongo
