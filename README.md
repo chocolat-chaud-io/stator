@@ -34,6 +34,24 @@ Of course, you won't be creating a todo application for your project, but you ca
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [node.js](https://nodejs.org/en/download/) your version must >= 14
 
+# Overview
+
+Stator is a full-stack pre-configured template for your projects.
+The technologies used are mentioned below:
+* Database
+  * [Postgres](https://github.com/postgres/postgres)
+  * [Mongo](https://github.com/mongodb/mongo)
+* Backend
+    * [TypeORM](https://github.com/typeorm/typeorm)
+    * [Nest](https://github.com/nestjs/nest)
+    * [Fastify](https://github.com/fastify/fastify)
+    * [NestJs CRUD](https://github.com/nestjsx/crud)
+* Frontend
+    * [React](https://github.com/facebook/react)
+    * [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
+    * [React Router](https://github.com/ReactTraining/react-router)
+    * [axios](https://github.com/axios/axios)
+
 ## Usage
 
 ### Copy the template
@@ -245,22 +263,3 @@ Branch names are enforced before you even commit to ensure everyone adopts the s
 For end to end testing, we use the notorious [cypress](https://github.com/cypress-io/cypress).
 
 We also have a pre-built CI toolkit for you that will build and run the tests.
-
-# Overview
-
-Stator is a full-stack pre-configured template for your projects.
-The technologies used are mentioned below:
-* Database
-  * Postgres
-  * Mongo
-  * Seeding data
-* Backend
-    * TypeORM
-    * Nest
-    * Fastify
-    * NestJs CRUD
-* Frontend
-    * React
-    * Redux Toolkit
-    * React Router
-    * axios    
