@@ -12,10 +12,9 @@ jobs:
     steps:
       - name: Wait for build to succeed
         uses: fountainhead/action-wait-for-check@v1.0.0
-        id: wait-for-build
         with:
           token: ${{ github.token }}
-          checkName: stator CI
+          checkName: Archive build artifacts
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
       - uses: actions/checkout@v2
