@@ -16,18 +16,17 @@ async function* walk(dir, ignoredPaths) {
 
 async function main() {
   const ignoredFolders = ["node_modules", "dist", ".git", ".idea", ".gitkeep", ".eslintrc", "README", "LICENSE"]
-  const capitalLeterRegex = /[A-Z]/gm
+  const capitalLetterRegex = /[A-Z]/gm
   const errorPathPaths = []
 
   function validateEntryName(entry) {
     const entryName = path.basename(entry).replace(/\.[^\/.]+$/, "")
-    if (entryName.length > 0 && !ignoredFolders.includes(entryName) && entryName.match(capitalLeterRegex)) {
-      console.log(entryName)
+    if (entryName.length > 0 && !ignoredFolders.includes(entryName) && entryName.match(capitalLetterRegex)) {
       errorPathPaths.push(entry)
     }
   }
 
-  for await (const entry of walk("./", ignoredFolders)) {
+  for await (const entry of walk(path.join(__dirname, '..'), ignoredFolders)) {
     validateEntryName(entry)
   }
 
@@ -46,4 +45,5 @@ async function main() {
 
   console.log("Congratulations, all your files and directories are properly named!")
 }
+
 main().then().catch(console.error)

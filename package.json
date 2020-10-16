@@ -10,7 +10,7 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "npm run affected:lint",
-    "lint:file-folder-convention": "node enforce-file-folder-naming-convention.js",
+    "lint:file-folder-convention": "node ./tools/enforce-file-folder-naming-convention.js",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
@@ -33,7 +33,8 @@
     "postgres:default": "sudo docker-compose -f ./apps/database/postgres/docker-compose.yml up",
     "mongo": "run-script-os",
     "mongo:win32": "docker-compose -f ./apps/database/mongo/docker-compose.yml up",
-    "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up"
+    "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up",
+    "rename-project": "node ./tools/rename-project.js --project-name"
   },
   "private": true,
   "dependencies": {
