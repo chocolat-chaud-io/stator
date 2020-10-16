@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-
 import { RootEntity } from "@stator/models"
+import { AxiosResponse } from "axios"
+
 import { environment } from "../../environments/environment"
 import { http } from "../../services/http"
-import { AxiosResponse } from "axios"
 
 const handleRequest = async <T>(requestFn: Promise<AxiosResponse<T>>) => {
   try {

@@ -10,7 +10,7 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "npm run affected:lint",
-    "lint:file-folder-convention": "node enforce-file-folder-naming-convention.js",
+    "lint:file-folder-convention": "node ./tools/enforce-file-folder-naming-convention.js",
     "e2e": "nx e2e",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
@@ -23,6 +23,7 @@
     "format": "nx format:write",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
+    "format:prettier": "prettier --write \"./(apps|libs)/**/*.(js|ts|tsx|json|yml)\"",
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
@@ -32,7 +33,8 @@
     "postgres:default": "sudo docker-compose -f ./apps/database/postgres/docker-compose.yml up",
     "mongo": "run-script-os",
     "mongo:win32": "docker-compose -f ./apps/database/mongo/docker-compose.yml up",
-    "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up"
+    "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up",
+    "rename-project": "node ./tools/rename-project.js --project-name"
   },
   "private": true,
   "dependencies": {
@@ -57,6 +59,7 @@
     "clsx": "^1.1.1",
     "document-register-element": "1.13.1",
     "fastify-swagger": "^3.4.0",
+    "import-sort-style-module": "^6.0.0",
     "mongodb": "^3.6.2",
     "nx": "^10.3.0",
     "pg": "^8.4.1",
@@ -115,7 +118,8 @@
     "eslint-plugin-react-hooks": "^4.0.0",
     "husky": "^4.3.0",
     "jest": "26.2.2",
-    "prettier": "^2.0.4",
+    "prettier": "^2.1.2",
+    "prettier-plugin-import-sort": "0.0.6",
     "semantic-release": "^17.2.1",
     "supertest": "^5.0.0",
     "ts-jest": "26.1.4",
@@ -132,6 +136,11 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "importSort": {
+    ".js, .jsx, .ts, .tsx": {
+      "style": "module"
     }
   }
 }

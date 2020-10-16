@@ -67,7 +67,7 @@ This repository is a repository template, which means you can use the `Use this 
 You will now want to make this project yours by replacing all `stator` occurrences with your own project name.
 Thankfully, we have a script just for that:
 
-`node renameProject.js --project-name {YOUR_PROJECT_NAME}`
+`npm run rename-project {YOUR_PROJECT_NAME}`
 
 \*Note: I highly recommend that the project name is the same as your git repository.
 
