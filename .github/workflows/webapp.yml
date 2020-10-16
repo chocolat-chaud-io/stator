@@ -1,0 +1,34 @@
+name: Deploy to Heroku (webapp)
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "dist/apps/webapp/**"
+      - ".github/workflows/webapp.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for build to succeed
+        uses: fountainhead/action-wait-for-check@v1.0.0
+        id: wait-for-build
+        with:
+          token: ${{ github.token }}
+          checkName: stator CI
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - uses: actions/checkout@v2
+
+      - name: Download dist folder
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+
+      - name: Add webapp remote origin
+        run: git remote add heroku-webapp https://heroku:${{ secrets.HEROKU_API_TOKEN }}@git.heroku.com/${{ secrets.HEROKU_WEBAPP_NAME }}.git
+
+      - name: Deploy webapp to Heroku
+        run: git push heroku-webapp `git subtree split --prefix dist/apps/webapp master`:refs/heads/master --force

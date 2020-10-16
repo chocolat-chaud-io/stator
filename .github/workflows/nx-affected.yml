@@ -76,6 +76,12 @@ jobs:
           github-token: ${{ github.token }}
           path-to-lcov: ./coverage/apps/api/lcov.info
 
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: ./dist
+
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
