@@ -34,7 +34,7 @@ Of course, you won't be creating a todo application for your project, but you ca
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [node.js](https://nodejs.org/en/download/) your version must >= 14
 
-# Overview
+## Overview
 
 Stator is a full-stack pre-configured template for your projects.
 The technologies used are mentioned below:
