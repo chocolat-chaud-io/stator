@@ -1,12 +1,10 @@
 name: Deploy to Heroku (api)
 
 on:
+  pull_request:
   push:
     branches:
       - master
-    paths:
-      - "dist/apps/api/**"
-      - ".github/workflows/api.yml"
 
 jobs:
   deploy:

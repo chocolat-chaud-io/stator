@@ -1,12 +1,10 @@
 name: Deploy to Heroku (webapp)
 
 on:
+  pull_request:
   push:
     branches:
       - master
-    paths:
-      - "dist/apps/webapp/**"
-      - ".github/workflows/webapp.yml"
 
 jobs:
   deploy:
