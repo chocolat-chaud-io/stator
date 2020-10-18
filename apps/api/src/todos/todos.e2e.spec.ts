@@ -4,7 +4,7 @@ import { Todo } from "@stator/models"
 import * as supertest from "supertest"
 import { Repository } from "typeorm"
 
-import { configurationTest } from "../config/configuration-test"
+import { configurationTest } from "../config/configuration.test"
 import { getRootModuleImports } from "../utils"
 import { TodosModule } from "./todos.module"
 

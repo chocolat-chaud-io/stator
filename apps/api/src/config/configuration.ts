@@ -4,6 +4,7 @@ import { Todo } from "@stator/models"
 
 export const configuration = () => ({
   port: parseInt(process.env.PORT, 10) || 3333,
+  address: process.env.ADDRESS || "0.0.0.0",
 
   database: {
     host: process.env.DATABASE_HOST || "localhost",
@@ -12,7 +13,7 @@ export const configuration = () => ({
     username: process.env.DATABASE_USERNAME || "postgres",
     password: process.env.DATABASE_PASSWORD || "postgres",
     synchronize: process.env.DATABASE_SYNCHRONIZE || true,
-    ca: process.env.DATABASE_CA_CERT,
+    certificateAuthority: process.env.DATABASE_CA_CERT,
   },
 })
 
@@ -25,9 +26,9 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
     username: configService.get("database.username"),
     password: configService.get("database.password"),
     synchronize: configService.get("database.synchronize"),
-    ssl: configService.get("database.ca")
+    ssl: configService.get("database.certificateAuthority")
       ? {
-          ca: configService.get("database.ca"),
+          ca: configService.get("database.certificateAuthority"),
         }
       : false,
     entities: [Todo],
