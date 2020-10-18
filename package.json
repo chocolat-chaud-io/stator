@@ -34,7 +34,8 @@
     "mongo": "run-script-os",
     "mongo:win32": "docker-compose -f ./apps/database/mongo/docker-compose.yml up",
     "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up",
-    "rename-project": "node ./tools/rename-project.js --project-name"
+    "rename-project": "node ./tools/rename-project.js --project-name",
+    "commit": "cz"
   },
   "private": true,
   "dependencies": {
@@ -59,7 +60,6 @@
     "clsx": "^1.1.1",
     "document-register-element": "1.13.1",
     "fastify-swagger": "^3.4.0",
-    "import-sort-style-module": "^6.0.0",
     "mongodb": "^3.6.2",
     "nx": "^10.3.0",
     "pg": "^8.4.1",
@@ -117,6 +117,7 @@
     "eslint-plugin-react": "^7.21.2",
     "eslint-plugin-react-hooks": "^4.0.0",
     "husky": "^4.3.0",
+    "import-sort-style-module": "^6.0.0",
     "jest": "26.2.2",
     "prettier": "^2.1.2",
     "prettier-plugin-import-sort": "0.0.6",
@@ -130,7 +131,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+$'"
+      "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+$' && npm run lint:file-folder-convention"
     }
   },
   "config": {
