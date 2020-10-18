@@ -22,8 +22,6 @@ If you want more details about how this idea was implemented, I recommend readin
 
 ![demo application](readme-assets/todo-demo.gif)
 
-# Getting started
-
 ## Introduction
 
 This template includes a demo todo application that serves as an example of sound patterns.
@@ -38,21 +36,26 @@ Of course, you won't be creating a todo application for your project, but you ca
 
 Stator is a full-stack pre-configured template for your projects.
 The technologies used are mentioned below:
-* Database
-  * [Postgres](https://github.com/postgres/postgres)
-  * [Mongo](https://github.com/mongodb/mongo)
-* Backend
-    * [TypeORM](https://github.com/typeorm/typeorm)
-    * [Nest](https://github.com/nestjs/nest)
-    * [Fastify](https://github.com/fastify/fastify)
-    * [NestJs CRUD](https://github.com/nestjsx/crud)
-* Frontend
-    * [React](https://github.com/facebook/react)
-    * [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
-    * [React Router](https://github.com/ReactTraining/react-router)
-    * [axios](https://github.com/axios/axios)
 
-## Usage
+### Database
+
+- [Postgres](https://github.com/postgres/postgres)
+- [Mongo](https://github.com/mongodb/mongo)
+
+### Backend
+- [TypeORM](https://github.com/typeorm/typeorm)
+- [Nest](https://github.com/nestjs/nest)
+- [Fastify](https://github.com/fastify/fastify)
+- [NestJs CRUD](https://github.com/nestjsx/crud)
+
+### Frontend
+
+- [React](https://github.com/facebook/react)
+- [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
+- [React Router](https://github.com/ReactTraining/react-router)
+- [axios](https://github.com/axios/axios)
+
+# Getting started
 
 ### Copy the template
 
