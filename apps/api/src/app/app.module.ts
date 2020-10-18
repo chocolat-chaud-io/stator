@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common"
 import { ServeStaticModule } from "@nestjs/serve-static"
 
 import { configuration } from "../config/configuration"
+import { HealthModule } from "../health/health.module"
 import { TodosModule } from "../todos/todos.module"
 import { getRootModuleImports } from "../utils"
 
@@ -12,6 +13,7 @@ import { getRootModuleImports } from "../utils"
       rootPath: `${__dirname}/assets`,
       exclude: ["/api*"],
     }),
+    HealthModule,
     TodosModule,
   ],
   controllers: [],

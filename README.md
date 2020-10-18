@@ -112,6 +112,25 @@ To have the CI working, you must:
 - Link your repository with [Coveralls](https://coveralls.io/repos/new).
 - (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
+### Deployment
+
+The application can be deployed in two different ways, depending on your objectives.
+
+#### Digital Ocean App Platform
+
+For a simple and fast deployment, the new [App Platform](https://www.digitalocean.com/docs/app-platform/) from Digital Ocean makes it easy to work with monorepos. For our todo app, the config file lies under `.do/app.yaml`. There, you can change the configuration of the different apps being deployed. [The spec can be found here.](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/)
+
+To deploy this full stack application yourself, follow the steps below:
+1. Create an account on [Digital Ocean Cloud](https://cloud.digitalocean.com) and enable Github access
+1. Install [doctl CLI](https://www.digitalocean.com/docs/apis-clis/doctl/how-to/install/)
+1. Run `doctl apps create --spec .do/app.yaml`
+1. View the build, logs, and deployment url [here](https://cloud.digitalocean.com/apps)
+
+Once done, your app will be hooked to master branch commits as defined in the spec. Therefore, on merge, the application will update. To update the spec of the application, first get the application id with `doctl apps list`, then simply run `doctl apps update <app id> --spec .do/app.yaml`.
+
+#### Kubernetes
+
+More to come..
 
 # Technologies used
 
