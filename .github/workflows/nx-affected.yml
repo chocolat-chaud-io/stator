@@ -52,20 +52,20 @@ jobs:
       - name: Install npm packages
         run: npm ci
 
-      - name: Build affected apps
-        run: npm run affected:build -- --base=origin/master
-
       - name: Lint files
         run: npm run affected:lint -- --base=origin/master
 
       - name: Enforce naming conventions
         run: npm run lint:file-folder-convention
 
-      - name: Run tests
-        run: npm run affected:test -- --base=origin/master --code-coverage
+      - name: Build affected apps
+        run: npm run affected:build -- --base=origin/master
 
       - name: Start api
         run: npm start api &
+
+      - name: Run tests
+        run: npm run affected:test -- --base=origin/master --code-coverage
 
       - name: Run e2e tests
         run: npm run affected:e2e -- --base=origin/master
