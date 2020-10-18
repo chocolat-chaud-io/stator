@@ -1,0 +1,54 @@
+name: Build a docker image for the web application
+
+on:
+  workflow_dispatch:
+    inputs:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Increase watcher limit
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Fetch latest changes
+        run: git fetch --no-tags --prune --depth=5 origin master
+
+      - name: Inject Nx Cloud token
+        shell: bash
+        env:
+          nx_cloud_token: ${{ secrets.NX_CLOUD_TOKEN }}
+        run:
+          sed -i "s/nx_cloud_token/$nx_cloud_token/" $GITHUB_WORKSPACE/nx.json
+
+      - name: Install npm packages
+        run: npm ci
+
+      - name: Build webapp
+        run: npx nx build webapp -- --base=origin/master
+
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          dockerfile: dockerfiles/webapp/Dockerfile
+          repository: chocolat-chaud-io/stator/stator-webapp
+          tag_with_ref: true
+          tag_with_sha: true

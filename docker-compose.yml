@@ -1,0 +1,14 @@
+version: "3.6"
+
+services:
+  api:
+    build:
+      context: ./
+      dockerfile: dockerfiles/api/Dockerfile
+    network_mode: host
+  webapp:
+    build:
+      context: ./
+      dockerfile: dockerfiles/webapp/Dockerfile
+    ports:
+    - 8000:80

@@ -15,7 +15,7 @@ async function* walk(dir, ignoredPaths) {
 }
 
 async function main() {
-  const ignoredFolders = ["node_modules", "dist", ".git", ".idea", ".gitkeep", ".eslintrc", ".cache", "README", "LICENSE"]
+  const ignoredFolders = ["node_modules", "dist", ".git", ".idea", ".gitkeep", ".eslintrc", ".cache", "README", "LICENSE", "dockerfiles"]
   const capitalLetterRegex = /[A-Z]/gm
   const errorPathPaths = []
 
