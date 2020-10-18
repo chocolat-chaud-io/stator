@@ -259,6 +259,8 @@ To facilitate and optimize the usage of the monorepo, we make use of [NX](https:
 
 [eslint](https://github.com/eslint/eslint) enforces excellent standards, and [prettier](https://github.com/prettier/prettier) helps you apply them.
 
+Commit messages must abide to those [guidelines](https://www.conventionalcommits.org/en/v1.0.0/). If you need help following them, simply run `npm run commit` and you will be prompted with an interactive menu.
+
 File and directory names are enforced by the custom made `enforce-file-folder-naming-convention.js`.
 
 Branch names are enforced before you even commit to ensure everyone adopts the same standard: `{issue-number}-{branch-work-title-kebab-case}`.
