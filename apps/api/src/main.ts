@@ -10,7 +10,8 @@ async function bootstrap() {
   const fastifyOptions = { logger: true }
 
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(fastifyOptions))
-  app.enableCors({ origin: true })
+  app.enableShutdownHooks()
+  app.enableCors({ origin: "*" })
   app.setGlobalPrefix(globalPrefix)
 
   const swaggerOptions = new DocumentBuilder()
@@ -24,7 +25,7 @@ async function bootstrap() {
   SwaggerModule.setup("documentation", app, document)
 
   const configService = app.get(ConfigService)
-  await app.listen(configService.get<number>("port"))
+  await app.listen(configService.get<number>("port"), "0.0.0.0")
 }
 
 bootstrap()
