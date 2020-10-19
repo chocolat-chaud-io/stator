@@ -3,15 +3,28 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "sourceType": "module",
     "project": "./tsconfig.*?.json"
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "ignorePatterns": ["**/*"],
-  "plugins": ["@typescript-eslint", "@nrwl/nx"],
+  "plugins": [
+    "@typescript-eslint",
+    "@nrwl/nx",
+    "react"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -28,7 +41,9 @@
           { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
         ]
       }
-    ]
+    ],
+    "react/prefer-stateless-function": "error",
+    "react/prop-types": "off"
   },
   "overrides": [
     {

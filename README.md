@@ -18,7 +18,7 @@ Indeed, this template is opinionated as to what's the best, but it does enforce 
 
 If you want more details about how this idea was implemented, I recommend reading the [series of blog articles](https://yann510.hashnode.dev/creating-the-modern-developer-stack-template-part-1-ckfl56axy02e85ds18pa26a6z) I wrote on the topic.
 
-# Demo Application
+# [Demo Application](https://stator-8t3l5.ondigitalocean.app)
 
 ![demo application](readme-assets/todo-demo.gif)
 
