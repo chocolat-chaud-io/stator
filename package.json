@@ -128,7 +128,7 @@
     "prettier-plugin-import-sort": "0.0.6",
     "semantic-release": "17.2.1",
     "supertest": "5.0.0",
-    "ts-jest": "26.1.4",
+    "ts-jest": "26.4.2",
     "ts-node": "7.0.1",
     "tslint": "6.0.0",
     "typescript": "3.9.7"
