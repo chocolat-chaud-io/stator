@@ -1,7 +1,7 @@
 version: "3.6"
 services:
   database:
-    image: mongo:4.2.3-bionic
+    image: mongo:4.4.1-bionic
     container_name: stator-mongo
     ports:
       - 27017:27017
