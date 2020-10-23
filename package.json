@@ -57,7 +57,7 @@
     "@nestjsx/crud-typeorm": "4.6.2",
     "@nrwl/nx-cloud": "10.1.7",
     "@reduxjs/toolkit": "1.4.0",
-    "axios": "0.20.0",
+    "axios": "0.21.0",
     "class-transformer": "0.3.1",
     "class-validator": "0.12.2",
     "clsx": "1.1.1",
