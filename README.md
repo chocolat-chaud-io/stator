@@ -1,8 +1,13 @@
+[![GitHub version](https://badge.fury.io/gh/chocolat-chaud-io%2Fstator.svg)](https://badge.fury.io/gh/chocolat-chaud-io%2Fstator)
 [![Github action status](https://github.com/yann510/stator/workflows/stator%20CI/badge.svg)](https://github.com/yann510/stator/actions)
 [![Coverage Status](https://coveralls.io/repos/github/yann510/stator/badge.svg?branch=master)](https://coveralls.io/github/yann510/stator?branch=master)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-ff69b4.svg)](http://commitizen.github.io/cz-cli/)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-blue.svg)](https://renovatebot.com)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Nest Powered](https://raw.githubusercontent.com/nestjsx/crud/master/img/nest-powered.svg?sanitize=true)](https://github.com/nestjs/nest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+ [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/chocolat-chaud-io/stator)
 
 # Stator
 
