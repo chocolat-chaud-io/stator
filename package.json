@@ -109,7 +109,7 @@
     "@typescript-eslint/eslint-plugin": "2.19.2",
     "@typescript-eslint/parser": "2.19.2",
     "babel-jest": "26.2.2",
-    "commitizen": "4.2.1",
+    "commitizen": "4.2.2",
     "cypress": "4.12.1",
     "cz-conventional-changelog": "3.3.0",
     "dotenv": "6.2.0",
