@@ -70,7 +70,7 @@
     "react-dom": "16.14.0",
     "react-redux": "7.2.1",
     "react-router-dom": "5.2.0",
-    "redoc": "2.0.0-rc.40",
+    "redoc": "2.0.0-rc.44",
     "reflect-metadata": "0.1.13",
     "replace-in-file": "6.1.0",
     "run-script-os": "1.1.1",
