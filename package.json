@@ -41,9 +41,9 @@
   },
   "private": true,
   "dependencies": {
-    "@material-ui/core": "5.0.0-alpha.7",
-    "@material-ui/icons": "5.0.0-alpha.11",
-    "@material-ui/lab": "5.0.0-alpha.7",
+    "@material-ui/core": "5.0.0-alpha.14",
+    "@material-ui/icons": "5.0.0-alpha.14",
+    "@material-ui/lab": "5.0.0-alpha.14",
     "@nestjs/common": "7.4.4",
     "@nestjs/config": "0.5.0",
     "@nestjs/core": "7.4.4",
