@@ -46,9 +46,6 @@
 * [About the Project](#-about-the-project)
 * [Demo Application](#-demo-application)
   * [Technical Stack](#technical-stack)
-    * [Database](#database)
-    * [Backend](#backend)
-    * [Frontend](#frontend)
 * [Getting Started](#-getting-started)
   * [Prerequisites](#prerequisites)
   * [Copy the template](#copy-the-template)
@@ -59,12 +56,12 @@
     * [Digital Ocean App Platform](#digital-ocean-app-platform)
     * [Kubernetes](#kubernetes)
 * [Implementation](#%EF%B8%8F-implementation)
-  * [Database](#database-1)
+  * [Database](#database)
     * [Postgres](#postgres)
     * [Mongo](#mongo-not-recommended)
     * [Data seeding](#data-seeding)
-  * [Backend](#backend-1)
-  * [Frontend](#frontend-1)
+  * [Backend](#backend)
+  * [Frontend](#frontend)
   * [General](#global)
 
 </br>
@@ -105,7 +102,7 @@ Of course, you won't be creating a todo application for your project, but you ca
 ### Prerequisites
 
 - [Docker Compose](https://docs.docker.com/compose/install/)
-- [node.js](https://nodejs.org/en/download/) >= v14
+- [node.js](https://nodejs.org/en/download/) v14+
 
 ### Copy the template
 
