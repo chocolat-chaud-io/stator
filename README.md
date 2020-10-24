@@ -53,7 +53,7 @@
   * [Prerequisites](#prerequisites)
   * [Copy the template](#copy-the-template)
   * [Make it yours](#make-it-yours)
-  * [Run it](#run-it)
+  * [Run the application](#run-the-application)
   * [Continuous Integration](#continuous-integration)
   * [Deployment](#deployment)
     * [Digital Ocean App Platform](#digital-ocean-app-platform)
@@ -91,27 +91,12 @@ Of course, you won't be creating a todo application for your project, but you ca
 
 ### Technical Stack
 
-Stator is a full-stack pre-configured template for your projects.
-The technologies used are mentioned below:
-
-#### Database
-
-- [Postgres](https://github.com/postgres/postgres)
-- [Mongo](https://github.com/mongodb/mongo)
-
-#### Backend
-
-- [TypeORM](https://github.com/typeorm/typeorm)
-- [Nest](https://github.com/nestjs/nest)
-- [Fastify](https://github.com/fastify/fastify)
-- [NestJs CRUD](https://github.com/nestjsx/crud)
-
-#### Frontend
-
-- [React](https://github.com/facebook/react)
-- [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
-- [React Router](https://github.com/ReactTraining/react-router)
-- [axios](https://github.com/axios/axios)
+| Database | Backend | Frontend |
+| --- | --- | --- |
+| [Postgres](https://github.com/postgres/postgres) | [Nest](https://github.com/nestjs/nest) | [React](https://github.com/facebook/react) |
+| [Mongo](https://github.com/mongodb/mongo) | [Fastify](https://github.com/fastify/fastify) | [React Router](https://github.com/ReactTraining/react-router) |
+|| [TypeORM](https://github.com/typeorm/typeorm) | [Redux Toolkit](https://github.com/reduxjs/redux-toolkit) |
+|| [NestJs CRUD](https://github.com/nestjsx/crud) | [axios](https://github.com/axios/axios) |
 
 </br>
 
@@ -146,7 +131,7 @@ On completion, you will see the following message:
 
 ![project appropriation success](readme-assets/project-appropriation-success.png)
 
-### Run it
+### Run the application
 
 First, install the dependencies:
 ```
