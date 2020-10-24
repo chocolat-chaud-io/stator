@@ -41,7 +41,7 @@
 
 </br>
 
-## 🚀 Quick start
+## 🚀 Quick Start
 
 The interactive CLI will guide you to easily setup your project.
 
@@ -105,7 +105,7 @@ Of course, you won't be creating a todo application for your project, but you ca
 
 </br>
 
-## 💥 Getting started
+## 💥 Getting Started
 
 ### Prerequisites
 
