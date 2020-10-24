@@ -38,17 +38,18 @@
     <img src="https://img.shields.io/badge/Made%20With-Love-orange.svg" alt="Made With Love" />
   </a>
 </div>
+
 </br>
 
 ## 📋 Table of Contents
 
-* [📚 About the Project](#-about-the-project)
-* [🦄 Demo Application](#-demo-application)
+* [About the Project](#-about-the-project)
+* [Demo Application](#-demo-application)
   * [Technical Stack](#technical-stack)
     * [Database](#database)
     * [Backend](#backend)
     * [Frontend](#frontend)
-* [🚀 Getting Started](#-getting-started)
+* [Getting Started](#-getting-started)
   * [Prerequisites](#prerequisites)
   * [Copy the template](#copy-the-template)
   * [Make it yours](#make-it-yours)
@@ -57,7 +58,7 @@
   * [Deployment](#deployment)
     * [Digital Ocean App Platform](#digital-ocean-app-platform)
     * [Kubernetes](#kubernetes)
-* [⚙️ Implementation](#%EF%B8%8F-implementation)
+* [Implementation](#%EF%B8%8F-implementation)
   * [Database](#database-1)
     * [Postgres](#postgres)
     * [Mongo](#mongo-not-recommended)
