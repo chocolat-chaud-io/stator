@@ -42,13 +42,13 @@
 
 ## 📋 Table of Contents
 
-* [About the Project](#about-the-project)
-* [Demo Application](#demo-application)
+* [📚 About the Project](#-about-the-project)
+* [🦄 Demo Application](#-demo-application)
   * [Technical Stack](#technical-stack)
     * [Database](#database)
     * [Backend](#backend)
     * [Frontend](#frontend)
-* [Getting Started](#getting-started)
+* [🚀 Getting Started](#-getting-started)
   * [Prerequisites](#prerequisites)
   * [Copy the template](#copy-the-template)
   * [Make it yours](#make-it-yours)
@@ -57,7 +57,7 @@
   * [Deployment](#deployment)
     * [Digital Ocean App Platform](#digital-ocean-app-platform)
     * [Kubernetes](#kubernetes)
-* [Implementation](#implementation)
+* [⚙️ Implementation](#%EF%B8%8F-implementation)
   * [Database](#database-1)
     * [Postgres](#postgres)
     * [Mongo](#mongo-not-recommended)
@@ -65,6 +65,8 @@
   * [Backend](#backend-1)
   * [Frontend](#frontend-1)
   * [General](#global)
+
+</br>
 
 ## 📚 About the Project
 
@@ -76,6 +78,8 @@ stator solves all of this for you by using the **latest technologies' most up-to
 Indeed, this template is opinionated as to what's the best, but it does enforce excellent practices such as **code re-usability**, **enforces coding guidelines**, **usage of a monorepo**, etc.
 
 If you want more details about how this idea was implemented, I recommend reading the [series of blog articles](https://yann510.hashnode.dev/creating-the-modern-developer-stack-template-part-1-ckfl56axy02e85ds18pa26a6z) I wrote on the topic.
+
+</br>
 
 ## 🦄 [Demo Application](https://stator-8t3l5.ondigitalocean.app)
 
@@ -107,6 +111,8 @@ The technologies used are mentioned below:
 - [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
 - [React Router](https://github.com/ReactTraining/react-router)
 - [axios](https://github.com/axios/axios)
+
+</br>
 
 ## 🚀 Getting started
 
@@ -191,7 +197,9 @@ Once done, your app will be hooked to master branch commits as defined in the sp
 
 More to come..
 
-## ⚙️ Technologies used
+</br>
+
+## ⚙️ Implementation
 
 ### Database
 
