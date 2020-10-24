@@ -89,7 +89,7 @@ If you want more details about how this idea was implemented, I recommend readin
 
 </br>
 
-## 🦄 [Demo Application](https://stator-8t3l5.ondigitalocean.app)
+## 🦄 [Demo Application](https://www.stator.dev)
 
 This template includes a demo **todo application** that serves as an example of sound patterns.
 Of course, you won't be creating a todo application for your project, but you can use this as an example of useful patterns and learn how to use the technologies presented in this project.
