@@ -10,11 +10,11 @@
   <a href="https://badge.fury.io/gh/chocolat-chaud-io%2Fstator">
     <img src="https://badge.fury.io/gh/chocolat-chaud-io%2Fstator.svg" alt="GitHub version" />
   </a>
-  <a href="https://github.com/yann510/stator/actions">
-    <img src="https://github.com/yann510/stator/workflows/stator%20CI/badge.svg" alt="Github action status" />
+  <a href="https://github.com/chocolat-chaud-io/stator/actions">
+    <img src="https://github.com/chocolat-chaud-io/stator/workflows/stator%20CI/badge.svg" alt="Github action status" />
   </a>
-  <a href="https://coveralls.io/github/yann510/stator?branch=master">
-    <img src="https://coveralls.io/repos/github/yann510/stator/badge.svg?branch=master" alt="Coverage Status" />
+  <a href="https://coveralls.io/github/chocolat-chaud-io/stator?branch=master">
+    <img src="https://coveralls.io/repos/github/chocolat-chaud-io/stator/badge.svg?branch=master" alt="Coverage Status" />
   </a>
   <a href="http://commitizen.github.io/cz-cli/">
     <img src="https://img.shields.io/badge/commitizen-friendly-ff69b4.svg" alt="Commitizen friendly" />
