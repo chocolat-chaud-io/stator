@@ -6,6 +6,6 @@
       "automerge": true
     }
   ],
-  "prConcurrentLimit": 2,
+  "prConcurrentLimit": 1,
   "lockFileMaintenance": { "enabled": true }
 }
