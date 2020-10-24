@@ -1,66 +1,119 @@
-[![GitHub version](https://badge.fury.io/gh/chocolat-chaud-io%2Fstator.svg)](https://badge.fury.io/gh/chocolat-chaud-io%2Fstator)
-[![Github action status](https://github.com/yann510/stator/workflows/stator%20CI/badge.svg)](https://github.com/yann510/stator/actions)
-[![Coverage Status](https://coveralls.io/repos/github/yann510/stator/badge.svg?branch=master)](https://coveralls.io/github/yann510/stator?branch=master)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-ff69b4.svg)](http://commitizen.github.io/cz-cli/)
-[![Renovate](https://img.shields.io/badge/renovate-enabled-blue.svg)](https://renovatebot.com)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Nest Powered](https://raw.githubusercontent.com/nestjsx/crud/master/img/nest-powered.svg?sanitize=true)](https://github.com/nestjs/nest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
- [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/chocolat-chaud-io/stator)
+<div align="center">
+  <h1>Stator</h1>
+</div>
+<div align="center">
+  <strong>Stator, your go-to template for the perfect stack.</strong>
+</div>
+</br>
 
-# Stator
+<div align="center">
+  <a href="https://badge.fury.io/gh/chocolat-chaud-io%2Fstator">
+    <img src="https://badge.fury.io/gh/chocolat-chaud-io%2Fstator.svg" alt="GitHub version" />
+  </a>
+  <a href="https://github.com/yann510/stator/actions">
+    <img src="https://github.com/yann510/stator/workflows/stator%20CI/badge.svg" alt="Github action status" />
+  </a>
+  <a href="https://coveralls.io/github/yann510/stator?branch=master">
+    <img src="https://coveralls.io/repos/github/yann510/stator/badge.svg?branch=master" alt="Coverage Status" />
+  </a>
+  <a href="http://commitizen.github.io/cz-cli/">
+    <img src="https://img.shields.io/badge/commitizen-friendly-ff69b4.svg" alt="Commitizen friendly" />
+  </a>
+  <a href="https://renovatebot.com">
+    <img src="https://img.shields.io/badge/renovate-enabled-blue.svg" alt="Renovate" />
+  </a>
+  <a href="https://github.com/semantic-release/semantic-release">
+    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release" />
+  </a>
+  <a href="https://github.com/nestjs/nest">
+    <img src="https://raw.githubusercontent.com/nestjsx/crud/master/img/nest-powered.svg?sanitize=true" alt="Nest Powered" />
+  </a>
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
+  </a>
+  <a href="http://makeapullrequest.com">
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome" />
+  </a>
+  <a href="https://github.com/chocolat-chaud-io/stator">
+    <img src="https://img.shields.io/badge/Made%20With-Love-orange.svg" alt="Made With Love" />
+  </a>
+</div>
+</br>
 
-Stator, your go-to template for the perfect stack.
+## 📋 Table of Contents
 
-# Why?
+* [About the Project](#about-the-project)
+* [Demo Application](#demo-application)
+  * [Technical Stack](#technical-stack)
+    * [Database](#database)
+    * [Backend](#backend)
+    * [Frontend](#frontend)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Copy the template](#copy-the-template)
+  * [Make it yours](#make-it-yours)
+  * [Run it](#run-it)
+  * [Continuous Integration](#continuous-integration)
+  * [Deployment](#deployment)
+    * [Digital Ocean App Platform](#digital-ocean-app-platform)
+    * [Kubernetes](#kubernetes)
+* [Implementation](#implementation)
+  * [Database](#database-1)
+    * [Postgres](#postgres)
+    * [Mongo](#mongo-not-recommended)
+    * [Data seeding](#data-seeding)
+  * [Backend](#backend-1)
+  * [Frontend](#frontend-1)
+  * [General](#global)
+
+## 📚 About the Project
 
 Have you ever started a new project by yourself?
 If so, you probably know that it is tedious to set up all the necessary tools.
 Just like you, the part I enjoy the most is coding, not boilerplate.
-stator solves all of this for you by using the latest technologies' most up-to-date standards.
+
+stator solves all of this for you by using the **latest technologies' most up-to-date standards**.
 Indeed, this template is opinionated as to what's the best, but it does enforce excellent practices such as **code re-usability**, **enforces coding guidelines**, **usage of a monorepo**, etc.
 
 If you want more details about how this idea was implemented, I recommend reading the [series of blog articles](https://yann510.hashnode.dev/creating-the-modern-developer-stack-template-part-1-ckfl56axy02e85ds18pa26a6z) I wrote on the topic.
 
-# [Demo Application](https://stator-8t3l5.ondigitalocean.app)
+## 🦄 [Demo Application](https://stator-8t3l5.ondigitalocean.app)
+
+This template includes a demo **todo application** that serves as an example of sound patterns.
+Of course, you won't be creating a todo application for your project, but you can use this as an example of useful patterns and learn how to use the technologies presented in this project.
 
 ![demo application](readme-assets/todo-demo.gif)
 
-## Introduction
-
-This template includes a demo todo application that serves as an example of sound patterns.
-Of course, you won't be creating a todo application for your project, but you can use this as an example of useful patterns and learn how to use the technologies presented in this project.
-
-## Prerequisites
-
-- [Docker Compose](https://docs.docker.com/compose/install/)
-- [node.js](https://nodejs.org/en/download/) your version must >= 14
-
-## Overview
+### Technical Stack
 
 Stator is a full-stack pre-configured template for your projects.
 The technologies used are mentioned below:
 
-### Database
+#### Database
 
 - [Postgres](https://github.com/postgres/postgres)
 - [Mongo](https://github.com/mongodb/mongo)
 
-### Backend
+#### Backend
+
 - [TypeORM](https://github.com/typeorm/typeorm)
 - [Nest](https://github.com/nestjs/nest)
 - [Fastify](https://github.com/fastify/fastify)
 - [NestJs CRUD](https://github.com/nestjsx/crud)
 
-### Frontend
+#### Frontend
 
 - [React](https://github.com/facebook/react)
 - [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)
 - [React Router](https://github.com/ReactTraining/react-router)
 - [axios](https://github.com/axios/axios)
 
-# Getting started
+## 🚀 Getting started
+
+### Prerequisites
+
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [node.js](https://nodejs.org/en/download/) >= v14
 
 ### Copy the template
 
@@ -75,7 +128,9 @@ This repository is a repository template, which means you can use the `Use this 
 You will now want to make this project yours by replacing all `stator` occurrences with your own project name.
 Thankfully, we have a script just for that:
 
-`npm run rename-project {YOUR_PROJECT_NAME}`
+```
+npm run rename-project {YOUR_PROJECT_NAME}
+```
 
 \*Note: I highly recommend that the project name is the same as your git repository.
 
@@ -84,38 +139,37 @@ On completion, you will see the following message:
 
 ![project appropriation success](readme-assets/project-appropriation-success.png)
 
-### Install the dependencies
+### Run it
 
-You can now install the dependencies:
+First, install the dependencies:
+```
+npm i
+```
 
-`npm i`
+Then, run the whole stack:
+```
+npm run postgres
+```
+```
+npm start api
+```
+```
+npm start webapp
+```
 
-### Run the whole stack
-
-Running the database:
-
-`npm run postgres`
-
-Running the api:
-
-`npm start api`
-
-Running the webapp:
-
-`npm start webapp`
-
-Running all the tests:
-
-`npm run affected:test && npm run affected:e2e`
+Finally, why not test it:
+```
+npm run affected:test && npm run affected:e2e
+```
 
 For a full list of available commands, consult the `package.json`.
 
-### Github Actions
+### Continuous Integration
 
-This templates integrates Github Actions as Continuous Integration. The existing workflows are under `.github/workflows`. 
+This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`. 
 To have the CI working, you must:
-- Link your repository with [Coveralls](https://coveralls.io/repos/new).
-- (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
+1. Link your repository with [Coveralls](https://coveralls.io/repos/new).
+1. (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
 ### Deployment
 
@@ -137,11 +191,11 @@ Once done, your app will be hooked to master branch commits as defined in the sp
 
 More to come..
 
-# Technologies used
+## ⚙️ Technologies used
 
-## Database
+### Database
 
-### Postgres
+#### Postgres
 
 There are 2 databases available, postgres and mongo.
 To ensure your developers don't get into any trouble while installing those, they are already pre-configured with `docker-compose.yml` files.
@@ -149,18 +203,18 @@ To ensure your developers don't get into any trouble while installing those, the
 **By default, the project uses postgres.**
 If this is what you want, you're good to go; everything will work out of the box.
 
-### Mongo [NOT RECOMMENDED]
+#### Mongo [NOT RECOMMENDED]
 
 If you would like to use mongodb, even though it is absolutely not recommended because it currently doesn't work well with [typeorm](https://github.com/typeorm/typeorm), you can still do that by updating the connection info under `./apps/api/src/config/configuration.ts`.
 You simply need to replace `type: "postgres"` with `type: "mongo"`.
 
-### Seeding data
+#### Data seeding
 
 If you want your database to be pre-populated with that, it is very easy to do so.
 For postgres add your `sql` statements to `apps/database/postgres/init.sql` file.
 For mongo add your mongo statements to `apps/database/mongo/mongo-entrypoint/seed-data.js` file.
 
-## Backend
+### Backend
 
 We are using cutting edge technologies to ensure that you get the best development experience one could hope for.
 To communicate with the database, we make use of the great [typeorm](https://github.com/typeorm/typeorm).
@@ -211,7 +265,7 @@ Once you navigate to [localhost:3333](http://localhost:3333), you will see this:
 
 ![redoc](readme-assets/redoc.png)
 
-## Frontend
+### Frontend
 
 For our webapp, we're using the very popular [react](https://github.com/facebook/react) alongside [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [react-router](https://github.com/ReactTraining/react-router).
 We highly recommend that you use [function components](https://reactjs.org/docs/components-and-props.html) as demonstrated in the example.
@@ -275,7 +329,7 @@ In our example, we are using [material-ui](https://github.com/mui-org/material-u
 
 We also use [axios](https://github.com/axios/axios) to simplify our requests handling as it works very well with TypeScript.
 
-## Global
+### General
 
 We strongly believe that typing helps create a more robust program; thus, we use [TypeScript](https://github.com/microsoft/TypeScript).
 
