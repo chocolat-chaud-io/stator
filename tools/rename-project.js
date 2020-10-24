@@ -20,7 +20,7 @@ async function main() {
 
     const projectName = args[1]
 
-    for await (const entry of walk(path.join(__dirname, '..'), ignoredFolders)) {
+    for await (const entry of walk(path.join(__dirname, ".."), ignoredFolders)) {
       const entryStat = await fs.promises.lstat(entry)
       if (entryStat.isFile()) {
         const fileContent = await fs.promises.readFile(entry, "utf-8")
@@ -31,7 +31,6 @@ async function main() {
       }
     }
 
-    await fs.promises.unlink("./tools/rename-project.js")
     console.log("This is now YOUR project provided generously by:")
     console.log(`
 ███████ ████████  █████  ████████  ██████  ██████ 
