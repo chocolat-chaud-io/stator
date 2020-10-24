@@ -51,26 +51,26 @@ npm run get-started
 
 ## 📋 Table of Contents
 
-* [About the Project](#-about-the-project)
-* [Demo Application](#-demo-application)
-  * [Technical Stack](#technical-stack)
-* [Getting Started](#-getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Copy the template](#copy-the-template)
-  * [Make it yours](#make-it-yours)
-  * [Run the application](#run-the-application)
-  * [Continuous Integration](#continuous-integration)
-  * [Deployment](#deployment)
-    * [Digital Ocean App Platform](#digital-ocean-app-platform)
-    * [Kubernetes](#kubernetes)
-* [Implementation](#%EF%B8%8F-implementation)
-  * [Database](#database)
-    * [Postgres](#postgres)
-    * [Mongo](#mongo-not-recommended)
-    * [Data seeding](#data-seeding)
-  * [Backend](#backend)
-  * [Frontend](#frontend)
-  * [General](#global)
+- [About the Project](#-about-the-project)
+- [Demo Application](#-demo-application)
+  - [Technical Stack](#technical-stack)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Copy the template](#copy-the-template)
+  - [Make it yours](#make-it-yours)
+  - [Run the application](#run-the-application)
+  - [Continuous Integration](#continuous-integration)
+  - [Deployment](#deployment)
+    - [Digital Ocean App Platform](#digital-ocean-app-platform)
+    - [Kubernetes](#kubernetes)
+- [Implementation](#%EF%B8%8F-implementation)
+  - [Database](#database)
+    - [Postgres](#postgres)
+    - [Mongo](#mongo-not-recommended)
+    - [Data seeding](#data-seeding)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [General](#global)
 
 </br>
 
@@ -96,12 +96,12 @@ Of course, you won't be creating a todo application for your project, but you ca
 
 ### Technical Stack
 
-| Database | Backend | Frontend |
-| --- | --- | --- |
-| [Postgres](https://github.com/postgres/postgres) | [Nest](https://github.com/nestjs/nest) | [React](https://github.com/facebook/react) |
-| [Mongo](https://github.com/mongodb/mongo) | [Fastify](https://github.com/fastify/fastify) | [React Router](https://github.com/ReactTraining/react-router) |
-|| [TypeORM](https://github.com/typeorm/typeorm) | [Redux Toolkit](https://github.com/reduxjs/redux-toolkit) |
-|| [NestJs CRUD](https://github.com/nestjsx/crud) | [axios](https://github.com/axios/axios) |
+| Database                                         | Backend                                        | Frontend                                                      |
+| ------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------- |
+| [Postgres](https://github.com/postgres/postgres) | [Nest](https://github.com/nestjs/nest)         | [React](https://github.com/facebook/react)                    |
+| [Mongo](https://github.com/mongodb/mongo)        | [Fastify](https://github.com/fastify/fastify)  | [React Router](https://github.com/ReactTraining/react-router) |
+|                                                  | [TypeORM](https://github.com/typeorm/typeorm)  | [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)     |
+|                                                  | [NestJs CRUD](https://github.com/nestjsx/crud) | [axios](https://github.com/axios/axios)                       |
 
 </br>
 
@@ -110,7 +110,7 @@ Of course, you won't be creating a todo application for your project, but you ca
 ### Prerequisites
 
 - [Docker Compose](https://docs.docker.com/compose/install/)
-- [node.js](https://nodejs.org/en/download/) v15+
+- [node.js](https://nodejs.org/en/download/) v14+
 
 ### Copy the template
 
@@ -139,22 +139,27 @@ On completion, you will see the following message:
 ### Run the application
 
 First, install the dependencies:
+
 ```
 npm i
 ```
 
 Then, run the whole stack:
+
 ```
 npm run postgres
 ```
+
 ```
 npm start api
 ```
+
 ```
 npm start webapp
 ```
 
 Finally, why not test it:
+
 ```
 npm run affected:test && npm run affected:e2e
 ```
@@ -163,8 +168,9 @@ For a full list of available commands, consult the `package.json`.
 
 ### Continuous Integration
 
-This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`. 
+This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`.
 To have the CI working, you must:
+
 1. Link your repository with [Coveralls](https://coveralls.io/repos/new).
 1. (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
@@ -177,6 +183,7 @@ The application can be deployed in two different ways, depending on your objecti
 For a simple and fast deployment, the new [App Platform](https://www.digitalocean.com/docs/app-platform/) from Digital Ocean makes it easy to work with monorepos. For our todo app, the config file lies under `.do/app.yaml`. There, you can change the configuration of the different apps being deployed. [The spec can be found here.](https://www.digitalocean.com/docs/app-platform/references/app-specification-reference/)
 
 To deploy this full stack application yourself, follow the steps below:
+
 1. Create an account on [Digital Ocean Cloud](https://m.do.co/c/67f72eccb557) (this is a sponsored link) and enable Github access
 1. Install [doctl CLI](https://www.digitalocean.com/docs/apis-clis/doctl/how-to/install/)
 1. Run `doctl apps create --spec .do/app.yaml`
