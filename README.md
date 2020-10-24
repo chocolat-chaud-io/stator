@@ -49,6 +49,8 @@ The interactive CLI will guide you to easily setup your project.
 npm run get-started
 ```
 
+</br>
+
 ## 📋 Table of Contents
 
 - [About the Project](#-about-the-project)
