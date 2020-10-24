@@ -50,7 +50,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install npm packages
-        run: npm ci
+        run: npm i
 
       - name: Lint files
         run: npm run affected:lint -- --base=origin/master
