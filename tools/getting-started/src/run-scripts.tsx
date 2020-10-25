@@ -28,7 +28,7 @@ const RunScripts: React.FC<Props> = props => {
       setIsRenamingProject(true)
 
       const { stdout } = await exec(
-        `npm --prefix ${projectRootPath} run rename-project -- --organizationName ${props.organizationName} --projectName ${props.projectName}`
+        `npm --prefix ${projectRootPath} run rename-project -- --organization ${props.organizationName} --project ${props.projectName}`
       )
 
       const validationText = "This is now YOUR project"

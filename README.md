@@ -128,7 +128,7 @@ You will now want to make this project yours by replacing all organization and p
 Thankfully, we have a script just for that:
 
 ```
-npm run rename-project -- --organizationName {YOUR_ORGANIZATIO_NAME} --projectName {YOUR_PROJECT_NAME}
+npm run rename-project -- --organization {YOUR_ORGANIZATION_NAME} --project {YOUR_PROJECT_NAME}
 ```
 
 \*Note: I highly recommend that the project name is the same as your git repository.

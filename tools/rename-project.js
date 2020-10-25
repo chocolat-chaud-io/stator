@@ -17,23 +17,23 @@ async function main() {
     const cli = meow(
       `
 	Usage
-	  $ rename-project --organizationName chocolat-chaud-io --projectName stator
+	  $ rename-project --organization chocolat-chaud-io --project stator
 
 	Options
-	  --organizationName, -on  The name of your github organization or personal account
-	  --projectName,      -pn  The name of the project
+	  --organization, -on  The name of your github organization or personal account
+	  --project,      -pn  The name of the project
 
 	Examples
-	  $ rename-project --organizationName chocolat-chaud-io --projectName stator
+	  $ rename-project --organization chocolat-chaud-io --project stator
 `,
       {
         flags: {
-          organizationName: {
+          organization: {
             type: "string",
             alias: "on",
             isRequired: true,
           },
-          projectName: {
+          project: {
             type: "string",
             alias: "pn",
             isRequired: true,
@@ -42,16 +42,16 @@ async function main() {
       }
     )
 
-    const organizationNameRegex = /^[a-zA-Z-\d_]+$/gim
-    const organizationName = cli.flags.organizationName
-    if (!organizationNameRegex.test(organizationName)) {
+    const organizationRegex = /^[a-zA-Z-\d_]+$/gim
+    const organization = cli.flags.organization
+    if (!organizationRegex.test(organization)) {
       console.error("The organization name must respect this regex /^[a-zA-Z-\\d_]+$/gmi")
       process.exit(1)
     }
 
     const projectRegex = /^[a-zA-Z-\d_]+$/gim
-    const projectName = cli.flags.projectName
-    if (!projectRegex.test(projectName)) {
+    const project = cli.flags.project
+    if (!projectRegex.test(project)) {
       console.error("The project name must respect this regex /^[a-zA-Z-\\d_]+$/gmi")
       process.exit(1)
     }
@@ -61,7 +61,7 @@ async function main() {
       if (entryStat.isFile()) {
         const fileContent = await fs.promises.readFile(entry, "utf-8")
         if (fileContent) {
-          const replacedFileContent = fileContent.replace(/chocolat-chaud-io/gim, organizationName).replace(/stator/gim, projectName)
+          const replacedFileContent = fileContent.replace(/chocolat-chaud-io/gim, organization).replace(/stator/gim, project)
           await fs.promises.writeFile(entry, replacedFileContent, "utf-8")
         }
       }
