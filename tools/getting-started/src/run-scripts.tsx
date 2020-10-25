@@ -11,6 +11,7 @@ const exec = util.promisify(require("child_process").exec)
 
 interface Props {
   projectName: string
+  organizationName: string
 }
 
 const projectRootPath = path.join(__dirname, "../../../")
@@ -26,7 +27,9 @@ const RunScripts: React.FC<Props> = props => {
     const asyncFn = async () => {
       setIsRenamingProject(true)
 
-      const { stdout } = await exec(`npm --prefix ${projectRootPath} run rename-project ${props.projectName}`)
+      const { stdout } = await exec(
+        `npm --prefix ${projectRootPath} run rename-project -- --organization ${props.organizationName} --project ${props.projectName}`
+      )
 
       const validationText = "This is now YOUR project"
       setIsRenamingProject(false)

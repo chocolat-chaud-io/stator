@@ -1,7 +1,7 @@
 import { Box, Text, useStdin } from "ink"
 import Divider from "ink-divider"
 import Link from "ink-link"
-import useStdoutDimensions from 'ink-use-stdout-dimensions'
+import useStdoutDimensions from "ink-use-stdout-dimensions"
 import React, { FC, useEffect, useState } from "react"
 
 import LabelValueInput from "./label-value-input"
@@ -33,6 +33,7 @@ const Ui: FC = () => {
 
   const [isDockerInstalled, setIsDockerInstalled] = useState<boolean>()
 
+  const [organizationName, setOrganizationName] = useState(initialInputValue)
   const [projectName, setProjectName] = useState(initialInputValue)
   const [coverallsToken, setCoverallsToken] = useState(initialInputValue)
   const [nxCloudToken, setNxCloudToken] = useState(initialInputValue)
@@ -42,10 +43,23 @@ const Ui: FC = () => {
     setRawMode(true)
   }, [])
 
-  const onProjectSubmit = () => {
+  const onOrganizationNameSubmit = () => {
+    setOrganizationName(value => cloneInputValueWithoutError(value))
+
+    const organizationNameRegex = /^[a-zA-Z-\d_]+$/
+    if (!organizationNameRegex.test(organizationName.value.trim())) {
+      return setOrganizationName(value =>
+        cloneInputValueWithError(value, "The organization name can only contain letters, numbers and '-'")
+      )
+    }
+
+    setOrganizationName(value => ({ ...value, isValid: true }))
+  }
+
+  const onProjectNameSubmit = () => {
     setProjectName(value => cloneInputValueWithoutError(value))
 
-    const projectNameRegex = /^[a-zA-Z\d-]+$/
+    const projectNameRegex = /^[a-zA-Z-\d_]+$/
     if (!projectNameRegex.test(projectName.value.trim())) {
       return setProjectName(value =>
         cloneInputValueWithError(value, "The project name can only contain letters, numbers and '-'")
@@ -101,11 +115,20 @@ const Ui: FC = () => {
       {isDockerInstalled && (
         <>
           <LabelValueInput
-            label="Project name"
-            inputValue={projectName}
-            onChange={value => setProjectName({ ...projectName, value })}
-            onSubmit={onProjectSubmit}
+            label="Organization name"
+            inputValue={organizationName}
+            onChange={value => setOrganizationName({ ...organizationName, value })}
+            onSubmit={onOrganizationNameSubmit}
           />
+
+          {organizationName.isValid && (
+            <LabelValueInput
+              label="Project name"
+              inputValue={projectName}
+              onChange={value => setProjectName({ ...projectName, value })}
+              onSubmit={onProjectNameSubmit}
+            />
+          )}
 
           {projectName.isValid && (
             <>
@@ -199,7 +222,9 @@ const Ui: FC = () => {
             </>
           )}
 
-          {digitalOceanToken.isValid && <RunScripts projectName={projectName.value} />}
+          {digitalOceanToken.isValid && (
+            <RunScripts projectName={projectName.value} organizationName={organizationName.value} />
+          )}
         </>
       )}
     </>
