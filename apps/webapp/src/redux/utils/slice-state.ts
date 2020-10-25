@@ -30,5 +30,5 @@ export const isEntityLoading = <T extends SliceState<TEntity>, TEntity extends R
   state: T,
   entity: TEntity
 ) => {
-  return state.status.get.ids[entity.id] || state.status.put.ids[entity.id] || state.status.delete.ids[entity.id]
+  return !!(state.status.get.ids[entity.id] || state.status.put.ids[entity.id] || state.status.delete.ids[entity.id])
 }

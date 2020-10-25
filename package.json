@@ -14,6 +14,8 @@
     "build": "nx build",
     "commit": "cz",
     "dep-graph": "nx dep-graph",
+    "docker:build:webapp": "docker build -t stator-api -f dockerfiles/api/Dockerfile .",
+    "docker:build:api": "docker build -t stator-webapp -f dockerfiles/webapp/Dockerfile .",
     "e2e": "nx e2e",
     "format": "nx format:write",
     "format:check": "nx format:check",
