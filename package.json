@@ -42,6 +42,7 @@
   },
   "husky": {
     "hooks": {
+      "post-checkout": "branch-naming-check '^\\d+(-[a-z]+)+$'",
       "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+$' && npm run lint:file-folder-convention",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
