@@ -211,6 +211,22 @@ To ensure your developers don't get into any trouble while installing those, the
 **By default, the project uses postgres.**
 If this is what you want, you're good to go; everything will work out of the box.
 
+#### Migrations
+
+Generate a migration from your modified schemas:
+
+```
+npm run typeorm -- migration:generate -n {MIGRATION_NAME}
+```
+
+Run all pending migrations:
+
+```
+npm run typeorm -- migration:run
+```
+
+To get all the information on migrations, consult [typeorm documentation](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md).
+
 #### Mongo [NOT RECOMMENDED]
 
 If you would like to use mongodb, even though it is absolutely not recommended because it currently doesn't work well with [typeorm](https://github.com/typeorm/typeorm), you can still do that by updating the connection info under `./apps/api/src/config/configuration.ts`.

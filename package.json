@@ -35,6 +35,7 @@
     "rename-project": "node ./tools/rename-project.js",
     "start": "nx serve",
     "test": "nx test",
+    "typeorm": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --project tsconfig.base.json ./node_modules/typeorm/cli.js --config apps/database/postgres/ormconfig.ts",
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic"
   },
