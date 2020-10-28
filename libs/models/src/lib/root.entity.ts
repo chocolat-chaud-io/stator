@@ -1,4 +1,4 @@
-import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export class RootEntity {
   @PrimaryGeneratedColumn()
@@ -8,5 +8,5 @@ export class RootEntity {
   createdAt?: Date
 
   @UpdateDateColumn({ type: "timestamp" })
-  updateAt?: Date
+  updatedAt?: Date
 }

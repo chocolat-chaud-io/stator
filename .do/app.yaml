@@ -38,7 +38,7 @@ services:
       - key: DATABASE_CA_CERT
         value: ${database.CA_CERT}
       - key: DATABASE_SYNCHRONIZE
-        value: false
+        value: true
     routes:
       - path: /do
     health_check:

@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [14.13.1]
 
     steps:
       - name: Cancel previous runs
@@ -62,7 +62,7 @@ jobs:
         run: npm run affected:build -- --base=origin/master
 
       - name: Start api
-        run: npm start api &
+        run: npm run typeorm -- migration:run && npm start api &
 
       - name: Run tests
         run: npm run affected:test -- --base=origin/master --code-coverage

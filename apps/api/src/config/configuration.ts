@@ -2,17 +2,20 @@ import { ConfigService } from "@nestjs/config"
 import { TypeOrmModuleOptions } from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface"
 import { Todo } from "@stator/models"
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ormConfig = require("../../../database/orm-config")
+
 export const configuration = () => ({
   port: parseInt(process.env.PORT, 10) || 3333,
   address: process.env.ADDRESS || "0.0.0.0",
 
   database: {
-    host: process.env.DATABASE_HOST || "localhost",
-    port: parseInt(process.env.DATABASE_PORT, 10) || 5433,
-    name: process.env.DATABASE_NAME || "stator",
-    username: process.env.DATABASE_USERNAME || "postgres",
-    password: process.env.DATABASE_PASSWORD || "postgres",
-    synchronize: process.env.DATABASE_SYNCHRONIZE || true,
+    host: ormConfig.host,
+    port: ormConfig.port,
+    name: ormConfig.database,
+    username: ormConfig.username,
+    password: ormConfig.password,
+    synchronize: ormConfig.synchronize,
     certificateAuthority: process.env.DATABASE_CA_CERT,
   },
 })

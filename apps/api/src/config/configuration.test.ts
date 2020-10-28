@@ -1,4 +1,4 @@
-import { configuration } from "../config/configuration"
+import { configuration } from "./configuration"
 
 export const configurationTest = () => {
   const baseConfig = configuration()
