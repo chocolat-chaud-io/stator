@@ -37,6 +37,7 @@
     "rename-project": "node ./tools/rename-project.js",
     "start": "nx serve",
     "test": "nx test",
+    "typeorm": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --project tsconfig.base.json ./node_modules/typeorm/cli.js --config apps/database/orm-config.ts",
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic"
   },
@@ -161,8 +162,8 @@
     "xo": "^0.34.1"
   },
   "engines": {
-    "node": "14.13.1",
-    "npm": "6.14.8"
+    "node": "^14.13.1",
+    "npm": "^6.14.8"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {

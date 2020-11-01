@@ -12,6 +12,8 @@ describe("Todos", () => {
   let app: INestApplication
   let repository: Repository<Todo>
 
+  const dateExpectations = { createdAt: expect.any(String), updatedAt: expect.any(String) }
+
   beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [...getRootModuleImports(configurationTest), TodosModule],
@@ -43,8 +45,8 @@ describe("Todos", () => {
         .expect(200)
 
       expect(body).toEqual([
-        { id: expect.any(Number), text: "test-name-0" },
-        { id: expect.any(Number), text: "test-name-1" },
+        { id: expect.any(Number), text: "test-name-0", ...dateExpectations },
+        { id: expect.any(Number), text: "test-name-1", ...dateExpectations },
       ])
     })
 
@@ -58,7 +60,7 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual({ id: todo.id, text: "test-name-0" })
+      expect(body).toEqual({ id: todo.id, text: "test-name-0", ...dateExpectations })
     })
 
     it("should create one todo", async () => {
@@ -72,7 +74,7 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(201)
 
-      expect(body).toEqual({ id: expect.any(Number), text: "test-name-0" })
+      expect(body).toEqual({ id: expect.any(Number), text: "test-name-0", ...dateExpectations })
     })
 
     it("should create multiple todos", async () => {
@@ -87,8 +89,8 @@ describe("Todos", () => {
         .expect(201)
 
       expect(body).toEqual([
-        { id: expect.any(Number), text: "test-name-0" },
-        { id: expect.any(Number), text: "test-name-1" },
+        { id: expect.any(Number), text: "test-name-0", ...dateExpectations },
+        { id: expect.any(Number), text: "test-name-1", ...dateExpectations },
       ])
     })
 
@@ -103,7 +105,7 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual({ id: expect.any(Number), text: "updated-name" })
+      expect(body).toEqual({ id: expect.any(Number), text: "updated-name", ...dateExpectations })
     })
 
     it("should delete one todo", async () => {

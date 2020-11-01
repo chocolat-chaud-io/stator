@@ -211,6 +211,28 @@ To ensure your developers don't get into any trouble while installing those, the
 **By default, the project uses postgres.**
 If this is what you want, you're good to go; everything will work out of the box.
 
+#### Migrations
+
+By default, the automatic synchronization is activated between your models and the database.
+This means that making changes on your models will be automatically reflected on your database schemas.
+If you would like to control your migrations manually, you can do so by setting `synchronize` to false in `orm-config.ts` file. 
+
+Generate migration from your modified schemas:
+
+```
+npm run typeorm -- migration:generate -n {MIGRATION_NAME}
+```
+This will check the difference between models for your defined entities and your database schemas. 
+If it finds changes, it will generate the appropriate migration scripts.
+
+Run all pending migrations:
+
+```
+npm run typeorm -- migration:run
+```
+
+To get all the information on migrations, consult [typeorm documentation](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md).
+
 #### Mongo [NOT RECOMMENDED]
 
 If you would like to use mongodb, even though it is absolutely not recommended because it currently doesn't work well with [typeorm](https://github.com/typeorm/typeorm), you can still do that by updating the connection info under `./apps/api/src/config/configuration.ts`.
