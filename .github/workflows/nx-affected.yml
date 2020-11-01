@@ -5,9 +5,6 @@ name: stator CI
 
 on:
   pull_request:
-  push:
-    branches:
-      - master
 
 jobs:
   build:
@@ -31,9 +28,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch latest changes
-        run: git fetch --no-tags --prune --depth=5 origin master
-
       - name: Inject Nx Cloud token
         shell: bash
         env:
@@ -53,22 +47,22 @@ jobs:
         run: npm i
 
       - name: Lint files
-        run: npm run affected:lint -- --base=origin/master
+        run: npm run affected:lint -- --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.head.sha }}
 
       - name: Enforce naming conventions
         run: npm run lint:file-folder-convention
 
       - name: Build affected apps
-        run: npm run affected:build -- --base=origin/master
+        run: npm run affected:build -- --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.head.sha }}
 
       - name: Start api
         run: npm run typeorm -- migration:run && npm start api &
 
       - name: Run tests
-        run: npm run affected:test -- --base=origin/master --code-coverage
+        run: npm run affected:test -- --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.head.sha }} --code-coverage
 
       - name: Run e2e tests
-        run: npm run affected:e2e -- --base=origin/master
+        run: npm run affected:e2e -- --base=${{ github.event.pull_request.base.sha }} --head=${{ github.event.pull_request.head.sha }}
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
