@@ -169,6 +169,12 @@ const Ui: FC = () => {
               <Text bold>3. Click "Set up a workspace"</Text>
               <Text bold>4. Click "No, I'm not using @nrwl/nx-cloud"</Text>
               <Text bold>5. Copy the command provided and run it locally</Text>
+              <Text>
+                If you are using Windows, you will need to run the following command for the previous step to work.
+              </Text>
+              <Text backgroundColor="#000" color="#fff">
+                npm install -g nx
+              </Text>
               <Text bold>
                 6. Copy the accessToken that was generated in nx.json (make sure you don't lose it as it is needed for
                 the following steps)
@@ -208,7 +214,8 @@ const Ui: FC = () => {
               <Link url="https://www.digitalocean.com/docs/apis-clis/doctl/how-to/install/">
                 <Text bold>3. Install doctl</Text>
               </Link>
-              <Text bold>4. After completing all the steps, paste the API token you generated in the input below</Text>
+              <Text bold>4. Run this command "doctl apps create --spec .do/app.yaml"</Text>
+              <Text bold>5. After completing all the steps, paste the API token you generated in the input below</Text>
 
               <Box marginBottom={1} />
 

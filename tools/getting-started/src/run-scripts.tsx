@@ -79,13 +79,13 @@ const RunScripts: React.FC<Props> = props => {
           <Text bold>
             api:{" "}
             <Text backgroundColor="#000" color="#fff">
-              npm run api
+              npm start api
             </Text>
           </Text>
           <Text bold>
             webapp:{" "}
             <Text backgroundColor="#000" color="#fff">
-              npm run webapp
+              npm start webapp
             </Text>
           </Text>
         </>
