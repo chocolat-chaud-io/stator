@@ -69,6 +69,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           path-to-lcov: ./coverage/apps/api/lcov.info
+        continue-on-error: true
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
