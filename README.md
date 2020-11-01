@@ -213,7 +213,7 @@ If this is what you want, you're good to go; everything will work out of the box
 
 #### Migrations
 
-By default, the automatic synchronization is activate between your models and the database.
+By default, the automatic synchronization is activated between your models and the database.
 This means that making changes on your models will be automatically reflected on your database schemas.
 If you would like to control your migrations manually, you can do so by setting `synchronize` to false in `orm-config.ts` file. 
 
@@ -222,7 +222,7 @@ Generate migration from your modified schemas:
 ```
 npm run typeorm -- migration:generate -n {MIGRATION_NAME}
 ```
-This will check the difference of models between your defined entities your database schemas. 
+This will check the difference between models for your defined entities and your database schemas. 
 If it finds changes, it will generate the appropriate migration scripts.
 
 Run all pending migrations:
