@@ -112,7 +112,7 @@ Of course, you won't be creating a todo application for your project, but you ca
 ### Prerequisites
 
 - [Docker Compose](https://docs.docker.com/compose/install/)
-- [node.js](https://nodejs.org/en/download/) v14+
+- [node.js](https://nodejs.org/en/download/) v14.x
 
 ### Copy the template
 
