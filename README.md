@@ -166,7 +166,7 @@ npm start webapp
 Finally, why not test it:
 
 ```
-npm run affected:test && npm run affected:e2e
+npm test api && npm run e2e webapp-e2e
 ```
 
 For a full list of available commands, consult the `package.json`.
