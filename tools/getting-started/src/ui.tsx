@@ -73,7 +73,7 @@ const Ui: FC = () => {
     setCoverallsToken(value => cloneInputValueWithoutError(value))
 
     const tokenRegex = /^[a-zA-Z\d]{30,40}$/
-    if (!tokenRegex.test(coverallsToken.value.trim())) {
+    if (coverallsToken.value !== "" && !tokenRegex.test(coverallsToken.value.trim())) {
       return setCoverallsToken(value =>
         cloneInputValueWithError(value, "The token you provided doesn't respect the coveralls token format")
       )
@@ -148,7 +148,8 @@ const Ui: FC = () => {
               <Box marginBottom={1} />
 
               <LabelValueInput
-                label="Coveralls token"
+                label="Coveralls token [optional]"
+                placeholder="Press enter to skip"
                 inputValue={coverallsToken}
                 onChange={value => setCoverallsToken({ ...coverallsToken, value })}
                 onSubmit={onCoverallsSubmit}
