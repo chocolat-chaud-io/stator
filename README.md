@@ -28,6 +28,9 @@
   <a href="https://github.com/nestjs/nest">
     <img src="https://raw.githubusercontent.com/nestjsx/crud/master/img/nest-powered.svg?sanitize=true" alt="Nest Powered" />
   </a>
+  <a href="https://github.com/juliandavidmr/awesome-nestjs#resources">
+    <img src="https://raw.githubusercontent.com/nestjsx/crud/master/img/awesome-nest.svg?sanitize=true" alt="Awesome Nest" />
+  </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" />
   </a>
@@ -163,7 +166,7 @@ npm start webapp
 Finally, why not test it:
 
 ```
-npm run affected:test && npm run affected:e2e
+npm test api && npm run e2e webapp-e2e
 ```
 
 For a full list of available commands, consult the `package.json`.
