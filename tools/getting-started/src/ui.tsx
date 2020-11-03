@@ -149,6 +149,7 @@ const Ui: FC = () => {
 
               <LabelValueInput
                 label="Coveralls token [optional]"
+                placeholder="Press enter to skip"
                 inputValue={coverallsToken}
                 onChange={value => setCoverallsToken({ ...coverallsToken, value })}
                 onSubmit={onCoverallsSubmit}
