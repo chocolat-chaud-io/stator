@@ -71,6 +71,13 @@ jobs:
           path-to-lcov: ./coverage/apps/api/lcov.info
         continue-on-error: true
 
+      - name: Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./coverage/apps/api/
+        continue-on-error: true
+
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:

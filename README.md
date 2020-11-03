@@ -176,7 +176,7 @@ For a full list of available commands, consult the `package.json`.
 This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`.
 To have the CI working, you must:
 
-1. Link your repository with [Coveralls](https://coveralls.io/repos/new).
+1. (Optional) Link your repository with [Coveralls](https://coveralls.io/repos/new), or with [Codecov](https://github.com/apps/codecov) by inserting your `CODECOV_TOKEN` in github secrets.
 1. (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
 ### Deployment
