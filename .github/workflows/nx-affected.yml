@@ -29,13 +29,13 @@ jobs:
           fetch-depth: 0
 
       - name: Set head
-        run: sh .github/get-head.sh >> $GITHUB_ENV
+        run: sh .github/scripts/get-head.sh >> $GITHUB_ENV
         env:
           PR_HEAD: ${{ github.event.pull_request.head.sha }}
           MERGE_HEAD: ${{ github.event.after }}
 
       - name: Set base
-        run: sh .github/get-base.sh >> $GITHUB_ENV
+        run: sh .github/scripts/get-base.sh >> $GITHUB_ENV
         env:
           PR_BASE: ${{ github.event.pull_request.base.sha }}
           MERGE_BASE: ${{ github.event.before }}
