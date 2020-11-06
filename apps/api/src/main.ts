@@ -1,3 +1,4 @@
+import { ValidationPipe } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 import { NestFactory } from "@nestjs/core"
 import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify"
@@ -10,6 +11,7 @@ async function bootstrap() {
   const fastifyOptions = { logger: true }
 
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter(fastifyOptions))
+  app.useGlobalPipes(new ValidationPipe())
   app.enableShutdownHooks()
   app.enableCors({ origin: "*" })
   app.setGlobalPrefix(globalPrefix)
