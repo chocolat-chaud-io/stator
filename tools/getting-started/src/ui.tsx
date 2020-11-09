@@ -215,8 +215,9 @@ const Ui: FC = () => {
               <Link url="https://www.digitalocean.com/docs/apis-clis/doctl/how-to/install/">
                 <Text bold>3. Install doctl</Text>
               </Link>
-              <Text bold>4. Run this command "doctl apps create --spec .do/app.yaml"</Text>
-              <Text bold>5. After completing all the steps, paste the API token you generated in the input below</Text>
+              <Text bold>4. Validate that your are properly authenticated by running "doctl account get"</Text>
+              <Text>If successful, you will see your email</Text>
+              <Text bold>5. Paste the API token you generated in the input below</Text>
 
               <Box marginBottom={1} />
 
@@ -231,7 +232,11 @@ const Ui: FC = () => {
           )}
 
           {digitalOceanToken.isValid && (
-            <RunScripts projectName={projectName.value} organizationName={organizationName.value} />
+            <RunScripts
+              projectName={projectName.value}
+              organizationName={organizationName.value}
+              digitalOceanToken={digitalOceanToken.value}
+            />
           )}
         </>
       )}

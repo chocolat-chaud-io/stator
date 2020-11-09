@@ -19,7 +19,7 @@ services:
       repo: chocolat-chaud-io/stator
       branch: master
       deploy_on_push: true
-    build_command: npm run remap-redoc && npm run typeorm -- migration:run && npm run build api -- --prod
+    build_command: npm run remap-redoc && npm run build api -- --prod
     run_command: node dist/apps/api/main.js
     http_port: 3333
     envs:
@@ -37,8 +37,6 @@ services:
         value: ${database.PASSWORD}
       - key: DATABASE_CA_CERT
         value: ${database.CA_CERT}
-      - key: DATABASE_SYNCHRONIZE
-        value: true
     routes:
       - path: /do
     health_check:
