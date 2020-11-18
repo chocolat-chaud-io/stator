@@ -81,12 +81,11 @@ npm run get-started
 
 ## 📚 About the Project
 
-Have you ever started a new project by yourself?
-If so, you probably know that it is tedious to set up all the necessary tools.
+Have you ever started a new project by yourself?<br/>
+If so, you probably know that it is tedious to set up all the necessary tools.<br/>
 Just like you, the part I enjoy the most is coding, not boilerplate.
 
-stator solves all of this for you by using the **latest technologies' most up-to-date standards**.
-Indeed, this template is opinionated as to what's the best, but it does enforce excellent practices such as **code re-usability**, **enforces coding guidelines**, **usage of a monorepo**, etc.
+Say hi to stator, a full-stack [TypeScript](https://github.com/microsoft/TypeScript) template that enforces conventions, handles releases, automates deployments and much more!
 
 If you want more details about how this idea was implemented, I recommend reading the [series of blog articles](https://yann510.hashnode.dev/creating-the-modern-developer-stack-template-part-1-ckfl56axy02e85ds18pa26a6z) I wrote on the topic.
 
@@ -101,12 +100,15 @@ Of course, you won't be creating a todo application for your project, but you ca
 
 ### Technical Stack
 
-| Database                                         | Backend                                        | Frontend                                                      |
-| ------------------------------------------------ | ---------------------------------------------- | ------------------------------------------------------------- |
-| [Postgres](https://github.com/postgres/postgres) | [Nest](https://github.com/nestjs/nest)         | [React](https://github.com/facebook/react)                    |
-| [Mongo](https://github.com/mongodb/mongo)        | [Fastify](https://github.com/fastify/fastify)  | [React Router](https://github.com/ReactTraining/react-router) |
-|                                                  | [TypeORM](https://github.com/typeorm/typeorm)  | [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)     |
-|                                                  | [NestJs CRUD](https://github.com/nestjsx/crud) | [axios](https://github.com/axios/axios)                       |
+For a detailed list of all those technologies, you can read this [blog article](https://yann510.hashnode.dev/stator-a-full-stack-template-releases-deployments-enforced-conventions-ckhmnyhr903us9ms1b20lgi3b).
+
+ | Deployment                                                                       | Database                                         | Backend                                                       | Frontend                                                      | Testing                                                                          | Conventions                                                                      |
+ | -------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+ | [DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform/) | [Postgres](https://github.com/postgres/postgres) | [Nest](https://github.com/nestjs/nest)                        | [React](https://github.com/facebook/react)                    | [jest](https://github.com/facebook/jest)                                         | [commitlint](https://github.com/conventional-changelog/commitlint)               |
+ | [semantic-release](https://github.com/semantic-release/semantic-release)         | [Mongo](https://github.com/mongodb/mongo)        | [Fastify](https://github.com/fastify/fastify)                 | [React Router](https://github.com/ReactTraining/react-router) | [cypress](https://github.com/cypress-io/cypress)                                 | [eslint](https://github.com/eslint/eslint)                                       |
+ |                                                                                  | [TypeORM](https://github.com/typeorm/typeorm)    | [Swagger](https://github.com/nestjs/swagger)                  | [Redux](https://github.com/reduxjs/redux)                     |                                                                                  | [prettier](https://github.com/prettier/prettier)                                 |
+ |                                                                                  | [NestJs CRUD](https://github.com/nestjsx/crud)   | [ReDoc](https://github.com/Redocly/redoc)                     | [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)     |                                                                                  |                                                                                  |
+ |                                                                                  |                                                  |                                                               | [Material UI](https://github.com/mui-org/material-ui)         |                                                                                  |                                                                                  |
 
 </br>
 
