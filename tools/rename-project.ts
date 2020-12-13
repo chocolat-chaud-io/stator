@@ -2,7 +2,7 @@ const fs = require("fs")
 const path = require("path")
 const meow = require("meow")
 
-async function* walk(dir, ignoredPaths) {
+async function* walk(dir: string, ignoredPaths: Array<string>) {
   for await (const d of await fs.promises.opendir(dir)) {
     const entry = path.join(dir, d.name)
     if (d.isDirectory() && !ignoredPaths.includes(d.name)) yield* walk(entry, ignoredPaths)
