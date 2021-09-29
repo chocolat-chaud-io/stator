@@ -1,0 +1,9 @@
+entity: Todo
+items:
+  todo1:
+    id: 1
+    text: test-name-0
+
+  todo2:
+    id: 2
+    text: test-name-1

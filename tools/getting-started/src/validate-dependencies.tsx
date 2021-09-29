@@ -13,8 +13,10 @@ interface Props {
 
 const ValidateDependencies: React.FC<Props> = props => {
   useEffect(() => {
-    exec("docker-compose -v", (error: Error | null, stdout: string) => {
-      props.onDockerIsInstalledChange(!error && stdout.toString().includes("docker-compose version"))
+    exec("docker-compose --version", (error: Error | null, stdout: string) => {
+      const validationTexts = ["docker-compose version", "docker compose version"]
+      const isDockerValid = !!validationTexts.find(text => stdout.toString().toLocaleLowerCase().includes(text))
+      props.onDockerIsInstalledChange(!error && isDockerValid)
     })
   }, [])
 
