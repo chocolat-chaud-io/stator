@@ -35,7 +35,7 @@ const Ui: FC = () => {
 
   const [organizationName, setOrganizationName] = useState(initialInputValue)
   const [projectName, setProjectName] = useState(initialInputValue)
-  const [coverallsToken, setCoverallsToken] = useState(initialInputValue)
+  const [codecovToken, setCodecovToken] = useState(initialInputValue)
   const [nxCloudToken, setNxCloudToken] = useState(initialInputValue)
   const [digitalOceanToken, setDigitalOceanToken] = useState(initialInputValue)
 
@@ -67,17 +67,17 @@ const Ui: FC = () => {
     setProjectName(value => ({ ...value, isValid: true }))
   }
 
-  const onCoverallsSubmit = () => {
-    setCoverallsToken(value => cloneInputValueWithoutError(value))
+  const onCodecovSubmit = () => {
+    setCodecovToken(value => cloneInputValueWithoutError(value))
 
-    const tokenRegex = /^[a-zA-Z\d]{30,40}$/
-    if (coverallsToken.value !== "" && !tokenRegex.test(coverallsToken.value.trim())) {
-      return setCoverallsToken(value =>
-        cloneInputValueWithError(value, "The token you provided doesn't respect the coveralls token format")
+    const tokenRegex = /^[a-zA-Z\d-]{30,40}$/
+    if (codecovToken.value !== "" && !tokenRegex.test(codecovToken.value.trim())) {
+      return setCodecovToken(value =>
+        cloneInputValueWithError(value, "The token you provided doesn't respect the Codecov token format")
       )
     }
 
-    setCoverallsToken(value => ({ ...value, isValid: true }))
+    setCodecovToken(value => ({ ...value, isValid: true }))
   }
 
   const onNxCloudTokenSubmit = () => {
@@ -130,30 +130,30 @@ const Ui: FC = () => {
             <>
               <Box marginTop={1} />
 
-              <Divider title="Coveralls" width={dividerWidth} />
+              <Divider title="Codecov" width={dividerWidth} />
 
-              <Link url="https://coveralls.io/sign-in">
-                <Text bold>1. Log in on the Coveralls website</Text>
+              <Link url="https://app.codecov.io/login/gh">
+                <Text bold>1. Log in on the Codecov website</Text>
               </Link>
-              <Link url="https://coveralls.io/repos/new">
+              <Link url="https://app.codecov.io/gh/+">
                 <Text bold>2. Link your repository</Text>
               </Link>
-              <Text bold>3. Click on the details of your repository</Text>
+              <Text bold>3. Add the token in your GitHub secrets of your project</Text>
               <Text bold>4. Copy the token from the top right and paste it in the input below</Text>
 
               <Box marginBottom={1} />
 
               <LabelValueInput
-                label="Coveralls token [optional]"
+                label="Codecov token [optional]"
                 placeholder="Press enter to skip"
-                inputValue={coverallsToken}
-                onChange={value => setCoverallsToken({ ...coverallsToken, value })}
-                onSubmit={onCoverallsSubmit}
+                inputValue={codecovToken}
+                onChange={value => setCodecovToken({ ...codecovToken, value })}
+                onSubmit={onCodecovSubmit}
               />
             </>
           )}
 
-          {coverallsToken.isValid && (
+          {codecovToken.isValid && (
             <>
               <Box marginTop={1} />
 

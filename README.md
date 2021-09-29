@@ -13,8 +13,8 @@
   <a href="https://github.com/chocolat-chaud-io/stator/actions">
     <img src="https://github.com/chocolat-chaud-io/stator/workflows/stator%20CI/badge.svg" alt="Github action status" />
   </a>
-  <a href="https://coveralls.io/github/chocolat-chaud-io/stator?branch=master">
-    <img src="https://coveralls.io/repos/github/chocolat-chaud-io/stator/badge.svg?branch=master" alt="Coverage Status" />
+  <a href="https://codecov.io/gh/chocolat-chaud-io/stator">
+    <img src="https://codecov.io/gh/chocolat-chaud-io/stator/branch/master/graph/badge.svg?token=3XN225FUIT" alt="Coverage Status" />
   </a>
   <a href="http://commitizen.github.io/cz-cli/">
     <img src="https://img.shields.io/badge/commitizen-friendly-ff69b4.svg" alt="Commitizen friendly" />
@@ -178,7 +178,7 @@ For a full list of available commands, consult the `package.json`.
 This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`.
 To have the CI working, you must:
 
-1. (Optional) Link your repository with [Coveralls](https://coveralls.io/repos/new), or with [Codecov](https://github.com/apps/codecov) by inserting your `CODECOV_TOKEN` in github secrets.
+1. (Optional) Link your repository with [Codecov](https://github.com/apps/codecov) by inserting your `CODECOV_TOKEN` in github secrets.
 1. (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
 ### Deployment
