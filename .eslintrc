@@ -1,57 +1,57 @@
 {
   "root": true,
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "sourceType": "module",
-    "project": "./tsconfig.*?.json"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "ignorePatterns": ["**/*"],
-  "plugins": [
-    "@typescript-eslint",
-    "@nrwl/nx",
-    "react"
-  ],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/@typescript-eslint"
-  ],
-  "rules": {
-    "@typescript-eslint/explicit-member-accessibility": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-parameter-properties": "off",
-    "@nrwl/nx/enforce-module-boundaries": [
-      "error",
-      {
-        "enforceBuildableLibDependency": true,
-        "allow": [],
-        "depConstraints": [
-          { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
-        ]
-      }
-    ],
-    "react/prefer-stateless-function": "error",
-    "react/prop-types": "off"
-  },
+  "plugins": ["@nrwl/nx"],
   "overrides": [
     {
-      "files": ["*.tsx"],
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "extends": ["plugin:react/recommended"],
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
+      },
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "project": "./tsconfig.*?.json"
+      },
+      "plugins": ["react"],
       "rules": {
-        "@typescript-eslint/no-unused-vars": "off"
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        "react/prefer-stateless-function": "error",
+        "react/prop-types": "off",
+        "id-length": ["error", { "exceptions": ["i", "_"] }],
+        "react/jsx-no-useless-fragment": "off",
+        "newline-before-return": "warn"
       }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript"],
+      "parserOptions": {
+        "project": "./tsconfig.*?.json"
+      },
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nrwl/nx/javascript"],
+      "rules": {}
     }
   ]
 }

@@ -61,9 +61,7 @@ const Ui: FC = () => {
 
     const projectNameRegex = /^[a-zA-Z-\d_]+$/
     if (!projectNameRegex.test(projectName.value.trim())) {
-      return setProjectName(value =>
-        cloneInputValueWithError(value, "The project name can only contain letters, numbers and '-'")
-      )
+      return setProjectName(value => cloneInputValueWithError(value, "The project name can only contain letters, numbers and '-'"))
     }
 
     setProjectName(value => ({ ...value, isValid: true }))
@@ -87,9 +85,7 @@ const Ui: FC = () => {
 
     const tokenRegex = /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/
     if (nxCloudToken.value !== "" && !tokenRegex.test(nxCloudToken.value.trim())) {
-      return setNxCloudToken(value =>
-        cloneInputValueWithError(value, "The token you provided doesn't respect the NX cloud token format")
-      )
+      return setNxCloudToken(value => cloneInputValueWithError(value, "The token you provided doesn't respect the NX cloud token format"))
     }
 
     setNxCloudToken(value => ({ ...value, isValid: true }))
@@ -170,23 +166,19 @@ const Ui: FC = () => {
               <Text bold>3. Click "Set up a workspace"</Text>
               <Text bold>4. Click "No, I'm not using @nrwl/nx-cloud"</Text>
               <Text bold>5. Copy the command provided and run it locally</Text>
-              <Text>
-                If you are using Windows, you will need to run the following command for the previous step to work.
-              </Text>
+              <Text>If you are using Windows, you will need to run the following command for the previous step to work.</Text>
               <Text backgroundColor="#000" color="#fff">
                 npm install -g nx
               </Text>
               <Text bold>
-                6. Copy the accessToken that was generated in nx.json (make sure you don't lose it as it is needed for
-                the following steps)
+                6. Copy the accessToken that was generated in nx.json (make sure you don't lose it as it is needed for the following steps)
               </Text>
               <Text bold>7. [PUBLIC REPOSITORY ONLY] Replace the token in nx.json with nx_cloud_token</Text>
               <Text bold>8. Paste the token on the NX website</Text>
               <Text bold>9. Complete the set up</Text>
               <Text bold>10. Go to your Github repository → Click Settings → Click Secrets → Click New secret</Text>
               <Text bold>
-                11. Secret name is NX_CLOUD_TOKEN and it's value is the accessToken we previously copied and click Add
-                secret
+                11. Secret name is NX_CLOUD_TOKEN and it's value is the accessToken we previously copied and click Add secret
               </Text>
               <Text bold>12. Paste the accessToken previously copied in the input below</Text>
 

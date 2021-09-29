@@ -1,9 +1,10 @@
 import { Controller, Get } from "@nestjs/common"
-import { ApiOperation } from "@nestjs/swagger"
+import { ApiOperation, ApiTags } from "@nestjs/swagger"
 import { DNSHealthIndicator, HealthCheck, HealthCheckService } from "@nestjs/terminus"
 
-import { environment } from "../environments/environment"
+import { environment } from "../../environments/environment"
 
+@ApiTags("health")
 @Controller("health")
 export class HealthController {
   constructor(private health: HealthCheckService, private dns: DNSHealthIndicator) {}

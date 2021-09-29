@@ -17,7 +17,7 @@ services:
       # seeding
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       # named volume
-      - postgres-data:/var/lib/postgresql/data
+      - stator-data:/var/lib/postgresql/stator/data
 
 volumes:
-  postgres-data:
+  stator-data:

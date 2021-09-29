@@ -75,7 +75,7 @@ npm run get-started
     - [Data seeding](#data-seeding)
   - [Backend](#backend)
   - [Frontend](#frontend)
-  - [General](#global)
+  - [General](#general)
 
 </br>
 
@@ -198,10 +198,6 @@ To deploy this full stack application yourself, follow the steps below:
 
 Once done, your app will be hooked to master branch commits as defined in the spec. Therefore, on merge, the application will update. To update the spec of the application, first get the application id with `doctl apps list`, then simply run `doctl apps update <app id> --spec .do/app.yaml`.
 
-#### Kubernetes
-
-More to come..
-
 </br>
 
 ## ⚙️ Implementation
@@ -305,60 +301,55 @@ Once you navigate to [localhost:3333](http://localhost:3333), you will see this:
 For our webapp, we're using the very popular [react](https://github.com/facebook/react) alongside [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [react-router](https://github.com/ReactTraining/react-router).
 We highly recommend that you use [function components](https://reactjs.org/docs/components-and-props.html) as demonstrated in the example.
 
-To further reduce the boilerplate necessary for redux-toolkit we provide you with a `thunkFactory` which allows you to generate all actions needed for a CRUD endpoint.
+To further reduce the boilerplate necessary for redux-toolkit we provide you with a `thunk-reducer-factory` which allows you to generate all actions needed for a CRUD operations.
 
-Here is how you use it:
+Here you would generate CRUD operations for our todo app:
 
 ```typescript
-import { Todo } from "@stator/models"
+export interface TodosState extends SliceState<Todo> {
+  status: Pick<SliceState<Todo>["status"], "getAll" | "post" | "put" | "delete">
+}
 
-import { thunkFactory } from "../utils/thunkFactory"
+const getAllThunkReducer = thunkReducerGetAllFactory("todos")
+const createThunkReducer = thunkReducerPostFactory<TodosState, { text: string }>("todos")
+const updateThunkReducer = thunkReducerPutFactory<TodosState, unknown, { id: number }>(request => `todos/${request.id}`)
+const deleteThunkReducer = thunkReducerDeleteFactory<TodosState, {id:number}>(request => `todos/${request.id}`)
 
-export const todoThunks = {
-  ...thunkFactory<Todo>("/todos"),
+export const todosSlice = createSlice({
+  name: "todos",
+  initialState: getInitialSliceState<TodosState>(),
+  reducers: {},
+  extraReducers: {
+    ...getAllThunkReducer.reducers,
+    ...createThunkReducer.reducers,
+    ...updateThunkReducer.reducers,
+    ...deleteThunkReducer.reducers,
+  },
+})
+export const todosThunks = {
+  getAll: getAllThunkReducer.thunk,
+  create: createThunkReducer.thunk,
+  update: updateThunkReducer.thunk,
+  delete: deleteThunkReducer.thunk,
 }
 ```
 
-We also provide a `sliceReducerFactory` that will generate the required reducers for the thunks you just created.
-
-Here is how you use it:
-
-```typescript
-import { Slice, createSlice } from "@reduxjs/toolkit"
-import { Todo } from "@stator/models"
-
-import { sliceReducerFactory } from "../utils/sliceReducerFactory"
-import { SliceState, getInitialSliceState } from "../utils/SliceState"
-import { todoThunks } from "./todos.thunk"
-
-export interface TodoState extends SliceState<Todo> {}
-
-export const todoSlice: Slice = createSlice({
-  name: "todos",
-  initialState: getInitialSliceState<TodoState, Todo>(),
-  reducers: {},
-  extraReducers: {
-    ...sliceReducerFactory<Todo, TodoState>(todoThunks),
-  },
-})
-```
-
-As you can see, everything is typed adequately. Thus you will get auto-completion when developing.
+As you can see, everything is typed adequately. Thus, you will get auto-completion when developing.
 
 Now let's say we want to fetch all our todos from our API, we can simply do this:
 
 ```typescript
-dispatch(todoThunks.getAll())
+dispatch(todoThunks.getAll({}))
 ```
 
 While the API is processing, we would like to add a loading.
-That is very easy because our `thunkFactory` handles all of this for us. You can access the loading status like this:
+That is very easy because our `thunk-reducer-factory` handles all of this for us. You can access the loading status like this:
 
 ```typescript
 todoState.status.getAll.loading
 ```
 
-For a complete example of CRUD operations, consult the `app.tsx` file.
+For a complete example of CRUD operations, consult the `todos-page.tsx` file.
 
 In our example, we are using [material-ui](https://github.com/mui-org/material-ui), but you could replace that with any other framework.
 
@@ -374,10 +365,10 @@ To facilitate and optimize the usage of the monorepo, we make use of [NX](https:
 
 Commit messages must abide to those [guidelines](https://www.conventionalcommits.org/en/v1.0.0/). If you need help following them, simply run `npm run commit` and you will be prompted with an interactive menu.
 
-File and directory names are enforced by the custom made `enforce-file-folder-naming-convention.ts`.
+File and directory names are enforced by the custom-made `enforce-file-folder-naming-convention.ts`.
 
 Branch names are enforced before you even commit to ensure everyone adopts the same standard: `{issue-number}-{branch-work-title-kebab-case}`.
 
-For end to end testing, we use the notorious [cypress](https://github.com/cypress-io/cypress).
+For end-to-end testing, we use the notorious [cypress](https://github.com/cypress-io/cypress).
 
 We also have a pre-built CI toolkit for you that will build and run the tests.

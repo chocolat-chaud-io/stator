@@ -1,13 +1,14 @@
 import { configuration } from "./configuration"
 
-export const configurationTest = () => {
+export const configurationTest = (databaseName: string) => {
   const baseConfig = configuration()
+
   return {
     ...baseConfig,
-
+    test: true,
     database: {
       ...baseConfig.database,
-      name: process.env.DATABASE_NAME || "stator-test",
+      name: databaseName,
     },
   }
 }

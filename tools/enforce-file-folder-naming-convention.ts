@@ -26,7 +26,7 @@ async function main() {
     "README",
     "LICENSE",
     "CONTRIBUTING",
-    "dockerfiles"
+    "dockerfiles",
   ]
   const capitalLetterRegex = /[A-Z]/gm
   const errorPathPaths = []

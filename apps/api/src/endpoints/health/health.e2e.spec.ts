@@ -1,30 +1,24 @@
-import { INestApplication } from "@nestjs/common"
-import { Test } from "@nestjs/testing"
-import * as supertest from "supertest"
+import supertest from "supertest"
 
+import { TestingHelper } from "../../utils/test"
 import { HealthModule } from "./health.module"
 
-describe("HealthController", () => {
-  let app: INestApplication
+describe("Health", () => {
+  let testingHelper: TestingHelper
 
   beforeAll(async () => {
-    const module = await Test.createTestingModule({
-      imports: [HealthModule],
-    }).compile()
-
-    app = module.createNestApplication()
-    await app.init()
+    testingHelper = await new TestingHelper().initializeModuleAndApp("health", [HealthModule])
   })
 
-  afterAll(async () => {
-    await app.close()
-  })
+  beforeEach(() => testingHelper.reloadFixtures())
 
   describe("GET /health", () => {
     it("should return status 200", async () => {
       await supertest
-        .agent(app.getHttpServer())
+        .agent(testingHelper.app.getHttpServer())
         .get("/health")
+        .set("Accept", "application/json")
+        .expect("Content-Type", /json/)
         .expect(200)
         .expect({
           status: "ok",

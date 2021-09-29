@@ -5,12 +5,12 @@
   "scripts": {
     "affected": "nx affected",
     "affected:apps": "nx affected:apps",
-    "affected:build": "nx affected:build --parallel",
+    "affected:build": "nx affected:build",
     "affected:dep-graph": "nx affected:dep-graph",
-    "affected:e2e": "nx affected:e2e --parallel",
+    "affected:e2e": "nx affected:e2e",
     "affected:libs": "nx affected:libs",
-    "affected:lint": "nx affected:lint --parallel",
-    "affected:test": "nx affected:test --parallel",
+    "affected:lint": "nx affected:lint",
+    "affected:test": "nx affected:test",
     "build": "nx build",
     "commit": "cz",
     "dep-graph": "nx dep-graph",
@@ -25,6 +25,7 @@
     "help": "nx help",
     "lint": "npm run affected:lint",
     "lint:file-folder-convention": "ts-node ./tools/enforce-file-folder-naming-convention.ts",
+    "lint:api-imports": "ts-node ./tools/enforce-valid-imports-api.ts",
     "mongo": "run-script-os",
     "mongo:default": "sudo docker-compose -f ./apps/database/mongo/docker-compose.yml up",
     "mongo:win32": "docker-compose -f ./apps/database/mongo/docker-compose.yml up",
@@ -39,12 +40,13 @@
     "test": "nx test",
     "typeorm": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --project tsconfig.base.json ./node_modules/typeorm/cli.js --config apps/database/orm-config.ts",
     "update": "nx migrate latest",
-    "workspace-schematic": "nx workspace-schematic"
+    "workspace-schematic": "nx workspace-schematic",
+    "workspace-generator": "nx workspace-generator"
   },
   "husky": {
     "hooks": {
       "post-checkout": "branch-naming-check '^\\d+(-[a-z]+)+|master$'",
-      "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+|master$' && npm run lint:file-folder-convention",
+      "pre-commit": "branch-naming-check '^\\d+(-[a-z]+)+|master$' && npm run lint:file-folder-convention && npm run lint:api-imports",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -68,23 +70,27 @@
     "@nestjs/terminus": "7.0.1",
     "@nestjs/typeorm": "7.1.4",
     "@nestjsx/crud": "4.6.2",
+    "@nestjsx/crud-request": "^4.6.2",
     "@nestjsx/crud-typeorm": "4.6.2",
-    "@nrwl/nx-cloud": "10.1.7",
+    "@nrwl/nx-cloud": "10.1.10",
     "@reduxjs/toolkit": "1.4.0",
     "axios": "0.21.0",
     "class-transformer": "0.3.1",
+    "class-transformer-validator": "^0.9.1",
     "class-validator": "0.12.2",
     "clsx": "1.1.1",
     "document-register-element": "1.14.10",
+    "extra-watch-webpack-plugin": "^1.0.3",
     "fastify-swagger": "3.4.0",
+    "hook-shell-script-webpack-plugin": "^0.1.3",
     "ink-use-stdout-dimensions": "1.0.5",
     "meow": "7.1.1",
     "mongodb": "3.6.2",
-    "nx": "10.3.1",
+    "nx": "10.4.15",
     "pg": "8.4.1",
     "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "react-redux": "7.2.1",
+    "react-dom": "17.0.1",
+    "react-redux": "7.2.2",
     "react-router-dom": "5.2.0",
     "redoc": "2.0.0-rc.44",
     "reflect-metadata": "0.1.13",
@@ -92,7 +98,8 @@
     "run-script-os": "1.1.3",
     "rxjs": "6.6.3",
     "swagger-ui-express": "4.1.4",
-    "typeorm": "0.2.28"
+    "typeorm": "0.2.28",
+    "typeorm-fixtures-cli": "^1.9.2"
   },
   "devDependencies": {
     "@ava/typescript": "1.1.1",
@@ -105,14 +112,15 @@
     "@innocells/branch-naming-check": "1.0.0",
     "@nestjs/schematics": "7.2.5",
     "@nestjs/testing": "7.4.4",
-    "@nrwl/cypress": "10.3.1",
-    "@nrwl/eslint-plugin-nx": "10.3.1",
-    "@nrwl/jest": "10.3.1",
-    "@nrwl/nest": "10.3.1",
-    "@nrwl/node": "10.3.1",
-    "@nrwl/react": "10.3.1",
-    "@nrwl/web": "10.3.1",
-    "@nrwl/workspace": "10.3.1",
+    "@nrwl/cli": "11.0.18",
+    "@nrwl/cypress": "11.0.18",
+    "@nrwl/eslint-plugin-nx": "11.0.18",
+    "@nrwl/jest": "11.0.18",
+    "@nrwl/nest": "11.0.18",
+    "@nrwl/node": "11.0.18",
+    "@nrwl/react": "11.0.18",
+    "@nrwl/web": "11.0.18",
+    "@nrwl/workspace": "11.0.18",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
     "@semantic-release/github": "7.1.1",
@@ -125,6 +133,7 @@
     "@types/react-dom": "16.9.8",
     "@types/react-redux": "7.1.9",
     "@types/react-router-dom": "5.1.6",
+    "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "ava": "3.13.0",
@@ -143,6 +152,7 @@
     "eslint-plugin-jsx-a11y": "6.3.1",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "4.2.0",
+    "hook-shell-script-webpack-plugin": "^0.1.3",
     "husky": "4.3.0",
     "import-sort-style-module": "6.0.0",
     "ink": "3.0.8",
@@ -159,7 +169,8 @@
     "ts-jest": "26.4.2",
     "ts-node": "9.1.1",
     "tslint": "6.1.3",
-    "typescript": "3.9.7",
+    "typeorm-fixtures-cli": "^1.8.1",
+    "typescript": "4.0.8",
     "xo": "0.34.1"
   },
   "engines": {
@@ -168,7 +179,8 @@
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {
-      "style": "module"
+      "style": "module",
+      "parser": "typescript"
     }
   }
 }

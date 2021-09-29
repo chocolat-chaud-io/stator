@@ -2,19 +2,27 @@
 const path = require("path")
 const webpack = require("webpack")
 const ts = require("typescript")
+const HookShellScriptPlugin = require("hook-shell-script-webpack-plugin")
+const ExtraWatchWebpackPlugin = require("extra-watch-webpack-plugin")
 
 /**
  * Extend the default Webpack configuration from nx / ng.
  * this webpack.config is used w/ node:build builder
  * see angular.json greenroom-rest-api
  */
-module.exports = (config) => {
+module.exports = config => {
   addSwagger(config)
 
   config.plugins = [
     ...(config.plugins || []),
     new webpack.ProvidePlugin({
       openapi: "@nestjs/swagger",
+    }),
+    new ExtraWatchWebpackPlugin({
+      dirs: ["libs/models/src"],
+    }),
+    new HookShellScriptPlugin({
+      watchRun: ["node ./tools/generators/generate-entity-index-file.js"],
     }),
   ]
 
@@ -39,6 +47,7 @@ const addSwagger = config => {
     ...rule.options,
     getCustomTransformers: () => {
       const program = ts.createProgram([path.join(__dirname, "src/main.ts")], {})
+
       return {
         before: [
           require("@nestjs/swagger/plugin").before(

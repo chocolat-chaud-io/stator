@@ -8,6 +8,7 @@ const ormConfig = require("../../../database/orm-config")
 export const configuration = () => ({
   port: parseInt(process.env.PORT, 10) || 3333,
   address: process.env.ADDRESS || "0.0.0.0",
+  test: process.env.TEST === "true",
 
   database: {
     host: ormConfig.host,
@@ -29,10 +30,12 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
     username: configService.get("database.username"),
     password: configService.get("database.password"),
     synchronize: configService.get("database.synchronize"),
+    keepConnectionAlive: true,
     ssl: configService.get("database.certificateAuthority")
       ? {
           ca: configService.get("database.certificateAuthority"),
         }
       : false,
     entities: [Todo],
+    logging: ["error"],
   })

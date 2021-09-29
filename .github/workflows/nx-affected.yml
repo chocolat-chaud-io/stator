@@ -69,6 +69,8 @@ jobs:
 
       - name: Start api
         run: npm run typeorm -- migration:run && npm start api &
+        env:
+          TEST: true
 
       - name: Run tests
         run: npm run affected:test -- --base=$BASE --head=$HEAD --code-coverage
@@ -81,7 +83,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
           path-to-lcov: ./coverage/apps/api/lcov.info
-        continue-on-error: true
+          fail_ci_if_error: false
 
       - name: Codecov
         uses: codecov/codecov-action@v1
