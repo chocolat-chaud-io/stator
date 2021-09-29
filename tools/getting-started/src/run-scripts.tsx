@@ -26,9 +26,7 @@ const RunScripts: React.FC<Props> = props => {
   const [renameProjectOutput, setRenameProjectOutput] = useState("")
 
   const [isDeployingApplication, setIsDeployingApplication] = useState(false)
-  const [isDeployingApplicationValid, setIsDeployingApplicationValid] = useState(
-    !!props.digitalOceanToken ? undefined : true
-  )
+  const [isDeployingApplicationValid, setIsDeployingApplicationValid] = useState(!!props.digitalOceanToken ? undefined : true)
 
   const [errorMessage, setErrorMessage] = useState("")
 

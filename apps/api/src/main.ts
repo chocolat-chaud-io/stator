@@ -22,11 +22,7 @@ async function bootstrap() {
   app.enableCors({ origin: "*" })
   app.setGlobalPrefix(globalPrefix)
 
-  const swaggerOptions = new DocumentBuilder()
-    .setTitle("Stator")
-    .setDescription("The stator API description")
-    .setVersion("1.0")
-    .build()
+  const swaggerOptions = new DocumentBuilder().setTitle("Stator").setDescription("The stator API description").setVersion("1.0").build()
 
   const document = SwaggerModule.createDocument(app, swaggerOptions)
   SwaggerModule.setup("documentation", app, document)

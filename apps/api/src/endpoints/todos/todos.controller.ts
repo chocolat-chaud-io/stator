@@ -1,9 +1,9 @@
 import { Controller } from "@nestjs/common"
+import { ApiTags } from "@nestjs/swagger"
 import { Crud, CrudController } from "@nestjsx/crud"
 import { Todo } from "@stator/models"
 
 import { TodosService } from "../../services/todos.service"
-import { ApiTags } from "@nestjs/swagger";
 
 @ApiTags("todos")
 @Controller("todos")

@@ -26,10 +26,7 @@ const rejectedReducer = <TEntity extends RootEntity, ThunkArg, ThunkApiConfig, T
   thunk: AsyncThunk<TEntity, ThunkArg, ThunkApiConfig>,
   method: AllowedMethod
 ) => ({
-  [thunk.rejected.toString()]: (
-    state: TSliceState,
-    action: PayloadAction<TEntity, string, { arg: TEntity }, Error>
-  ) => {
+  [thunk.rejected.toString()]: (state: TSliceState, action: PayloadAction<TEntity, string, { arg: TEntity }, Error>) => {
     if (method === "getAll" || method === "post") {
       state.status[method].loading = false
     } else {
@@ -52,11 +49,7 @@ const handleRequest = async <T>(requestFn: Promise<AxiosResponse<T>>) => {
   }
 }
 
-export const thunkReducerGetAllFactory = <
-  TSliceState extends SliceState<RootEntity>,
-  TRequestParams = unknown,
-  TRequestQuery = unknown
->(
+export const thunkReducerGetAllFactory = <TSliceState extends SliceState<RootEntity>, TRequestParams = unknown, TRequestQuery = unknown>(
   urlPath: UrlPath<TRequestParams>,
   onFulfilled?: (state: TSliceState, action: PayloadAction<StateEntityType<TSliceState>[]>) => void
 ) => {
@@ -87,11 +80,7 @@ export const thunkReducerGetAllFactory = <
   }
 }
 
-export const thunkReducerGetFactory = <
-  TSliceState extends SliceState<RootEntity>,
-  TRequestParams = unknown,
-  TRequestQuery = unknown
->(
+export const thunkReducerGetFactory = <TSliceState extends SliceState<RootEntity>, TRequestParams = unknown, TRequestQuery = unknown>(
   urlPath: UrlPath<TRequestParams>,
   onFulfilled?: (state: TSliceState, action: PayloadAction<StateEntityType<TSliceState>>) => void
 ) => {
@@ -143,12 +132,7 @@ export const thunkReducerPostFactory = <
 ) => {
   const thunk = createAsyncThunk(
     `${urlPath}/post`,
-    async (request: {
-      params?: TRequestParams
-      query?: TRequestQuery
-      data?: TRequestBody
-      config?: AxiosRequestConfig
-    }) => {
+    async (request: { params?: TRequestParams; query?: TRequestQuery; data?: TRequestBody; config?: AxiosRequestConfig }) => {
       const url = typeof urlPath === "function" ? urlPath(request.params) : urlPath
       const data = { ...request.data, ...request.config?.data }
       const config: AxiosRequestConfig = { ...request.config, params: request.query }
@@ -185,12 +169,7 @@ export const thunkReducerPutFactory = <
 ) => {
   const thunk = createAsyncThunk(
     `${urlPath}/put`,
-    async (request: {
-      params?: TRequestParams
-      query?: TRequestQuery
-      data?: TRequestBody
-      config?: AxiosRequestConfig
-    }) => {
+    async (request: { params?: TRequestParams; query?: TRequestQuery; data?: TRequestBody; config?: AxiosRequestConfig }) => {
       const url = typeof urlPath === "function" ? urlPath(request.params) : urlPath
       const data = { ...request.data, ...request.config?.data }
       const config: AxiosRequestConfig = { ...request.config, params: request.query }

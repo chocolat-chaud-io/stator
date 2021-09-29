@@ -1,7 +1,7 @@
 import fs from "fs"
 import path from "path"
 
-import { INestApplication, HttpStatus } from "@nestjs/common"
+import { HttpStatus, INestApplication } from "@nestjs/common"
 import { DynamicModule } from "@nestjs/common/interfaces/modules/dynamic-module.interface"
 import { ForwardReference } from "@nestjs/common/interfaces/modules/forward-reference.interface"
 import { Provider } from "@nestjs/common/interfaces/modules/provider.interface"

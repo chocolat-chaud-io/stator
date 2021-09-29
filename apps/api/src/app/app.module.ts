@@ -2,9 +2,9 @@ import { Module } from "@nestjs/common"
 import { ServeStaticModule } from "@nestjs/serve-static"
 
 import { configuration } from "../config/configuration"
-import { getRootModuleImports } from "../utils/utils";
-import { TodosModule } from "../endpoints/todos/todos.module";
-import { HealthModule } from "../endpoints/health/health.module";
+import { HealthModule } from "../endpoints/health/health.module"
+import { TodosModule } from "../endpoints/todos/todos.module"
+import { getRootModuleImports } from "../utils/utils"
 
 @Module({
   imports: [

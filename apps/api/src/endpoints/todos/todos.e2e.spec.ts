@@ -90,11 +90,7 @@ describe("Todos", () => {
     })
 
     it("should delete one todo", async () => {
-      await supertest
-        .agent(testingHelper.app.getHttpServer())
-        .delete(`/todos/1`)
-        .set("Accept", "application/json")
-        .expect(200)
+      await supertest.agent(testingHelper.app.getHttpServer()).delete(`/todos/1`).set("Accept", "application/json").expect(200)
       const missingTodo = await repository.findOne({ id: 1 })
 
       expect(missingTodo).toBe(undefined)

@@ -8,4 +8,3 @@ export * from "./lib/root.entity"
 
 // todo.entity.ts
 export * from "./lib/todo.entity"
-

@@ -28,9 +28,6 @@ export const getInitialSliceState = <T extends SliceState<unknown>>(): T => {
   } as T
 }
 
-export const isEntityLoading = <T extends SliceState<TEntity>, TEntity extends RootEntity>(
-  state: T,
-  entity: TEntity
-) => {
+export const isEntityLoading = <T extends SliceState<TEntity>, TEntity extends RootEntity>(state: T, entity: TEntity) => {
   return !!(state.status.get.ids[entity.id] || state.status.put.ids[entity.id] || state.status.delete.ids[entity.id])
 }

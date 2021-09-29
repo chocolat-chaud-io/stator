@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 
+import { errorMiddleware } from "./middlewares/error-middleware"
 import rootReducer from "./root-reducer"
-import { errorMiddleware } from "./middlewares/error-middleware";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -11,8 +11,7 @@ const store = configureStore({
         ignoredActionPaths: ["meta.timestamp", "payload"],
         ignoredPaths: ["stocksReducer.status.error"],
       },
-    })
-      .concat(errorMiddleware()),
+    }).concat(errorMiddleware()),
 })
 
 export type AppDispatch = typeof store.dispatch

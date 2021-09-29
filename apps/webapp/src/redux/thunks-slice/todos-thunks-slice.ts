@@ -3,10 +3,11 @@ import { Todo } from "@stator/models"
 
 import { SliceState, getInitialSliceState } from "../utils/slice-state"
 import {
-  thunkReducerDeleteFactory, thunkReducerGetAllFactory,
+  thunkReducerDeleteFactory,
+  thunkReducerGetAllFactory,
   thunkReducerPostFactory,
-  thunkReducerPutFactory
-} from "../utils/thunk-reducer-factory";
+  thunkReducerPutFactory,
+} from "../utils/thunk-reducer-factory"
 
 export interface TodosState extends SliceState<Todo> {
   status: Pick<SliceState<Todo>["status"], "getAll" | "post" | "put" | "delete">
@@ -15,7 +16,7 @@ export interface TodosState extends SliceState<Todo> {
 const getAllThunkReducer = thunkReducerGetAllFactory("todos")
 const createThunkReducer = thunkReducerPostFactory<TodosState, { text: string }>("todos")
 const updateThunkReducer = thunkReducerPutFactory<TodosState, unknown, { id: number }>(request => `todos/${request.id}`)
-const deleteThunkReducer = thunkReducerDeleteFactory<TodosState, {id:number}>(request => `todos/${request.id}`)
+const deleteThunkReducer = thunkReducerDeleteFactory<TodosState, { id: number }>(request => `todos/${request.id}`)
 
 export const todosSlice = createSlice({
   name: "todos",
