@@ -15,7 +15,10 @@
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
             "assets": ["apps/api/src/assets"],
-            "webpackConfig": "apps/api/webpack.config.ts"
+            "webpackConfig": "apps/api/webpack.config.ts",
+            "showCircularDependencies": false,
+            "maxWorkers": 2,
+            "memoryLimit": 1024
           },
           "configurations": {
             "production": {
@@ -29,12 +32,21 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
             "buildTarget": "api:build"
+          }
+        },
+        "debug": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api:build",
+            "inspect": true,
+            "port": 7777
           }
         },
         "lint": {
@@ -50,7 +62,32 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
+          },
+          "outputs": ["coverage/apps/api"]
+        }
+      }
+    },
+    "models": {
+      "root": "libs/models",
+      "sourceRoot": "libs/models/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": ["libs/models/tsconfig.lib.json", "libs/models/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/models/**/*"]
           }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/models/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/models"]
         }
       }
     },
@@ -71,7 +108,10 @@
             "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
             "styles": ["apps/webapp/src/styles.scss"],
             "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "webpackConfig": "@nrwl/react/plugins/webpack",
+            "showCircularDependencies": false,
+            "maxWorkers": 2,
+            "memoryLimit": 1024
           },
           "configurations": {
             "production": {
@@ -96,7 +136,8 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": ["{options.outputPath}"]
         },
         "serve": {
           "builder": "@nrwl/web:dev-server",
@@ -122,7 +163,8 @@
           "options": {
             "jestConfig": "apps/webapp/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": ["coverage/apps/webapp"]
         }
       }
     },
@@ -150,29 +192,6 @@
             "linter": "eslint",
             "tsConfig": ["apps/webapp-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/webapp-e2e/**/*"]
-          }
-        }
-      }
-    },
-    "models": {
-      "root": "libs/models",
-      "sourceRoot": "libs/models/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
-          "options": {
-            "linter": "eslint",
-            "tsConfig": ["libs/models/tsconfig.lib.json", "libs/models/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/models/**/*"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/models/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }
