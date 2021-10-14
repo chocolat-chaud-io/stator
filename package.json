@@ -38,7 +38,9 @@
     "rename-project": "ts-node ./tools/rename-project.ts",
     "start": "nx serve",
     "test": "nx test",
-    "typeorm": "cross-env TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node --project tsconfig.base.json ./node_modules/typeorm/cli.js --config apps/database/orm-config.ts",
+    "typeorm": "ts-node --project tsconfig.base.json ./node_modules/typeorm/cli.js --config apps/database/orm-config.ts",
+    "db:create": "ts-node --project tsconfig.base.json ./node_modules/typeorm-extension/dist/cli/index.js db:create --config apps/database/orm-config.ts",
+    "db:drop": "ts-node --project tsconfig.base.json ./node_modules/typeorm-extension/dist/cli/index.js db:drop --config apps/database/orm-config.ts",
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "workspace-generator": "nx workspace-generator"
@@ -124,7 +126,7 @@
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
     "@semantic-release/github": "7.1.1",
-    "@sindresorhus/tsconfig": "0.9.0",
+    "@sindresorhus/tsconfig": "0.7.0",
     "@testing-library/react": "11.1.0",
     "@types/ink-divider": "2.0.2",
     "@types/jest": "26.0.24",
@@ -169,6 +171,7 @@
     "ts-jest": "26.4.2",
     "ts-node": "9.1.1",
     "tslint": "6.1.3",
+    "typeorm-extension": "0.3.0",
     "typeorm-fixtures-cli": "1.9.2",
     "typescript": "4.0.8",
     "xo": "0.34.1"

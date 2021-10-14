@@ -22,11 +22,11 @@ const RunScripts: React.FC<Props> = props => {
   const { exit } = useApp()
 
   const [isRenamingProject, setIsRenamingProject] = useState(false)
-  const [isRenamingProjectValid, setIsRenamingProjectValid] = useState<boolean>()
+  const [isRenamingProjectValid, setIsRenamingProjectValid] = useState(false)
   const [renameProjectOutput, setRenameProjectOutput] = useState("")
 
   const [isDeployingApplication, setIsDeployingApplication] = useState(false)
-  const [isDeployingApplicationValid, setIsDeployingApplicationValid] = useState(!!props.digitalOceanToken ? undefined : true)
+  const [isApplicationValid, setIsApplicationValid] = useState(false)
 
   const [errorMessage, setErrorMessage] = useState("")
 
@@ -54,31 +54,35 @@ const RunScripts: React.FC<Props> = props => {
   }, [])
 
   useEffect(() => {
-    if (renameProjectOutput && props.digitalOceanToken) {
-      const asyncFn = async () => {
-        setIsDeployingApplication(true)
+    if (renameProjectOutput) {
+      if (props.digitalOceanToken) {
+        const asyncFn = async () => {
+          setIsDeployingApplication(true)
 
-        const { stdout } = await exec(`doctl apps create --spec ${projectRootPath}.do/app.yaml`)
+          const { stdout } = await exec(`doctl apps create --spec ${projectRootPath}.do/app.yaml`)
 
-        const isValid = stdout.includes(props.projectName)
-        if (!isValid) {
-          setErrorMessage(stdout)
+          const isValid = stdout.includes(props.projectName)
+          if (!isValid) {
+            setErrorMessage(stdout)
+          }
+
+          setIsDeployingApplication(false)
+          setIsApplicationValid(isValid)
         }
-
-        setIsDeployingApplication(false)
-        setIsDeployingApplicationValid(isValid)
+        asyncFn()
+          .then()
+          .catch(err => setErrorMessage(err.message))
+      } else {
+        setIsApplicationValid(true)
       }
-      asyncFn()
-        .then()
-        .catch(err => setErrorMessage(err.message))
     }
   }, [renameProjectOutput])
 
   useEffect(() => {
-    if (isDeployingApplicationValid) {
+    if (isApplicationValid) {
       exit()
     }
-  }, [isDeployingApplicationValid])
+  }, [isApplicationValid])
 
   return (
     <>
@@ -110,11 +114,11 @@ const RunScripts: React.FC<Props> = props => {
             )}
             Deploying application on DigitalOcean
           </Text>
-          <IsValidIcon isValid={isDeployingApplicationValid} />
+          <IsValidIcon isValid={isApplicationValid} />
         </Box>
       )}
 
-      {isRenamingProjectValid && isDeployingApplicationValid && (
+      {isRenamingProjectValid && isApplicationValid && (
         <>
           <Box marginTop={1} />
           <Text bold>Start your stack:</Text>
@@ -124,6 +128,12 @@ const RunScripts: React.FC<Props> = props => {
             database:{" "}
             <Text backgroundColor="#000" color="#fff">
               npm run postgres
+            </Text>
+          </Text>
+          <Text bold>
+            create database:{" "}
+            <Text backgroundColor="#000" color="#fff">
+              npm run db:create
             </Text>
           </Text>
           <Text bold>
@@ -142,7 +152,7 @@ const RunScripts: React.FC<Props> = props => {
       )}
 
       <Box marginBottom={1} />
-      {!!renameProjectOutput && isDeployingApplicationValid && <Text bold>{renameProjectOutput}</Text>}
+      {!!renameProjectOutput && isApplicationValid && <Text bold>{renameProjectOutput}</Text>}
       <Error errorMessage={errorMessage} />
     </>
   )
