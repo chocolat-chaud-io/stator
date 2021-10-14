@@ -55,13 +55,18 @@ async function main() {
       console.error("The project name must respect this regex /^[a-zA-Z-\\d_]+$/gmi")
       process.exit(1)
     }
+    const databaseName = project.replace(/-/g, "_")
+    const databaseFiles = ["docker-compose.yml", "seed-data.js", "init.sql", "test.ts", "orm-config.ts"]
 
     for await (const entry of walk(path.join(__dirname, ".."), ignoredFolders)) {
       const entryStat = await fs.promises.lstat(entry)
       if (entryStat.isFile()) {
         const fileContent = await fs.promises.readFile(entry, "utf-8")
         if (fileContent) {
-          const replacedFileContent = fileContent.replace(/chocolat-chaud-io/gim, organization).replace(/stator/gim, project)
+          const isDatabaseFile = databaseFiles.some(databaseFile => entry.includes(databaseFile))
+          const replacedFileContent = fileContent
+            .replace(/chocolat-chaud-io/gim, organization)
+            .replace(/stator/gim, isDatabaseFile ? databaseName : project)
           await fs.promises.writeFile(entry, replacedFileContent, "utf-8")
         }
       }

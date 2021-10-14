@@ -72,9 +72,7 @@ const Ui: FC = () => {
 
     const tokenRegex = /^[a-zA-Z\d-]{30,40}$/
     if (codecovToken.value !== "" && !tokenRegex.test(codecovToken.value.trim())) {
-      return setCodecovToken(value =>
-        cloneInputValueWithError(value, "The token you provided doesn't respect the Codecov token format")
-      )
+      return setCodecovToken(value => cloneInputValueWithError(value, "The token you provided doesn't respect the Codecov token format"))
     }
 
     setCodecovToken(value => ({ ...value, isValid: true }))
@@ -138,8 +136,10 @@ const Ui: FC = () => {
               <Link url="https://app.codecov.io/gh/+">
                 <Text bold>2. Link your repository</Text>
               </Link>
-              <Text bold>3. Add the token in your GitHub secrets of your project</Text>
-              <Text bold>4. Copy the token from the top right and paste it in the input below</Text>
+              <Text bold>3. Copy the token from the page shown after successfully linking your repository</Text>
+              <Text bold>4. Go to your Github repository → Click Settings → Click Secrets → Click New secret</Text>
+              <Text bold>5. Secret name is CODECOV_TOKEN and it's value is the accessToken we previously copied and click Add secret</Text>
+              <Text bold>6. Paste the token previously copied in the input below</Text>
 
               <Box marginBottom={1} />
 

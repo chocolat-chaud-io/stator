@@ -1,1 +1,1 @@
-create database "stator-test";
+create database "stator";
