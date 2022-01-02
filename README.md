@@ -301,55 +301,13 @@ Once you navigate to [localhost:3333](http://localhost:3333), you will see this:
 For our webapp, we're using the very popular [react](https://github.com/facebook/react) alongside [redux-toolkit](https://github.com/reduxjs/redux-toolkit) and [react-router](https://github.com/ReactTraining/react-router).
 We highly recommend that you use [function components](https://reactjs.org/docs/components-and-props.html) as demonstrated in the example.
 
-To further reduce the boilerplate necessary for redux-toolkit we provide you with a `thunk-reducer-factory` which allows you to generate all actions needed for a CRUD operations.
+To further reduce the boilerplate necessary you can generate hooks based on your API swagger by running `npm run generate-api-redux`.
+When you add new entities to your API, you should also add them in the output file property of the `tools/generators/open-api-config.ts` file.
+If you would like to avoid this, you can generate a single file by removing both properties [`outputFiles`, `filterEndpoints`]
 
-Here you would generate CRUD operations for our todo app:
+This script will generate the required [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) code and caching keys so your data remains up to date while performing CRUD operations.
 
-```typescript
-export interface TodosState extends SliceState<Todo> {
-  status: Pick<SliceState<Todo>["status"], "getAll" | "post" | "put" | "delete">
-}
-
-const getAllThunkReducer = thunkReducerGetAllFactory("todos")
-const createThunkReducer = thunkReducerPostFactory<TodosState, { text: string }>("todos")
-const updateThunkReducer = thunkReducerPutFactory<TodosState, unknown, { id: number }>(request => `todos/${request.id}`)
-const deleteThunkReducer = thunkReducerDeleteFactory<TodosState, {id:number}>(request => `todos/${request.id}`)
-
-export const todosSlice = createSlice({
-  name: "todos",
-  initialState: getInitialSliceState<TodosState>(),
-  reducers: {},
-  extraReducers: {
-    ...getAllThunkReducer.reducers,
-    ...createThunkReducer.reducers,
-    ...updateThunkReducer.reducers,
-    ...deleteThunkReducer.reducers,
-  },
-})
-export const todosThunks = {
-  getAll: getAllThunkReducer.thunk,
-  create: createThunkReducer.thunk,
-  update: updateThunkReducer.thunk,
-  delete: deleteThunkReducer.thunk,
-}
-```
-
-As you can see, everything is typed adequately. Thus, you will get auto-completion when developing.
-
-Now let's say we want to fetch all our todos from our API, we can simply do this:
-
-```typescript
-dispatch(todoThunks.getAll({}))
-```
-
-While the API is processing, we would like to add a loading.
-That is very easy because our `thunk-reducer-factory` handles all of this for us. You can access the loading status like this:
-
-```typescript
-todoState.status.getAll.loading
-```
-
-For a complete example of CRUD operations, consult the `todos-page.tsx` file.
+For a complete example of CRUD operations, consult the `apps/webapp/src/pages/todos-page.tsx` file.
 
 In our example, we are using [material-ui](https://github.com/mui-org/material-ui), but you could replace that with any other framework.
 

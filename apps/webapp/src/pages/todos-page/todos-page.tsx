@@ -2,31 +2,28 @@ import { Card, CardContent, CircularProgress, List, ListItem, ListItemSecondaryA
 import { Add, Delete, Done, Edit } from "@material-ui/icons"
 import { Todo } from "@stator/models"
 import React, { ChangeEvent, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
 
 import { LoadingIconButton } from "../../loading-icon-button/loading-icon-button"
-import { RootState } from "../../redux/root-reducer"
-import { AppDispatch } from "../../redux/store"
-import { TodosState, todosThunks } from "../../redux/thunks-slice/todos-thunks-slice"
+import { useCreateOneTodoMutation, useDeleteOneTodoMutation, useGetManyTodosQuery, useUpdateOneTodoMutation } from "../../redux/endpoints/todos-endpoints"
 import { useTodosPageStyles } from "./todos-page.styles"
 
 interface Props {}
 
 export const TodosPage: React.FC<Props> = () => {
   const classes = useTodosPageStyles()
-  const dispatch = useDispatch<AppDispatch>()
-  const todoState = useSelector<RootState, TodosState>((state: RootState) => state.todoReducer)
+  const { data, isLoading: isGetAllTodosLoading } = useGetManyTodosQuery({ sort: ["id,DESC"] })
+  const todos = ((data as unknown) as Todo[]) || []
+  const [createTodo, { isLoading: isCreatingTodo }] = useCreateOneTodoMutation()
+  const [updateTodo, { isLoading: isUpdatingTodo }] = useUpdateOneTodoMutation()
+  const [deleteTodo, { isLoading: isDeletingTodo }] = useDeleteOneTodoMutation()
+  const [selectedTodo, setSelectedTodo] = useState<Todo>()
   const [todoCreateText, setTodoCreateText] = useState("")
   const [todoEditTextMap, setTodoEditTextMap] = useState(new Map<number, string>())
   const [todoEditIdMap, setTodoEditIdMap] = useState(new Map<number, boolean>())
 
   useEffect(() => {
-    dispatch(todosThunks.getAll({}))
-  }, [dispatch])
-
-  useEffect(() => {
-    setTodoEditTextMap(todoState.entities.reduce((container, todo) => ({ ...container, [todo.id]: todo.text }), new Map<number, string>()))
-  }, [todoState.entities])
+    setTodoEditTextMap(todos.reduce((container, todo) => ({ ...container, [todo.id]: todo.text }), new Map<number, string>()))
+  }, [todos])
 
   const onTodoCreateChange = (event: ChangeEvent<HTMLInputElement>) => setTodoCreateText(event.target.value)
 
@@ -35,15 +32,16 @@ export const TodosPage: React.FC<Props> = () => {
   }
 
   const onTodoCreate = async () => {
-    const response = await dispatch(todosThunks.create({ data: { text: todoCreateText } }))
-    if (!response.type.includes("rejected")) {
+    const response = await createTodo({ todo: { text: todoCreateText } })
+    if ("data" in response) {
       setTodoCreateText("")
     }
   }
 
   const onTodoEditClick = async (todo: Todo) => {
+    setSelectedTodo(todo)
     if (todoEditIdMap[todo.id]) {
-      await dispatch(todosThunks.update({ params: { id: todo.id }, data: { ...todo, text: todoEditTextMap[todo.id] } }))
+      await updateTodo({ id: todo.id, todo: { text: todoEditTextMap[todo.id] } })
       setTodoEditIdMap(todoEditIdMap => ({
         ...todoEditIdMap,
         [todo.id]: false,
@@ -72,7 +70,7 @@ export const TodosPage: React.FC<Props> = () => {
     <>
       <Card>
         <CardContent className={classes.addTodoContainer}>
-          {!todoState.status.getAll.loading && (
+          {!isGetAllTodosLoading && (
             <>
               <TextField
                 id="create-text-field"
@@ -81,18 +79,18 @@ export const TodosPage: React.FC<Props> = () => {
                 onChange={onTodoCreateChange}
                 onKeyPress={onTodoCreateKeyPress()}
               />
-              <LoadingIconButton Icon={Add} onClick={onTodoCreate} loading={todoState.status.post.loading} />
+              <LoadingIconButton Icon={Add} onClick={onTodoCreate} loading={isCreatingTodo} />
             </>
           )}
         </CardContent>
       </Card>
       <Card>
         <CardContent className={classes.cardContent}>
-          {todoState.status.getAll.loading ? (
+          {isGetAllTodosLoading ? (
             <CircularProgress className={classes.getLoadingProgress} />
           ) : (
             <List>
-              {todoState.entities.map(todo => (
+              {todos.map(todo => (
                 <ListItem key={todo.id}>
                   {todoEditIdMap[todo.id] && (
                     <TextField
@@ -109,15 +107,18 @@ export const TodosPage: React.FC<Props> = () => {
                   <ListItemSecondaryAction className={classes.listItemSecondaryAction}>
                     <LoadingIconButton
                       className="edit-icon-button"
-                      loading={todoState.status.put.ids[todo.id]}
+                      loading={isUpdatingTodo && todo === selectedTodo}
                       Icon={todoEditIdMap[todo.id] ? Done : Edit}
                       onClick={() => onTodoEditClick(todo)}
                     />
                     <LoadingIconButton
                       className="delete-icon-button"
-                      loading={todoState.status.delete.ids[todo.id]}
+                      loading={isDeletingTodo && todo === selectedTodo}
                       Icon={Delete}
-                      onClick={() => dispatch(todosThunks.delete({ params: { id: todo.id } }))}
+                      onClick={() => {
+                        setSelectedTodo(todo)
+                        deleteTodo({ id: todo.id })
+                      }}
                     />
                   </ListItemSecondaryAction>
                 </ListItem>

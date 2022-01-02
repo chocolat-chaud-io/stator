@@ -4,8 +4,7 @@ import { Alert } from "@material-ui/lab"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
-import { RootState } from "../../../redux/root-reducer"
-import { AppDispatch } from "../../../redux/store"
+import { AppDispatch, RootState } from "../../../redux/store"
 import { SnackbarState, snackbarThunks } from "../../../redux/thunks-slice/snackbar-thunks-slice"
 
 interface Props {}
