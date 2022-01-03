@@ -35,7 +35,7 @@
         ],
         "react/prefer-stateless-function": "error",
         "react/prop-types": "off",
-        "id-length": ["error", { "exceptions": ["i", "_"] }],
+        "id-length": ["error", { "exceptions": ["i", "_", "s"] }],
         "react/jsx-no-useless-fragment": "off",
         "newline-before-return": "warn"
       }

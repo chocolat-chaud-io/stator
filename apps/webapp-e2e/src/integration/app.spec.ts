@@ -5,11 +5,10 @@ describe("webapp", () => {
   beforeEach(() => {
     cy.visit("/")
 
-    cy.server()
-    cy.route("**/todos").as("getTodos")
+    cy.intercept("**/todos**").as("getTodos")
 
-    cy.wait("@getTodos").then(xhr => {
-      if (xhr.response.body.length > 0) {
+    cy.wait("@getTodos").then(({response}) => {
+      if (response.body.length > 0) {
         cy.get(".delete-icon-button").click({ multiple: true })
       }
     })
