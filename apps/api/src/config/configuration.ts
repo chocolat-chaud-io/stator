@@ -11,13 +11,12 @@ export const configuration = () => ({
   test: process.env.TEST === "true",
 
   database: {
-    host: ormConfig.host,
-    port: ormConfig.port,
-    name: ormConfig.database,
-    username: ormConfig.username,
-    password: ormConfig.password,
-    synchronize: ormConfig.synchronize,
+    ...ormConfig,
     certificateAuthority: process.env.DATABASE_CA_CERT,
+    keepConnectionAlive: false,
+    entities: [Todo],
+    logging: ["error"],
+    retries: 1,
   },
 })
 
@@ -30,12 +29,9 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
     username: configService.get("database.username"),
     password: configService.get("database.password"),
     synchronize: configService.get("database.synchronize"),
-    keepConnectionAlive: true,
-    ssl: configService.get("database.certificateAuthority")
-      ? {
-          ca: configService.get("database.certificateAuthority"),
-        }
-      : false,
-    entities: [Todo],
-    logging: ["error"],
+    keepConnectionAlive: configService.get("database.keepConnectionAlive"),
+    ssl: configService.get("database.certificateAuthority") ?? false,
+    entities: configService.get("database.entities"),
+    logging: configService.get("database.logging"),
+    retries: configService.get("database.retries"),
   })

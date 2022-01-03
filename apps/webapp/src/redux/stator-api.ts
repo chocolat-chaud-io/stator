@@ -8,11 +8,4 @@ export const statorApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: environment.apiUrl.replace("/api", "") }),
   tagTypes: Object.values(apiTagTypes),
   endpoints: () => ({}),
-}).enhanceEndpoints({
-  endpoints: {
-    getManyTodos: { providesTags: [apiTagTypes.todo] },
-    createOneTodo: { invalidatesTags: [apiTagTypes.todo] },
-    updateOneTodo: { invalidatesTags: [apiTagTypes.todo] },
-    deleteOneTodo: { invalidatesTags: [apiTagTypes.todo] },
-  },
 })

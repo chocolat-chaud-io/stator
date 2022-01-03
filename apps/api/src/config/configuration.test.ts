@@ -9,6 +9,7 @@ export const configurationTest = (databaseName: string) => {
     database: {
       ...baseConfig.database,
       name: databaseName,
+      keepConnectionAlive: false,
     },
   }
 }

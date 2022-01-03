@@ -9,8 +9,6 @@ describe("Todos", () => {
   let testingHelper: TestingHelper
   let repository: Repository<Todo>
 
-  const dateExpectations = { createdAt: expect.any(String), updatedAt: expect.any(String) }
-
   beforeAll(async () => {
     testingHelper = await new TestingHelper().initializeModuleAndApp("todos", [TodosModule])
 
@@ -29,21 +27,10 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual([
-        { id: expect.any(Number), text: "test-name-0", ...dateExpectations },
-        { id: expect.any(Number), text: "test-name-1", ...dateExpectations },
+      expect(body).toMatchObject([
+        { id: expect.any(Number), text: "test-name-0" },
+        { id: expect.any(Number), text: "test-name-1" },
       ])
-    })
-
-    it("should return a single todo", async () => {
-      const { body } = await supertest
-        .agent(testingHelper.app.getHttpServer())
-        .get(`/todos/1`)
-        .set("Accept", "application/json")
-        .expect("Content-Type", /json/)
-        .expect(200)
-
-      expect(body).toEqual({ id: 1, text: "test-name-0", ...dateExpectations })
     })
 
     it("should create one todo", async () => {
@@ -57,36 +44,19 @@ describe("Todos", () => {
         .expect("Content-Type", /json/)
         .expect(201)
 
-      expect(body).toEqual({ id: expect.any(Number), text: "test-name-0", ...dateExpectations })
-    })
-
-    it("should create multiple todos", async () => {
-      const todos = [{ text: "test-name-0" }, { text: "test-name-1" }]
-
-      const { body } = await supertest
-        .agent(testingHelper.app.getHttpServer())
-        .post("/todos/bulk")
-        .send({ bulk: todos })
-        .set("Accept", "application/json")
-        .expect("Content-Type", /json/)
-        .expect(201)
-
-      expect(body).toEqual([
-        { id: expect.any(Number), text: "test-name-0", ...dateExpectations },
-        { id: expect.any(Number), text: "test-name-1", ...dateExpectations },
-      ])
+      expect(body).toMatchObject({ id: expect.any(Number), text: "test-name-0" })
     })
 
     it("should update the name of a todo", async () => {
       const { body } = await supertest
         .agent(testingHelper.app.getHttpServer())
-        .put(`/todos/1`)
+        .patch(`/todos/1`)
         .send({ text: "updated-name" })
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(200)
 
-      expect(body).toEqual({ id: 1, text: "updated-name", ...dateExpectations })
+      expect(body).toMatchObject({ id: 1, text: "updated-name" })
     })
 
     it("should delete one todo", async () => {

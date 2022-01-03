@@ -8,7 +8,6 @@ const ormConfig: PostgresConnectionOptions = {
   password: process.env.DATABASE_PASSWORD || "postgres",
   database: process.env.DATABASE_NAME || "stator",
   synchronize: !!(process.env.DATABASE_SYNCHRONIZE ?? true),
-
   entities: [__dirname + "/../../libs/**/*.entity{.ts,.js}"],
   migrations: [__dirname + "/migrations/*.ts"],
   cli: {
