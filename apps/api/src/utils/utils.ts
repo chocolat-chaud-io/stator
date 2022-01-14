@@ -7,17 +7,14 @@ import winston from "winston"
 import { getOrmConfigFn } from "../config/configuration"
 import { environment } from "../environments/environment"
 
-export const getWinstonConsoleFormat = () => {
-  if (environment.production) {
-    return winston.format.json()
-  }
-
-  return winston.format.combine(
-    winston.format.timestamp(),
-    winston.format.ms(),
-    nestWinstonModuleUtilities.format.nestLike("MyApp", { prettyPrint: true })
-  )
-}
+export const getWinstonConsoleFormat = () =>
+  environment.production
+    ? winston.format.json()
+    : winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.ms(),
+        nestWinstonModuleUtilities.format.nestLike("MyApp", { prettyPrint: true })
+      )
 
 export const getRootModuleImports = (configuration: ConfigFactory) => [
   ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),

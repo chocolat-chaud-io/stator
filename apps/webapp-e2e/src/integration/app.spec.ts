@@ -7,7 +7,7 @@ describe("webapp", () => {
 
     cy.intercept("**/todos**").as("getTodos")
 
-    cy.wait("@getTodos").then(({response}) => {
+    cy.wait("@getTodos").then(({ response }) => {
       if (response.body.length > 0) {
         cy.get(".delete-icon-button").click({ multiple: true })
       }

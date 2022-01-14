@@ -1,10 +1,10 @@
-import { Color } from "@material-ui/lab"
+import { AlertColor } from "@mui/material"
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit"
 
 export interface SnackbarState {
   snackbar: {
     message?: string
-    severity?: Color
+    severity?: AlertColor
   }
 }
 

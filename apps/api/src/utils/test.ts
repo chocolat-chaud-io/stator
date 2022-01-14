@@ -1,33 +1,27 @@
 import fs from "fs"
 import path from "path"
 
-import { INestApplication } from "@nestjs/common"
-import { DynamicModule } from "@nestjs/common/interfaces/modules/dynamic-module.interface"
-import { ForwardReference } from "@nestjs/common/interfaces/modules/forward-reference.interface"
+import { ModuleMetadata } from "@nestjs/common/interfaces/modules/module-metadata.interface"
 import { Provider } from "@nestjs/common/interfaces/modules/provider.interface"
-import { Type } from "@nestjs/common/interfaces/type.interface"
-import { FastifyAdapter } from "@nestjs/platform-fastify"
+import { FastifyAdapter, NestFastifyApplication } from "@nestjs/platform-fastify"
 import { Test, TestingModule } from "@nestjs/testing"
 import { Connection, createConnection } from "typeorm"
-import { getRepository } from "typeorm"
 import { Builder, Loader, Parser, Resolver, fixturesIterator } from "typeorm-fixtures-cli/dist"
+import { ConnectionOptions } from "typeorm/connection/ConnectionOptions"
 
 import { configurationTest } from "../config/configuration.test"
 import { getRootModuleImports } from "./utils"
 
 export class TestingHelper {
   module: TestingModule
-  app: INestApplication
+  app: NestFastifyApplication
 
-  async initializeModuleAndApp(
-    testName: string,
-    importedModules: Array<Type<unknown> | DynamicModule | Promise<DynamicModule> | ForwardReference>,
-    providers: Provider[] = []
-  ) {
+  async initializeModuleAndApp(testName: string, importedModules: ModuleMetadata["imports"], providers: Provider[] = undefined) {
     const databaseName = `stator_test_${testName}`
     const configuration = configurationTest.bind(this, databaseName)
 
-    const connection = await createConnection({ ...configuration().database })
+    const connectionOptions: ConnectionOptions = { ...configuration().database }
+    const connection = await createConnection(connectionOptions)
     await this.createDatabaseIfNotExist(connection, databaseName)
 
     this.module = await Test.createTestingModule({
@@ -35,7 +29,7 @@ export class TestingHelper {
       providers: providers,
     }).compile()
 
-    this.app = this.module.createNestApplication(new FastifyAdapter())
+    this.app = this.module.createNestApplication<NestFastifyApplication>(new FastifyAdapter())
 
     await this.app.init()
     await this.app.getHttpAdapter().getInstance().ready()
@@ -56,7 +50,7 @@ export class TestingHelper {
 
     for (const fixture of fixtures) {
       const entity = await builder.build(fixture)
-      await getRepository(entity.constructor.name).save(entity)
+      await connection.getRepository(entity.constructor.name).save(entity)
     }
   }
 
@@ -81,5 +75,6 @@ PERFORM dblink_exec('', 'CREATE DATABASE ${databaseName}');
 EXCEPTION WHEN duplicate_database THEN RAISE NOTICE '%, skipping', SQLERRM USING ERRCODE = SQLSTATE;
 END
 $$;`)
+    await connection.close()
   }
 }

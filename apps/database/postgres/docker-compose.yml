@@ -1,7 +1,7 @@
 version: "3.6"
 services:
   database:
-    image: postgres:latest
+    image: postgres:13
     container_name: stator-postgres
     ports:
       - 5433:5432

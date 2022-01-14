@@ -1,10 +1,15 @@
-import { Card, CardContent, CircularProgress, List, ListItem, ListItemSecondaryAction, ListItemText, TextField } from "@material-ui/core"
-import { Add, Delete, Done, Edit } from "@material-ui/icons"
+import { Add, Delete, Done, Edit } from "@mui/icons-material"
+import { Card, CardContent, CircularProgress, List, ListItem, ListItemSecondaryAction, ListItemText, TextField } from "@mui/material"
 import { Todo } from "@stator/models"
 import React, { ChangeEvent, useEffect, useState } from "react"
 
 import { LoadingIconButton } from "../../loading-icon-button/loading-icon-button"
-import { useCreateOneTodoMutation, useDeleteOneTodoMutation, useGetManyTodosQuery, useUpdateOneTodoMutation } from "../../redux/endpoints/todos-endpoints"
+import {
+  useCreateOneTodoMutation,
+  useDeleteOneTodoMutation,
+  useGetManyTodosQuery,
+  useUpdateOneTodoMutation,
+} from "../../redux/endpoints/todos-endpoints"
 import { useTodosPageStyles } from "./todos-page.styles"
 
 interface Props {}
@@ -12,7 +17,7 @@ interface Props {}
 export const TodosPage: React.FC<Props> = () => {
   const classes = useTodosPageStyles()
   const { data, isLoading: isGetAllTodosLoading } = useGetManyTodosQuery({ sort: ["id,DESC"] })
-  const todos = ((data as unknown) as Todo[]) || []
+  const todos = (data as unknown as Todo[]) || []
   const [createTodo, { isLoading: isCreatingTodo }] = useCreateOneTodoMutation()
   const [updateTodo, { isLoading: isUpdatingTodo }] = useUpdateOneTodoMutation()
   const [deleteTodo, { isLoading: isDeletingTodo }] = useDeleteOneTodoMutation()

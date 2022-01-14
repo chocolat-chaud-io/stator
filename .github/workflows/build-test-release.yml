@@ -7,12 +7,8 @@ on:
       - master
 
 jobs:
-  build:
+  build-test-release:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.13.1]
 
     steps:
       - name: Cancel previous runs
@@ -28,17 +24,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set head
-        run: sh .github/scripts/get-head.sh >> $GITHUB_ENV
-        env:
-          PR_HEAD: ${{ github.event.pull_request.head.sha }}
-          MERGE_HEAD: ${{ github.event.after }}
-
-      - name: Set base
-        run: sh .github/scripts/get-base.sh >> $GITHUB_ENV
-        env:
-          PR_BASE: ${{ github.event.pull_request.base.sha }}
-          MERGE_BASE: ${{ github.event.before }}
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: master
 
       - name: Inject Nx Cloud token
         shell: bash
@@ -50,33 +39,43 @@ jobs:
       - name: Setup postgres container
         run: docker-compose -f $GITHUB_WORKSPACE/apps/database/postgres/docker-compose.yml up -d
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2-beta
+      - name: Setup node.js 14.18.0
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.18.0
+
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            /home/runner/.cache/Cypress
+          key: modules-${{ hashFiles('package-lock.json') }}
 
       - name: Install npm packages
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm i
-
-      - name: Lint files
-        run: npm run affected:lint -- --base=$BASE --head=$HEAD
-
-      - name: Enforce naming conventions
-        run: npm run lint:file-folder-convention
-
-      - name: Build affected apps
-        run: npm run affected:build -- --base=$BASE --head=$HEAD
 
       - name: Start api
         run: npm run typeorm -- migration:run && npm start api &
         env:
           TEST: true
 
-      - name: Run tests
-        run: npm run affected:test -- --base=$BASE --head=$HEAD --code-coverage
+      - name: Enforce naming conventions
+        run: npm run lint:file-folder-convention
 
-      - name: Run e2e tests
-        run: npm run affected:e2e -- --base=$BASE --head=$HEAD
+      - name: Lint affected files
+        run: npm run affected:lint
+
+      - name: Build affected apps
+        run: npm run affected:build
+
+      - name: Test affected apps
+        run: npm run affected:test -- --code-coverage
+
+      - name: Test affected apps e2e
+        run: npm run affected:e2e
 
       - name: Codecov
         uses: codecov/codecov-action@v2
