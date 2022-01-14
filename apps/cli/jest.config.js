@@ -1,16 +1,15 @@
 module.exports = {
-  name: "api",
-  preset: "../../jest.config.js",
+  displayName: "cli",
+  preset: "../../jest.preset.js",
   globals: {
     "ts-jest": {
       tsconfig: "<rootDir>/tsconfig.spec.json",
     },
   },
+  testEnvironment: "node",
   transform: {
     "^.+\\.[tj]s$": "ts-jest",
   },
   moduleFileExtensions: ["ts", "js", "html"],
-  coverageDirectory: "../../coverage/apps/api",
-  coveragePathIgnorePatterns: ["./src/config/"],
-  testEnvironment: "node",
+  coverageDirectory: "../../coverage/apps/cli",
 }

@@ -138,7 +138,6 @@ npm run rename-project -- --organization {YOUR_ORGANIZATION_NAME} --project {YOU
 
 \*Note: I highly recommend that the project name is the same as your git repository.
 
-The file will delete itself once it has been completed.
 On completion, you will see the following message:
 
 ![project appropriation success](readme-assets/project-appropriation-success.png)

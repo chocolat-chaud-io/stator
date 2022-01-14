@@ -49,8 +49,8 @@
             "port": 7777
           }
         },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
+        "linter": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
             "linter": "eslint",
             "tsConfig": ["apps/api/tsconfig.app.json", "apps/api/tsconfig.spec.json"],
@@ -65,7 +65,59 @@
           },
           "outputs": ["coverage/apps/api"]
         }
-      }
+      },
+      "tags": []
+    },
+    "cli": {
+      "root": "apps/cli",
+      "sourceRoot": "apps/cli/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "cli",
+            "main": "apps/cli/src/main.ts",
+            "tsConfig": "apps/cli/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/cli/src/environments/environment.ts",
+                  "with": "apps/cli/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "cli:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/cli/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/cli"],
+          "options": {
+            "jestConfig": "apps/cli/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
     },
     "models": {
       "root": "libs/models",
@@ -73,8 +125,8 @@
       "projectType": "library",
       "schematics": {},
       "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:lint",
+        "linter": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
             "linter": "eslint",
             "tsConfig": ["libs/models/tsconfig.lib.json", "libs/models/tsconfig.spec.json"],
@@ -89,7 +141,8 @@
           },
           "outputs": ["coverage/libs/models"]
         }
-      }
+      },
+      "tags": []
     },
     "webapp": {
       "root": "apps/webapp",
@@ -98,7 +151,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/web:build",
+          "builder": "@nrwl/web:webpack",
           "options": {
             "outputPath": "dist/apps/webapp",
             "index": "apps/webapp/src/index.html",
@@ -150,8 +203,8 @@
             }
           }
         },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
+        "linter": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
             "linter": "eslint",
             "tsConfig": ["apps/webapp/tsconfig.app.json", "apps/webapp/tsconfig.spec.json"],
@@ -166,7 +219,8 @@
           },
           "outputs": ["coverage/apps/webapp"]
         }
-      }
+      },
+      "tags": []
     },
     "webapp-e2e": {
       "root": "apps/webapp-e2e",
@@ -186,35 +240,17 @@
             }
           }
         },
-        "lint": {
-          "builder": "@nrwl/linter:lint",
+        "linter": {
+          "builder": "@nrwl/linter:eslint",
           "options": {
             "linter": "eslint",
             "tsConfig": ["apps/webapp-e2e/tsconfig.e2e.json"],
             "exclude": ["**/node_modules/**", "!apps/webapp-e2e/**/*"]
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/nest"
-  },
-  "defaultProject": "api",
-  "schematics": {
-    "@nrwl/react": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint",
-        "babel": true
       },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
+      "tags": [],
+      "implicitDependencies": ["webapp"]
     }
   }
 }

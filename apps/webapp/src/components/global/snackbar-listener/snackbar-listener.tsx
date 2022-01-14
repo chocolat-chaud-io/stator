@@ -1,6 +1,5 @@
-import { Snackbar } from "@material-ui/core"
-import { SnackbarCloseReason } from "@material-ui/core/Snackbar/Snackbar"
-import { Alert } from "@material-ui/lab"
+import { Alert, Snackbar } from "@mui/material"
+import { SnackbarCloseReason } from "@mui/material/Snackbar/Snackbar"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 

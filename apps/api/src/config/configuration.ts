@@ -14,24 +14,21 @@ export const configuration = () => ({
     ...ormConfig,
     certificateAuthority: process.env.DATABASE_CA_CERT,
     keepConnectionAlive: false,
-    entities: [Todo],
-    logging: ["error"],
-    retries: 1,
+    retryAttempts: 1,
   },
 })
 
-export const getOrmConfigFn = async (configService: ConfigService): Promise<TypeOrmModuleOptions> =>
-  Promise.resolve({
-    type: "postgres",
-    host: configService.get("database.host"),
-    port: configService.get<number>("database.port"),
-    database: configService.get("database.name"),
-    username: configService.get("database.username"),
-    password: configService.get("database.password"),
-    synchronize: configService.get("database.synchronize"),
-    keepConnectionAlive: configService.get("database.keepConnectionAlive"),
-    ssl: configService.get("database.certificateAuthority") ?? false,
-    entities: configService.get("database.entities"),
-    logging: configService.get("database.logging"),
-    retries: configService.get("database.retries"),
-  })
+export const getOrmConfigFn = async (configService: ConfigService): Promise<TypeOrmModuleOptions> => ({
+  type: "postgres",
+  host: configService.get("database.host"),
+  port: configService.get<number>("database.port"),
+  database: configService.get("database.database"),
+  username: configService.get("database.username"),
+  password: configService.get("database.password"),
+  synchronize: configService.get("database.synchronize"),
+  keepConnectionAlive: configService.get("database.keepConnectionAlive"),
+  ssl: configService.get("database.certificateAuthority") ?? false,
+  entities: [Todo],
+  logging: ["error"],
+  retryAttempts: configService.get<number>("database.retryAttempts"),
+})

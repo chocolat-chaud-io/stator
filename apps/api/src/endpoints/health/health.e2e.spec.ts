@@ -10,7 +10,9 @@ describe("Health", () => {
     testingHelper = await new TestingHelper().initializeModuleAndApp("health", [HealthModule])
   })
 
-  beforeEach(() => testingHelper.reloadFixtures())
+  afterAll(async () => {
+    await testingHelper.shutdownServer()
+  })
 
   describe("GET /health", () => {
     it("should return status 200", async () => {

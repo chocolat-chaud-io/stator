@@ -2,8 +2,6 @@
 const path = require("path")
 const webpack = require("webpack")
 const ts = require("typescript")
-const HookShellScriptPlugin = require("hook-shell-script-webpack-plugin")
-const ExtraWatchWebpackPlugin = require("extra-watch-webpack-plugin")
 
 /**
  * Extend the default Webpack configuration from nx / ng.
@@ -17,12 +15,6 @@ module.exports = config => {
     ...(config.plugins || []),
     new webpack.ProvidePlugin({
       openapi: "@nestjs/swagger",
-    }),
-    new ExtraWatchWebpackPlugin({
-      dirs: ["libs/models/src"],
-    }),
-    new HookShellScriptPlugin({
-      watchRun: ["node ./tools/generators/generate-entity-index-file.js"],
     }),
   ]
 

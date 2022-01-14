@@ -18,26 +18,40 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "nx_cloud_token",
-        "cacheableOperations": ["build", "lint", "e2e"],
+        "cacheableOperations": ["build", "lint", "e2e", "test"],
         "cacheDirectory": ".cache/nx",
         "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        "showUsageWarnings": true,
+        "parallel": 3
       }
     }
   },
-  "projects": {
-    "api": {
-      "tags": []
-    },
-    "webapp": {
-      "tags": []
-    },
-    "webapp-e2e": {
-      "tags": [],
-      "implicitDependencies": ["webapp"]
-    },
-    "models": {
-      "tags": []
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "api",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
     }
   }
 }
