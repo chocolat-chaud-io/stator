@@ -15,6 +15,7 @@
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
             "assets": ["apps/api/src/assets"],
+            "generatePackageJson": true,
             "webpackConfig": "apps/api/webpack.config.ts",
             "showCircularDependencies": false,
             "maxWorkers": 2,
@@ -24,6 +25,7 @@
             "production": {
               "optimization": true,
               "extractLicenses": true,
+              "generatePackageJson": true,
               "inspect": false,
               "fileReplacements": [
                 {

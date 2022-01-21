@@ -1,0 +1,17 @@
+name: Delete review app
+
+on:
+  pull_request:
+    types: [closed, locked]
+
+jobs:
+  delete-review-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Delete droplet
+        run: doctl compute droplet delete pr-${{ github.event.number }}
