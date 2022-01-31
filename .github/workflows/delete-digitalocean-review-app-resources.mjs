@@ -10,7 +10,9 @@ const headers = { Authorization: `Bearer ${process.env.DIGITALOCEAN_ACCESS_TOKEN
 const dropletPort = (await nothrow($`doctl compute droplet get ${dropletName}`)).stdout.split("port_")[1].split(",")[0];
 await deleteFirewallRuleIfExists();
 await deleteLoadBalancerRuleIfExists();
-await nothrow($`doctl compute droplet delete ${dropletName}`);
+if (dropletPort) {
+  await $`doctl compute droplet delete ${dropletName} --force`;
+}
 
 async function deleteFirewallRuleIfExists() {
   const firewallsResponse = await fetch(`${digitaloceanBaseUrl}/firewalls`, { headers });
@@ -18,10 +20,10 @@ async function deleteFirewallRuleIfExists() {
 
   const { firewalls: firewalls } = JSON.parse(await firewallsResponse.text());
   const firewall = firewalls.find(firewall => firewall.name === firewallName);
-  const loadBalancerRule = firewall?.inbound_rules?.find(rule => rule.ports === dropletPort);
+  const firewallRule = firewall?.inbound_rules?.find(rule => rule.ports === dropletPort);
 
-  if (loadBalancerRule) {
-    const response = await fetch(`${digitaloceanBaseUrl}/firewalls`, {
+  if (firewallRule) {
+    const response = await fetch(`${digitaloceanBaseUrl}/firewalls/${firewall.id}`, {
       method: "PUT",
       headers,
       body: JSON.stringify({
@@ -39,15 +41,17 @@ async function deleteLoadBalancerRuleIfExists() {
 
   const { load_balancers } = JSON.parse(await loadBalancerResponse.text());
   const loadBalancer = load_balancers.find(loadBalancer => loadBalancer.name === loadBalancerName);
-  const loadBalancerRule = loadBalancer?.forwarding_rules?.find(rule => rule.entry_port === dropletPort);
+  const loadBalancerRule = loadBalancer?.forwarding_rules?.find(rule => rule.entry_port.toString() === dropletPort);
 
   if (loadBalancerRule) {
-    const response = await fetch(`${digitaloceanBaseUrl}/load_balancers`, {
+    delete loadBalancer.droplet_ids
+    const response = await fetch(`${digitaloceanBaseUrl}/load_balancers/${loadBalancer.id}`, {
       method: "PUT",
       headers,
       body: JSON.stringify({
         ...loadBalancer,
-        forwarding_rules: loadBalancer.forwarding_rules.filter(rule => rule.entry_port !== dropletPort)
+        region: "nyc1",
+        forwarding_rules: loadBalancer.forwarding_rules.filter(rule => rule.entry_port.toString() !== dropletPort)
       })
     });
     await checkResponseValidity(response, "Could not remove load balancer rule:");
