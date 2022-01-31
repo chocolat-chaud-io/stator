@@ -8,10 +8,21 @@ jobs:
   delete-review-app:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.18.0
+
+      - name: Install zx
+        run: npm i zx -g
+
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      - name: Delete droplet
-        run: doctl compute droplet delete pr-${{ github.event.number }}
+      - name: Delete review app resources
+        run: zx delete-digitalocean-review-app-resources.mjs
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}

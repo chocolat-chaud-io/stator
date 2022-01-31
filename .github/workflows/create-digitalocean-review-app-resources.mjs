@@ -22,7 +22,7 @@ await createDropletLoadBalancerForwardingRuleIfDoesntExist(loadBalancer, certifi
 const firewall = await getOrCreateFirewall(loadBalancer);
 await createFirewallRuleIfDoesntExist(firewall);
 
-async function getLoadBalancer(tryUntilReady = false) {
+export async function getLoadBalancer(tryUntilReady = false) {
   const loadBalancerResponse = await fetch(`${digitaloceanBaseUrl}/load_balancers`, { headers });
   await checkResponseValidity(loadBalancerResponse, "Could not fetch load balancer list:");
 
