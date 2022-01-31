@@ -9,53 +9,15 @@ on:
 jobs:
   build-test-release:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Cancel previous runs
-        uses: styfle/cancel-workflow-action@0.5.0
+      - uses: actions/checkout@v2
+      - uses: ./.github/action-setup-ci
         with:
-          access_token: ${{ github.token }}
-
-      - name: Increase watcher limit
-        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
-        with:
-          main-branch-name: master
-
-      - name: Inject Nx Cloud token
-        shell: bash
-        env:
+          github_token: ${{ github.token }}
           nx_cloud_token: ${{ secrets.NX_CLOUD_TOKEN }}
-        run:
-          sed -i "s/nx_cloud_token/$nx_cloud_token/" $GITHUB_WORKSPACE/nx.json
 
       - name: Setup postgres container
         run: docker-compose -f $GITHUB_WORKSPACE/apps/database/postgres/docker-compose.yml up -d
-
-      - name: Setup node.js 14.18.0
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.18.0
-
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./node_modules
-            /home/runner/.cache/Cypress
-          key: modules-${{ hashFiles('package-lock.json') }}
-
-      - name: Install npm packages
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm i
 
       - name: Start api
         run: npm run typeorm -- migration:run && npm start api &

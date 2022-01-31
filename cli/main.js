@@ -12,7 +12,7 @@ const clipanion_1 = __webpack_require__("clipanion");
 const utils_1 = __webpack_require__("./apps/cli/src/utils.ts");
 class EnforceFileFolderNamingConvention extends clipanion_1.Command {
     async execute() {
-        const ignoredFolders = [
+        const ignoredPaths = [
             "node_modules",
             "dist",
             ".git",
@@ -24,17 +24,18 @@ class EnforceFileFolderNamingConvention extends clipanion_1.Command {
             "LICENSE",
             "CONTRIBUTING",
             "dockerfiles",
+            "Dockerfile",
         ];
         const capitalLetterRegex = /[A-Z]/gm;
         const errorPathPaths = [];
         function validateEntryName(entry) {
             const entryName = path_1.default.basename(entry).replace(/\.[^/.]+$/, "");
-            if (entryName.length > 0 && !ignoredFolders.includes(entryName) && entryName.match(capitalLetterRegex)) {
+            if (entryName.length > 0 && !ignoredPaths.includes(entryName) && entryName.match(capitalLetterRegex)) {
                 errorPathPaths.push(entry);
             }
         }
         const folderNames = [];
-        for await (const entry of (0, utils_1.walk)(path_1.default.join(__dirname, ".."), ignoredFolders, folderNames)) {
+        for await (const entry of (0, utils_1.walk)(path_1.default.join(__dirname, ".."), ignoredPaths, folderNames)) {
             validateEntryName(entry);
         }
         for (const folderName of folderNames) {

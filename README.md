@@ -106,7 +106,7 @@ For a detailed list of all those technologies, you can read this [blog article](
  | -------------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
  | [DigitalOcean App Platform](https://www.digitalocean.com/products/app-platform/) | [Postgres](https://github.com/postgres/postgres) | [Nest](https://github.com/nestjs/nest)                        | [React](https://github.com/facebook/react)                    | [jest](https://github.com/facebook/jest)                                         | [commitlint](https://github.com/conventional-changelog/commitlint)               |
  | [semantic-release](https://github.com/semantic-release/semantic-release)         | [Mongo](https://github.com/mongodb/mongo)        | [Fastify](https://github.com/fastify/fastify)                 | [React Router](https://github.com/ReactTraining/react-router) | [cypress](https://github.com/cypress-io/cypress)                                 | [eslint](https://github.com/eslint/eslint)                                       |
- |                                                                                  | [TypeORM](https://github.com/typeorm/typeorm)    | [Swagger](https://github.com/nestjs/swagger)                  | [Redux](https://github.com/reduxjs/redux)                     |                                                                                  | [prettier](https://github.com/prettier/prettier)                                 |
+ | [docker-compose](https://github.com/docker/compose)                              | [TypeORM](https://github.com/typeorm/typeorm)    | [Swagger](https://github.com/nestjs/swagger)                  | [Redux](https://github.com/reduxjs/redux)                     |                                                                                  | [prettier](https://github.com/prettier/prettier)                                 |
  |                                                                                  | [NestJs CRUD](https://github.com/nestjsx/crud)   | [ReDoc](https://github.com/Redocly/redoc)                     | [Redux Toolkit](https://github.com/reduxjs/redux-toolkit)     |                                                                                  |                                                                                  |
  |                                                                                  |                                                  |                                                               | [Material UI](https://github.com/mui-org/material-ui)         |                                                                                  |                                                                                  |
 
@@ -174,11 +174,17 @@ For a full list of available commands, consult the `package.json`.
 
 ### Continuous Integration
 
-This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`.
+This templates integrates Github Actions for its Continuous Integration. The existing workflows are under `.github/workflows`. 
+Currently, the CI will ensure all your apps work properly, by building and testing. 
+For your pull requests, it will create a review application which will basically host your whole stack on a VM.
+Once everything is ready a new comment will be added to your pull request with the deployment URL.
+When the PR is closed, your review app will be destroyed as it's purpose will have been served. 
+It's sacrifice will be for the greater good and also your wallet.
 To have the CI working, you must:
 
-1. (Optional) Link your repository with [Codecov](https://github.com/apps/codecov) by inserting your `CODECOV_TOKEN` in github secrets.
-1. (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
+1. (Optional) If you want review apps to work, you should follow the instruction provided by the `get-started` CLI.
+2. (Optional) Link your repository with [Codecov](https://github.com/apps/codecov) by inserting your `CODECOV_TOKEN` in github secrets.
+3. (Optional) Insert your [Nx Cloud](https://nx.app/) access token in github secrets under `NX_CLOUD_TOKEN`. This enables for caching and faster build times.
 
 ### Deployment
 
@@ -237,6 +243,7 @@ To get all the information on migrations, consult [typeorm documentation](https:
 
 If you would like to use mongodb, even though it is absolutely not recommended because it currently doesn't work well with [typeorm](https://github.com/typeorm/typeorm), you can still do that by updating the connection info under `./apps/api/src/config/configuration.ts`.
 You simply need to replace `type: "postgres"` with `type: "mongo"`.
+Make sure you run the mongo container using the command: `npm run mongo`.
 
 #### Data seeding
 

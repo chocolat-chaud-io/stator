@@ -209,7 +209,34 @@ const Ui: FC = () => {
               </Link>
               <Text bold>4. Validate that your are properly authenticated by running "doctl account get"</Text>
               <Text>If successful, you will see your email</Text>
-              <Text bold>5. Paste the API token you generated in the input below</Text>
+              <Text bold>5. Generate a new SSH key by running "ssh-keygen -t rsa -b 4096 -f ~/.ssh/digitalocean-ci"</Text>
+              <Text>This SSH key will be used to create review apps</Text>
+              <Text bold>
+                6. Let's add the new key to DigitalOcean by running "public_key=$(cat ~/.ssh/digitalocean-ci.pub); doctl compute ssh-key
+                create github-ci --public-key $public_key"
+              </Text>
+              <Text bold>{`7. Copy your private key to your clipboard by running "xclip -sel c < ~/.ssh/digitalocean-ci"`}</Text>
+              <Text bold>8. Go to your Github repository → Click Settings → Click Secrets → Click New secret</Text>
+              <Text bold>
+                9. Secret name is DIGITALOCEAN_SSH_KEY and it's value is the private SSH key we just copied and click Add secret
+              </Text>
+              <Text bold>{`10. Copy your public key to your clipboard by running "xclip -sel c < ~/.ssh/digitalocean-ci.pub"`}</Text>
+              <Text bold>
+                11. Secret name is DIGITALOCEAN_SSH_KEY_PUBLIC and it's value is the public SSH key we just copied and click Add secret
+              </Text>
+              <Link url="https://www.digitalocean.com/community/tutorials/how-to-point-to-digitalocean-nameservers-from-common-domain-registrars">
+                <Text bold>12. Make DigitalOcean your DNS record manager</Text>
+              </Link>
+              <Text>Follow the instruction by clicking the above link</Text>
+              <Link url="https://cloud.digitalocean.com/account/api/tokens">
+                <Text bold>13. Generate a new API token</Text>
+              </Link>
+              <Text bold>14. Copy the API token</Text>
+              <Text bold>15. Go to your Github repository → Click Settings → Click Secrets → Click New secret</Text>
+              <Text bold>
+                16. Secret name is DIGITALOCEAN_ACCESS_TOKEN and it's value is the API token we previously copied and click Add secret
+              </Text>
+              <Text bold>17. Paste the API token you generated in the input below</Text>
 
               <Box marginBottom={1} />
 
