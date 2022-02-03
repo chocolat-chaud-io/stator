@@ -14,7 +14,7 @@ export class EnforceFileFolderNamingConvention extends Command {
   })
 
   async execute(): Promise<number | void> {
-    const ignoredFolders = [
+    const ignoredPaths = [
       "node_modules",
       "dist",
       ".git",
@@ -26,19 +26,20 @@ export class EnforceFileFolderNamingConvention extends Command {
       "LICENSE",
       "CONTRIBUTING",
       "dockerfiles",
+      "Dockerfile",
     ]
     const capitalLetterRegex = /[A-Z]/gm
     const errorPathPaths = []
 
     function validateEntryName(entry) {
       const entryName = path.basename(entry).replace(/\.[^/.]+$/, "")
-      if (entryName.length > 0 && !ignoredFolders.includes(entryName) && entryName.match(capitalLetterRegex)) {
+      if (entryName.length > 0 && !ignoredPaths.includes(entryName) && entryName.match(capitalLetterRegex)) {
         errorPathPaths.push(entry)
       }
     }
 
     const folderNames = []
-    for await (const entry of walk(path.join(__dirname, ".."), ignoredFolders, folderNames)) {
+    for await (const entry of walk(path.join(__dirname, ".."), ignoredPaths, folderNames)) {
       validateEntryName(entry)
     }
 

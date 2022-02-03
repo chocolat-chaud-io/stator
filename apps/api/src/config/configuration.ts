@@ -14,7 +14,7 @@ export const configuration = () => ({
     ...ormConfig,
     certificateAuthority: process.env.DATABASE_CA_CERT,
     keepConnectionAlive: false,
-    retryAttempts: 1,
+    retryAttempts: 3,
   },
 })
 
