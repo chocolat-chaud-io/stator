@@ -4,8 +4,7 @@
   "license": "MIT",
   "bin": "dist/cli.js",
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=14.13.1 <15.0.0"
   },
   "scripts": {
     "build": "cross-env node ../../node_modules/typescript/bin/tsc",

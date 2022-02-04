@@ -7,8 +7,8 @@ import { walk } from "../utils"
 
 export class RenameProject extends Command {
   static paths = [["rename-project"]]
-  organization = Option.String({ required: true })
-  project = Option.String({ required: true })
+  organization = Option.String("--organization",{ required: true })
+  project = Option.String("--project", { required: true })
 
   static usage = Command.Usage({
     category: "getting-started",

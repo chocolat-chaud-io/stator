@@ -44,7 +44,9 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "workspace-generator": "nx workspace-generator",
-    "generate-api-redux": "node node_modules/@rtk-query/codegen-openapi/lib/bin/cli.js apps/cli/src/open-api-config.ts && node cli/main.js generate-cache-key-file"
+    "generate-api-redux": "node node_modules/@rtk-query/codegen-openapi/lib/bin/cli.js apps/cli/src/open-api-config.ts && node cli/main.js generate-cache-key-file",
+    "cli": "node cli/main.js",
+    "stator-cli": "node cli/main.js"
   },
   "husky": {
     "hooks": {
@@ -184,8 +186,7 @@
     "zx": "4.2.0"
   },
   "engines": {
-    "node": ">=14.13.1 <15.0.0",
-    "npm": ">=6.14.8 <7.0.0"
+    "node": ">=14.13.1 <15.0.0"
   },
   "importSort": {
     ".js, .jsx, .ts, .tsx": {

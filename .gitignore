@@ -35,6 +35,7 @@ testem.log
 /typings
 .cache
 entity-index-hash.txt
+cli/3rdpartylicenses.txt
 
 # System Files
 .DS_Store

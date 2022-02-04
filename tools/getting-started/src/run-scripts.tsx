@@ -50,7 +50,10 @@ const RunScripts: React.FC<Props> = props => {
     }
     asyncFn()
       .then()
-      .catch(err => setErrorMessage(err.message))
+      .catch(err => {
+        setErrorMessage(err.message)
+        exit()
+      })
   }, [])
 
   useEffect(() => {
@@ -71,7 +74,10 @@ const RunScripts: React.FC<Props> = props => {
         }
         asyncFn()
           .then()
-          .catch(err => setErrorMessage(err.message))
+          .catch(err => {
+            setErrorMessage(err.message)
+            exit()
+          })
       } else {
         setIsApplicationValid(true)
       }
