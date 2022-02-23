@@ -59,7 +59,7 @@ export class TestingHelper {
   }
 
   private getFixturePath() {
-    const possibleFixturePaths = ["./src/assets/fixtures", "./assets/fixtures", "./apps/api/src/assets/fixtures"]
+    const possibleFixturePaths = ["./apps/api/src/assets/fixtures", "./src/assets/fixtures", "./assets/fixtures"]
     for (const possibleFixturePath of possibleFixturePaths) {
       if (fs.existsSync(possibleFixturePath)) {
         return possibleFixturePath

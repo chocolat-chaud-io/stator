@@ -1,0 +1,77 @@
+{
+  "root": "apps/webapp",
+  "sourceRoot": "apps/webapp/src",
+  "projectType": "application",
+  "generators": {},
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "options": {
+        "outputPath": "dist/apps/webapp",
+        "index": "apps/webapp/src/index.html",
+        "main": "apps/webapp/src/main.tsx",
+        "polyfills": "apps/webapp/src/polyfills.ts",
+        "tsConfig": "apps/webapp/tsconfig.app.json",
+        "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
+        "styles": ["apps/webapp/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack",
+        "showCircularDependencies": false,
+        "maxWorkers": 2,
+        "memoryLimit": 1024
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/webapp/src/environments/environment.ts",
+              "with": "apps/webapp/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "extractCss": true,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "2mb",
+              "maximumError": "5mb"
+            }
+          ]
+        }
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "webapp:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "webapp:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/webapp/**/*.{ts,tsx,js,jsx}"]
+      },
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "apps/webapp/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/apps/webapp"]
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,25 @@
+{
+  "root": "libs/models",
+  "sourceRoot": "libs/models/src",
+  "projectType": "library",
+  "generators": {},
+  "targets": {
+    "linter": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "linter": "eslint",
+        "tsConfig": ["libs/models/tsconfig.lib.json", "libs/models/tsconfig.spec.json"],
+        "exclude": ["**/node_modules/**", "!libs/models/**/*"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/models/jest.config.js",
+        "passWithNoTests": true
+      },
+      "outputs": ["coverage/libs/models"]
+    }
+  },
+  "tags": []
+}
