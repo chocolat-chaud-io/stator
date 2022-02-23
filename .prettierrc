@@ -6,6 +6,6 @@
   "trailingComma": "es5",
   "semi": false,
   "jsxSingleQuote": false,
-  "jsxBracketSameLine": false,
+  "bracketSameLine": false,
   "printWidth": 140
 }

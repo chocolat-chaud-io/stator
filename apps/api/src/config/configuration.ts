@@ -27,7 +27,7 @@ export const getOrmConfigFn = async (configService: ConfigService): Promise<Type
   password: configService.get("database.password"),
   synchronize: configService.get("database.synchronize"),
   keepConnectionAlive: configService.get("database.keepConnectionAlive"),
-  ssl: configService.get("database.certificateAuthority") ?? false,
+  ssl: configService.get("database.certificateAuthority") ? { ca: configService.get("database.certificateAuthority") } : false,
   entities: [Todo],
   logging: ["error"],
   retryAttempts: configService.get<number>("database.retryAttempts"),
