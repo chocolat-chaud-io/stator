@@ -107,8 +107,8 @@
   },
   "devDependencies": {
     "@ava/typescript": "3.0.1",
-    "@babel/core": "7.16.7",
-    "@babel/preset-env": "7.16.7",
+    "@babel/core": "7.17.8",
+    "@babel/preset-env": "7.16.11",
     "@babel/preset-react": "7.16.7",
     "@babel/preset-typescript": "7.16.7",
     "@commitlint/cli": "16.0.1",
