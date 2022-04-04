@@ -6,7 +6,9 @@ closes #issue_number
 - [ ] Ensure you respect all the requirements of the issue you completed.
 - [ ] `conditional` UI/UX improvements: Try to think how you would like the feature to have been build if you get into the role of the end user. E.g: when you click a button, a modal opens up, personally as a user when I press escape I would like the modal to be closed.
 - [ ] Review your code as if you were reviewing someone else's code. Don't hesitate to refactor everywhere you think your code could be cleaner.
-- [ ] Test thoroughly every new feature you added and try to think if your changes could have affected some other flows. E.g: you modified a generic component used in other areas; if you think it can cause issues, please test these other areas.
+- [ ] Test thoroughly every new feature you added and try to think if your changes could have affected some other flows. E.g: you modified a generic component used in other areas; if you think it can cause issues, please test these other areas.- [ ] Squash all the commits into a single one (if you make any PR fixes create separate commits).
+- [ ] Tag a reviewer.
+- [ ] Move the issue to review in progress once you've completed the checklist.
 
 ### Pull request reviewer checklist
 
