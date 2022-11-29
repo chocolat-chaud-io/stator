@@ -2,12 +2,13 @@ import fs from "fs"
 import path from "path"
 
 import { Command, Option } from "clipanion"
+import { camelCase, kebabCase } from "lodash"
 
 import { walk } from "../utils"
 
 export class RenameProject extends Command {
   static paths = [["rename-project"]]
-  organization = Option.String("--organization",{ required: true })
+  organization = Option.String("--organization", { required: true })
   project = Option.String("--project", { required: true })
 
   static usage = Command.Usage({
@@ -22,7 +23,6 @@ export class RenameProject extends Command {
 
   async renameProject() {
     try {
-      console.log(this.organization, this.project, __dirname)
       const organizationRegex = /^[a-zA-Z-\d_]+$/gim
       if (!organizationRegex.test(this.organization)) {
         console.error("The organization name must respect this regex /^[a-zA-Z-\\d_]+$/gmi")
@@ -37,6 +37,8 @@ export class RenameProject extends Command {
       const databaseName = this.project.replace(/-/g, "_")
       const databaseFiles = ["docker-compose.yml", "seed-data.js", "init.sql", "test.ts", "orm-config.ts"]
 
+      const camelCaseProjectName = camelCase(this.project)
+
       const ignoredFolders = ["node_modules", "dist", ".git", ".idea", ".cache"]
       for await (const entry of walk(path.join(__dirname, "../"), ignoredFolders)) {
         const entryStat = await fs.promises.lstat(entry)
@@ -46,7 +48,7 @@ export class RenameProject extends Command {
             const isDatabaseFile = databaseFiles.some(databaseFile => entry.includes(databaseFile))
             const replacedFileContent = fileContent
               .replace(/chocolat-chaud-io/gim, this.organization)
-              .replace(/stator/gim, isDatabaseFile ? databaseName : this.project)
+              .replace(/stator/gim, isDatabaseFile ? databaseName : camelCaseProjectName)
             await fs.promises.writeFile(entry, replacedFileContent, "utf-8")
           }
         }

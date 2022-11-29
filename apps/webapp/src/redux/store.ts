@@ -3,14 +3,14 @@ import { setupListeners } from "@reduxjs/toolkit/query"
 
 import { addGeneratedCacheKeys } from "./endpoints/generated-cache-keys"
 import { errorMiddleware } from "./middlewares/error-middleware"
-import { statorApi } from "./stator-api"
+import { api } from "./api"
 import { snackbarThunksSlice } from "./thunks-slice/snackbar-thunks-slice"
 
 addGeneratedCacheKeys()
 
 export const rootReducer = combineReducers({
   snackbarReducer: snackbarThunksSlice.reducer,
-  [statorApi.reducerPath]: statorApi.reducer,
+  [api.reducerPath]: api.reducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
@@ -24,7 +24,7 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(errorMiddleware())
-      .concat(statorApi.middleware),
+      .concat(api.middleware),
 })
 setupListeners(store.dispatch)
 
