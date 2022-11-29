@@ -1,4 +1,4 @@
-import { statorApi as api } from "../stator-api"
+import { api } from "../api"
 const injectedRtkApi = api.injectEndpoints({
   endpoints: build => ({
     getManyTodos: build.query<GetManyTodosApiResponse, GetManyTodosApiArg>({
